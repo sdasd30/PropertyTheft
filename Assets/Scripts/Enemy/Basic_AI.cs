@@ -9,17 +9,24 @@ public class Basic_AI : MonoBehaviour
     public LayerMask layershit;
     public Rigidbody2D rb;
     public BoxCollider2D b_collider;
+    private Transform target;
+    private float speed;
 
     public bool AI_Flag_1;
+    public bool AI_Flag_2;
+    private bool AI_Flag_2_set;
     // Start is called before the first frame update
     void Start()
     {
-        AI_Flag_1 = true;
+        //AI_Flag_1 = true;
+        AI_Flag_2_set = false;
         ray = new Ray(transform.position, transform.forward);
         rb = GetComponent<Rigidbody2D>();
         b_collider = GetComponent<BoxCollider2D>();
         Vector3 dims = b_collider.size;
-        maxDistance = dims.x/2 + 0.1f;
+        maxDistance = dims.x / 2 + 0.1f;
+        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        speed = 5f;
     }
 
     // Update is called once per frame
@@ -29,15 +36,40 @@ public class Basic_AI : MonoBehaviour
         {
             AI_Movement_1();
         }
+        if (AI_Flag_2)
+        {
+            if (!AI_Flag_2_set)
+            {
+                AI_Movement_2();
+                AI_Flag_2_set = true;
+            }
+            Quaternion rotation = Quaternion.LookRotation(target.transform.position - transform.position, transform.TransformDirection(Vector3.up));
+            this.transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
+            this.transform.position = Vector3.MoveTowards(this.transform.position, target.position, 1 * Time.deltaTime);
+        }
     }
 
     void AI_Movement_1()
     {
-        rb.velocity = transform.right * 5f;
+        rb.velocity = transform.right * speed;
         RaycastHit2D hits = Physics2D.Raycast(transform.position, transform.right, maxDistance, layershit);
         if (hits)
         {
             transform.right = -1f * transform.right;
+        }
+    }
+    void AI_Movement_2()
+    {
+        rb.gravityScale = 0;
+        rb.velocity = new Vector3(0, 0, 0);
+
+    }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        if (collision.gameObject.tag == "Level" && AI_Flag_2)
+        {
+            Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), collision.collider);
         }
     }
 }
