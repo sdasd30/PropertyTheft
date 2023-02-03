@@ -13,13 +13,13 @@ using UnityEngine;
 public class PlayerShoot : MonoBehaviour
 {
     [SerializeField] GameObject projectile;
-    private Transform gun;
+    private PlayerHeldProperty mPropertyHolder;
     bool firing;
-    float coolDown = 0;
+    //float coolDown = 0;
 
     void Start()
     {
-        gun = transform.GetChild(0).GetChild(0);
+        mPropertyHolder = gameObject.GetComponent<PlayerHeldProperty>();
     }
 
     public void Update()
@@ -37,11 +37,12 @@ public class PlayerShoot : MonoBehaviour
                 RaycastHit2D hit;
                 Vector3 direction = Vector3.Normalize(new Vector3(mousePoint.x - transform.position.x, 
                                                       mousePoint.y - transform.position.y, 0.0f));
-                hit = Physics2D.Raycast(gun.position, direction);
+                hit = Physics2D.Raycast(transform.position, direction);
                 if (hit.collider != null)
                 {
                     Debug.Log("Raycast hit something: " + hit.transform.name);
                     Debug.DrawLine(transform.position, hit.point, Color.red, 2.0f, false);
+                    mPropertyHolder.HitObject(hit);
                 }
                 else 
                 {

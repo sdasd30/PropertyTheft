@@ -46,12 +46,35 @@ public class MaterialHolder : MonoBehaviour
         ma.ApplyMaterials(propertyList);
     }
 
-    public void RemoveProperty(int index = -1) //Defaults to last property
+    public bool ValidPropertyAction(bool isTaking) 
     {
-        if (index == -1)
-            propertyList.RemoveAt(propertyList.Count - 1);
+        //Checks to see if the attempted action is valid. If not, return False. Otherwise, return true
+        if (isTaking)
+        {
+            //Is attempting take. If on default, return false. Otherwise return true.
+            return !onDefaultMaterial;
+        }
         else
+        {
+            //Is attempting give. Always return true. (Might want to change later)
+            return true;
+        }
+    }
+
+    public MaterialProperty RemoveProperty(int index = -1) 
+        //Defaults to last property (Highest priority)
+    {
+        MaterialProperty removedProperty;
+        if (index == -1)
+        {
+            removedProperty = propertyList[propertyList.Count - 1];
+            propertyList.RemoveAt(propertyList.Count - 1);
+        }
+        else
+        {
+            removedProperty = propertyList[index];
             propertyList.RemoveAt(index);
+        }
 
 
         if (propertyList.Count <= 0 && defaultMaterial)
@@ -65,9 +88,11 @@ public class MaterialHolder : MonoBehaviour
         }
 
         ma.ApplyMaterials(propertyList);
+        return removedProperty;
     }
 
-    public void AddProperty(MaterialProperty mp, int index = -1) //Defaults to last property
+    public void AddProperty(MaterialProperty mp, int index = -1) 
+        //Defaults to last property (Highest priority)
     {
         if (index != -1)
         {
@@ -85,12 +110,6 @@ public class MaterialHolder : MonoBehaviour
         }
 
         ma.ApplyMaterials(propertyList);
-    }
-
-    public MaterialProperty DEBUG_PROPERTY;
-    public void DEBUG_ADD_PROPERTY()
-    {
-        AddProperty(DEBUG_PROPERTY);
     }
 
 }
