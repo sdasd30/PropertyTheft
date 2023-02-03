@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffd05dd24c8eaae4dbcd3c1b51e0a7dc, type: 3}
   m_Name: Wood
   m_EditorClassIdentifier: 
+  materialName: Wood
   colorModifier: {r: 0.7264151, g: 0.4862205, b: 0.01027944, a: 1}
-  mass: 1
+  mass: 3
   health: 10
   destructable: 2
   conductive: 1

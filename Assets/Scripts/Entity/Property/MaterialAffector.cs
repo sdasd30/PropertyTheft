@@ -14,6 +14,8 @@ public class MaterialAffector : MonoBehaviour
     {
         SpriteRenderer mSpriteRenderer = GetComponent<SpriteRenderer>();
         mSpriteRenderer.color = Color.magenta;
+        Rigidbody2D mRigidBody = GetComponent<Rigidbody2D>();
+        mRigidBody.mass = 1.0f;
 
         foreach (MaterialProperty material in materialList)
         {
@@ -21,6 +23,10 @@ public class MaterialAffector : MonoBehaviour
             if (material.colorModifier != Color.magenta)
             {
                 mSpriteRenderer.color = material.colorModifier;
+            }
+            if (material.mass != -1.0f)
+            {
+                mRigidBody.mass = material.mass;
             }
         }
     }

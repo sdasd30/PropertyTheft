@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffd05dd24c8eaae4dbcd3c1b51e0a7dc, type: 3}
   m_Name: DefaultMaterial
   m_EditorClassIdentifier: 
+  materialName: Default Material
   colorModifier: {r: 1, g: 1, b: 1, a: 1}
   mass: 1
   health: 10
