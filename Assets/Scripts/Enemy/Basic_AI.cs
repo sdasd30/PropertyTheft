@@ -20,7 +20,7 @@ public class Basic_AI : MonoBehaviour
     public bool AI_Flag_5; // Moves in one direction and reverses direction when about to fall off a cliff.
     public bool AI_Flag_6; // Moves in one direction indefinitely.
     private bool AI_Flag_2_3_set;
-    // Start is called before the first frame update
+    /// Start is called before the first frame update
     void Start()
     {
         ray = new Ray(transform.position, transform.forward);
