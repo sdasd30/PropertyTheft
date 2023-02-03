@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffd05dd24c8eaae4dbcd3c1b51e0a7dc, type: 3}
   m_Name: Plastic
   m_EditorClassIdentifier: 
-  materialName: Unnamed Property
-  colorModifier: {r: 1, g: 0, b: 1, a: 1}
-  mass: -1
+  materialName: Plastic
+  colorModifier: {r: 1, g: 0, b: 0.14576912, a: 1}
+  mass: 2
   health: -1
-  destructable: 0
-  conductive: 0
-  flammable: 0
+  destructable: 1
+  conductive: 1
+  flammable: 1
