@@ -31,6 +31,7 @@ public class Basic_AI : MonoBehaviour
         maxDistanceY = dims.y / 2 + 0.2f;
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         speed = 1f;
+
     }
 
     // Update is called once per frame
