@@ -14,12 +14,14 @@ public class Basic_AI : MonoBehaviour
 
     public bool AI_Flag_1;
     public bool AI_Flag_2;
+    public bool AI_Flag_3;
     private bool AI_Flag_2_set;
+    private bool AI_Flag_2_3_set;
     // Start is called before the first frame update
     void Start()
     {
         //AI_Flag_1 = true;
-        AI_Flag_2_set = false;
+        //AI_Flag_2_set = false;
         ray = new Ray(transform.position, transform.forward);
         rb = GetComponent<Rigidbody2D>();
         b_collider = GetComponent<BoxCollider2D>();
@@ -36,19 +38,18 @@ public class Basic_AI : MonoBehaviour
         {
             AI_Movement_1();
         }
-        if (AI_Flag_2)
-        {
-            if (!AI_Flag_2_set)
+        if (AI_Flag_2 || AI_Flag_3)
+        {   
+            if (!AI_Flag_2_3_set)
             {
-                AI_Movement_2();
-                AI_Flag_2_set = true;
+                AI_Movement_2_3();
+                AI_Flag_2_3_set = true;
             }
             Quaternion rotation = Quaternion.LookRotation(target.transform.position - transform.position, transform.TransformDirection(Vector3.up));
             this.transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
-            this.transform.position = Vector3.MoveTowards(this.transform.position, target.position, 1 * Time.deltaTime);
+            this.transform.position = Vector3.MoveTowards(this.transform.position, target.position, speed * Time.deltaTime);
         }
     }
-
     void AI_Movement_1()
     {
         rb.velocity = transform.right * speed;
@@ -58,7 +59,7 @@ public class Basic_AI : MonoBehaviour
             transform.right = -1f * transform.right;
         }
     }
-    void AI_Movement_2()
+    void AI_Movement_2_3()
     {
         rb.gravityScale = 0;
         rb.velocity = new Vector3(0, 0, 0);
