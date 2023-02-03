@@ -23,22 +23,10 @@ public class Basic_AI : MonoBehaviour
     void Update()
     {
         rb.velocity = transform.right * 5f;
-
-
         RaycastHit2D hits = Physics2D.Raycast(transform.position, transform.right, maxDistance, layershit);
         if (hits)
         {
             transform.right = -1f * transform.right;
-            Debug.Log("hit");
-
         }
-        //CheckForColliders();
     }
-    //void CheckForColliders()
-    //{
-    //    if (Physics2D.Raycast(ray, out RaycastHit hit , maxDistance, layershit))
-    //    {
-    //        Debug.Log("hit");
-    //    }
-    //}
 }
