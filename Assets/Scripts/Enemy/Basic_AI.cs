@@ -5,7 +5,8 @@ using UnityEngine;
 public class Basic_AI : MonoBehaviour
 {
     Ray ray;
-    float maxDistance;
+    float maxDistanceX;
+    float maxDistanceY;
     public LayerMask layershit;
     public Rigidbody2D rb;
     public BoxCollider2D b_collider;
@@ -28,17 +29,18 @@ public class Basic_AI : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         b_collider = GetComponent<BoxCollider2D>();
         Vector3 dims = b_collider.size;
-        maxDistance = dims.x / 2 + 0.1f;
+        maxDistanceX = dims.x / 2 + 0.2f;
+        maxDistanceY = dims.y / 2 + 0.2f;
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        speed = 5f;
+        speed = 3f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (AI_Flag_1)
+        if (AI_Flag_1 || AI_Flag_5)
         {
-            AI_Movement_1();
+            AI_Movement_1_5();
         }
 
         if (AI_Flag_4){
@@ -56,13 +58,24 @@ public class Basic_AI : MonoBehaviour
 
         }
     }
-    void AI_Movement_1()
+    void AI_Movement_1_5()
     {
         rb.velocity = transform.right * speed;
-        RaycastHit2D hits = Physics2D.Raycast(transform.position, transform.right, maxDistance, layershit);
-        if (hits)
+        RaycastHit2D hits;
+        if (AI_Flag_1)
         {
-            transform.right = -1f * transform.right;
+            hits = Physics2D.Raycast(transform.position, transform.right, maxDistanceX, layershit);
+            if (hits)
+            {
+                transform.right = -1f * transform.right;
+            }
+        } else
+        {
+            hits = Physics2D.Raycast(transform.position + transform.right*maxDistanceX, -1f*transform.up, maxDistanceY, layershit);
+            if (!hits)
+            {
+                transform.right = -1f * transform.right;
+            }
         }
     }
     void AI_Start_2_3()
@@ -79,10 +92,6 @@ public class Basic_AI : MonoBehaviour
     {
         Quaternion rotation = Quaternion.LookRotation(target.transform.position - transform.position, transform.TransformDirection(Vector3.up));
         this.transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
-    }
-    void AI_Movement_5()
-    {
-
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
