@@ -15,7 +15,8 @@ public class Basic_AI : MonoBehaviour
     public bool AI_Flag_1;
     public bool AI_Flag_2;
     public bool AI_Flag_3;
-    private bool AI_Flag_2_set;
+    public bool AI_Flag_4;
+    //private bool AI_Flag_2_set;
     private bool AI_Flag_2_3_set;
     // Start is called before the first frame update
     void Start()
@@ -38,16 +39,21 @@ public class Basic_AI : MonoBehaviour
         {
             AI_Movement_1();
         }
-        if (AI_Flag_2 || AI_Flag_3)
-        {   
-            if (!AI_Flag_2_3_set)
-            {
-                AI_Movement_2_3();
-                AI_Flag_2_3_set = true;
-            }
+
+        if (AI_Flag_4){
             Quaternion rotation = Quaternion.LookRotation(target.transform.position - transform.position, transform.TransformDirection(Vector3.up));
             this.transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
-            this.transform.position = Vector3.MoveTowards(this.transform.position, target.position, speed * Time.deltaTime);
+
+            if (AI_Flag_2 || AI_Flag_3)
+            {
+                if (!AI_Flag_2_3_set)
+                {
+                    AI_Movement_2_3();
+                    AI_Flag_2_3_set = true;
+                }
+                this.transform.position = Vector3.MoveTowards(this.transform.position, target.position, speed * Time.deltaTime);
+            }
+
         }
     }
     void AI_Movement_1()
