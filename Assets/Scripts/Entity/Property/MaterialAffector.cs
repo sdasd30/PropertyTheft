@@ -1,6 +1,6 @@
 /*
  *Author: Daniel Zhao
- *Last Modified: 1/27/2023
+ *Last Modified: 2/3/2023
  *Description: Applies material affects from properties held in MaterialHolder.
 */
 

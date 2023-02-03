@@ -1,3 +1,9 @@
+/*
+ *Author: Daniel Zhao
+ *Last Modified: 2/3/2023
+ *Description: This is a scriptable object describing various materials.
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
