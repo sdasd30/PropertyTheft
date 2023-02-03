@@ -16,6 +16,7 @@ public class Basic_AI : MonoBehaviour
     public bool AI_Flag_2;
     public bool AI_Flag_3;
     public bool AI_Flag_4;
+    public bool AI_Flag_5;
     //private bool AI_Flag_2_set;
     private bool AI_Flag_2_3_set;
     // Start is called before the first frame update
@@ -41,17 +42,16 @@ public class Basic_AI : MonoBehaviour
         }
 
         if (AI_Flag_4){
-            Quaternion rotation = Quaternion.LookRotation(target.transform.position - transform.position, transform.TransformDirection(Vector3.up));
-            this.transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
+            AI_Movement_4();
 
             if (AI_Flag_2 || AI_Flag_3)
             {
                 if (!AI_Flag_2_3_set)
                 {
-                    AI_Movement_2_3();
+                    AI_Start_2_3();
                     AI_Flag_2_3_set = true;
                 }
-                this.transform.position = Vector3.MoveTowards(this.transform.position, target.position, speed * Time.deltaTime);
+                AI_Movement_3();
             }
 
         }
@@ -65,10 +65,23 @@ public class Basic_AI : MonoBehaviour
             transform.right = -1f * transform.right;
         }
     }
-    void AI_Movement_2_3()
+    void AI_Start_2_3()
     {
         rb.gravityScale = 0;
         rb.velocity = new Vector3(0, 0, 0);
+
+    }
+    void AI_Movement_3()
+    {
+        this.transform.position = Vector3.MoveTowards(this.transform.position, target.position, speed * Time.deltaTime);
+    }
+    void AI_Movement_4()
+    {
+        Quaternion rotation = Quaternion.LookRotation(target.transform.position - transform.position, transform.TransformDirection(Vector3.up));
+        this.transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
+    }
+    void AI_Movement_5()
+    {
 
     }
     void OnCollisionEnter2D(Collision2D collision)
