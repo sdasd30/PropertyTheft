@@ -18,6 +18,7 @@ public class Basic_AI : MonoBehaviour
     public bool AI_Flag_3;
     public bool AI_Flag_4;
     public bool AI_Flag_5;
+    public bool AI_Flag_6;
     //private bool AI_Flag_2_set;
     private bool AI_Flag_2_3_set;
     // Start is called before the first frame update
@@ -32,7 +33,7 @@ public class Basic_AI : MonoBehaviour
         maxDistanceX = dims.x / 2 + 0.2f;
         maxDistanceY = dims.y / 2 + 0.2f;
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        speed = 3f;
+        speed = 1f;
     }
 
     // Update is called once per frame
@@ -41,9 +42,7 @@ public class Basic_AI : MonoBehaviour
         if (AI_Flag_1 || AI_Flag_5)
         {
             AI_Movement_1_5();
-        }
-
-        if (AI_Flag_4){
+        } else if (AI_Flag_4){
             AI_Movement_4();
 
             if (AI_Flag_2 || AI_Flag_3)
@@ -55,12 +54,16 @@ public class Basic_AI : MonoBehaviour
                 }
                 AI_Movement_3();
             }
-
+        } else if (AI_Flag_6)
+        {
+            AI_Movement_6();
         }
+        
     }
     void AI_Movement_1_5()
     {
         rb.velocity = transform.right * speed;
+        rb.SetRotation(0f);
         RaycastHit2D hits;
         if (AI_Flag_1)
         {
@@ -92,6 +95,12 @@ public class Basic_AI : MonoBehaviour
     {
         Quaternion rotation = Quaternion.LookRotation(target.transform.position - transform.position, transform.TransformDirection(Vector3.up));
         this.transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
+    }
+    void AI_Movement_6()
+    {
+        rb.freezeRotation = true;
+        rb.velocity = transform.right * speed;
+
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
