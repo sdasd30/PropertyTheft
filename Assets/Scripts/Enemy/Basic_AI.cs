@@ -13,19 +13,16 @@ public class Basic_AI : MonoBehaviour
     private Transform target;
     private float speed;
 
-    public bool AI_Flag_1;
-    public bool AI_Flag_2;
-    public bool AI_Flag_3;
-    public bool AI_Flag_4;
-    public bool AI_Flag_5;
-    public bool AI_Flag_6;
-    //private bool AI_Flag_2_set;
+    public bool AI_Flag_1; //moves horizontally in one direction until a wall is hit, then reverses direction
+    public bool AI_Flag_2; //Follows the player and ignores walls and gravity. Rotates in the direction of the player
+    public bool AI_Flag_3; //Follows the player. Ignores walls and not gravity. Rotates in the direction of the player
+    public bool AI_Flag_4; // Rotates in the direction of the player. This flat is a prerequisite in order to use AI_Flag_2 and AI_Flag_3. 
+    public bool AI_Flag_5; // Moves in one direction and reverses direction when about to fall off a cliff.
+    public bool AI_Flag_6; // Moves in one direction indefinitely.
     private bool AI_Flag_2_3_set;
     // Start is called before the first frame update
     void Start()
     {
-        //AI_Flag_1 = true;
-        //AI_Flag_2_set = false;
         ray = new Ray(transform.position, transform.forward);
         rb = GetComponent<Rigidbody2D>();
         b_collider = GetComponent<BoxCollider2D>();
@@ -62,6 +59,7 @@ public class Basic_AI : MonoBehaviour
     }
     void AI_Movement_1_5()
     {
+        rb.freezeRotation = true;
         rb.velocity = transform.right * speed;
         rb.SetRotation(0f);
         RaycastHit2D hits;
