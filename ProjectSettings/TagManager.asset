@@ -15,7 +15,7 @@ TagManager:
   - Background
   - Entities
   - Standable Entities
-  - Forground
+  - 
   - 
   - 
   - 
@@ -46,9 +46,6 @@ TagManager:
     locked: 0
   - name: Level
     uniqueID: 1766980681
-    locked: 0
-  - name: Entities
-    uniqueID: 3328430471
     locked: 0
   - name: Player
     uniqueID: 97546359
