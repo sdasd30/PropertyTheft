@@ -12,6 +12,8 @@ public class Basic_AI : MonoBehaviour
     public BoxCollider2D b_collider;
     private Transform target;
     private float speed;
+    public GameObject player_game_object;
+
 
     public bool AI_Flag_1; //moves horizontally in one direction until a wall is hit, then reverses direction
     public bool AI_Flag_2; //Follows the player and ignores walls and gravity. Rotates in the direction of the player
@@ -31,7 +33,7 @@ public class Basic_AI : MonoBehaviour
         maxDistanceY = dims.y / 2 + 0.2f;
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         speed = 1f;
-
+        player_game_object = GameObject.Find("WeaponHandler");
     }
 
     // Update is called once per frame
@@ -108,5 +110,48 @@ public class Basic_AI : MonoBehaviour
         {
             Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), collision.collider);
         }
+
     }
-}
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+        {
+            if (GameObject.Find("WeaponHandler").GetComponent<PlayerAim>().has_property)
+            { 
+                int the_property = GameObject.Find("WeaponHandler").GetComponent<PlayerAim>().property;
+                if (the_property == 1)
+                {
+                    Debug.Log("swapped to property 1");
+                    AI_Flag_1 = true;
+                    AI_Flag_5 = false;
+                }
+                if (the_property == 5)
+                {
+                    Debug.Log("swapped to property 5");
+                    AI_Flag_1 = false;
+                    AI_Flag_5 = true;
+                }
+            } else
+            {
+                //var script = collision.gameObject.GetComponent<Basic_AI>();
+                //has_property = true;
+                player_game_object.GetComponent<PlayerAim>().has_property = true;
+                if (AI_Flag_1)
+                {
+                    Debug.Log("stole property 1");
+                    player_game_object.GetComponent<PlayerAim>().property = 1;
+                }
+                else if (AI_Flag_5)
+                {
+                    Debug.Log("stole property 5");
+                    player_game_object.GetComponent<PlayerAim>().property = 5;
+                }
+                else
+                {
+                    player_game_object.GetComponent<PlayerAim>().has_property = false ;
+                }
+            }
+        }
+    }
+
+    }

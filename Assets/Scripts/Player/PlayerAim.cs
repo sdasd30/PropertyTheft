@@ -14,12 +14,16 @@ public class PlayerAim : MonoBehaviour
 	public bool is_firing;
 	private float fire_cooldown;
 	private float start_time;
+	public int property;
+	public bool has_property;
 
 	void Start()
 	{
 		is_firing = false;
-		fire_cooldown = .65f;
+		fire_cooldown = .3f;
 		start_time = Time.time;
+		property = 0;
+		has_property = false;
 	}
 	void Update()
 	{
