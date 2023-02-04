@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     //public bool has_property;
     // Start is called before the first frame update
     public GameObject player_game_object;
+    
     void Start()
     {
         //property = 0;
@@ -23,9 +24,11 @@ public class Bullet : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag != "Player")
+        if (collision.gameObject.CompareTag("Enemy"))
         {
+            //Debug.Log(collision.gameObject.tag);
             Destroy(gameObject);
         }
     }
+
 }
