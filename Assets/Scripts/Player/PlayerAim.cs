@@ -12,10 +12,18 @@ public class PlayerAim : MonoBehaviour
 {
 	public GameObject BulletPrefab;
 	public bool is_firing;
+	private float fire_cooldown;
+	private float start_time;
+	public int property;
+	public bool has_property;
 
 	void Start()
 	{
 		is_firing = false;
+		fire_cooldown = .3f;
+		start_time = Time.time;
+		property = 0;
+		has_property = false;
 	}
 	void Update()
 	{
@@ -28,10 +36,11 @@ public class PlayerAim : MonoBehaviour
 		float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
-		if (Input.GetMouseButton(0) && !is_firing)
+		if (Input.GetMouseButton(0) && Time.time > start_time + fire_cooldown)
 		{
 			Fire();
-			is_firing = true;
+			//is_firing = true;
+			start_time = Time.time;
 		}
 	}
 
@@ -49,6 +58,6 @@ public class PlayerAim : MonoBehaviour
 		Vector3 bullet_location = new Vector3(transform.position.x + transform.right.x / transform.right.magnitude, transform.position.y + transform.right.y / transform.right.magnitude, transform.position.z);
 		GameObject new_bullet = Instantiate(BulletPrefab, bullet_location, transform.rotation*Quaternion.Euler(0,0,90));
 		//Quaternion bullet_rotation = 
-		new_bullet.GetComponent<Rigidbody2D>().velocity = 5f * transform.right;
+		new_bullet.GetComponent<Rigidbody2D>().velocity = 10f * transform.right;
 	}
 }
