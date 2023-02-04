@@ -42,19 +42,19 @@ public class Basic_AI : MonoBehaviour
         if (AI_Flag_1 || AI_Flag_5)
         {
             AI_Movement_1_5();
-        } else if (AI_Flag_4){
+        } else if (AI_Flag_4) {
             AI_Movement_4();
-
-            if (AI_Flag_2 || AI_Flag_3)
+        } else if (AI_Flag_2 || AI_Flag_3)
+        {
+            AI_Movement_4();
+            if (!AI_Flag_2_3_set)
             {
-                if (!AI_Flag_2_3_set)
-                {
-                    AI_Start_2_3();
-                    AI_Flag_2_3_set = true;
-                }
-                AI_Movement_3();
+                AI_Start_2_3();
+                AI_Flag_2_3_set = true;
             }
-        } else if (AI_Flag_6)
+            AI_Movement_3();
+        }
+         else if (AI_Flag_6)
         {
             AI_Movement_6();
         }
@@ -119,39 +119,104 @@ public class Basic_AI : MonoBehaviour
             if (GameObject.Find("WeaponHandler").GetComponent<PlayerAim>().has_property)
             { 
                 int the_property = GameObject.Find("WeaponHandler").GetComponent<PlayerAim>().property;
-                if (the_property == 1)
-                {
-                    Debug.Log("swapped to property 1");
-                    AI_Flag_1 = true;
-                    AI_Flag_5 = false;
-                }
-                if (the_property == 5)
-                {
-                    Debug.Log("swapped to property 5");
-                    AI_Flag_1 = false;
-                    AI_Flag_5 = true;
-                }
+                ChangeProperty(the_property);
+                player_game_object.GetComponent<PlayerAim>().has_property = false;
             } else
             {
-                //var script = collision.gameObject.GetComponent<Basic_AI>();
-                //has_property = true;
                 player_game_object.GetComponent<PlayerAim>().has_property = true;
-                if (AI_Flag_1)
-                {
-                    Debug.Log("stole property 1");
-                    player_game_object.GetComponent<PlayerAim>().property = 1;
-                }
-                else if (AI_Flag_5)
-                {
-                    Debug.Log("stole property 5");
-                    player_game_object.GetComponent<PlayerAim>().property = 5;
-                }
-                else
-                {
-                    player_game_object.GetComponent<PlayerAim>().has_property = false ;
-                }
+                SetProperty();
             }
         }
     }
 
+
+
+    void SetProperty()
+    {
+        if (AI_Flag_1)
+        {
+            Debug.Log("stole property 1");
+            player_game_object.GetComponent<PlayerAim>().property = 1;
+        }
+        else if (AI_Flag_2)
+        {
+            Debug.Log("stole property 2");
+            player_game_object.GetComponent<PlayerAim>().property = 2;
+        }
+        else if (AI_Flag_3)
+        {
+            Debug.Log("stole property 3");
+            player_game_object.GetComponent<PlayerAim>().property = 3;
+        }
+        else if (AI_Flag_4)
+        {
+            Debug.Log("stole property 4");
+            player_game_object.GetComponent<PlayerAim>().property = 4;
+        }
+        else if (AI_Flag_5)
+        {
+            Debug.Log("stole property 5");
+            player_game_object.GetComponent<PlayerAim>().property = 5;
+        }
+        else if (AI_Flag_6)
+        {
+            Debug.Log("stole property 6");
+            player_game_object.GetComponent<PlayerAim>().property = 6;
+        }
+        else
+        {
+            player_game_object.GetComponent<PlayerAim>().has_property = false;
+        }
+    }
+
+    void ChangeProperty(int property_val)
+    {
+        if (1 == property_val)
+        {
+            Debug.Log("swapped to property 1");
+            SetAllFlagsFalse();
+            AI_Flag_1 = true;
+            //GetComponent<Renderer>().material.color = new Color(255,0,0,1);
+        }
+        if (2 == property_val)
+        {
+            Debug.Log("swapped to property 5");
+            SetAllFlagsFalse();
+            AI_Flag_2 = true;
+        }
+        if (3 == property_val)
+        {
+            Debug.Log("swapped to property 5");
+            SetAllFlagsFalse();
+            AI_Flag_3 = true;
+        }
+        if (4 == property_val)
+        {
+            Debug.Log("swapped to property 5");
+            SetAllFlagsFalse();
+            AI_Flag_4 = true;
+        }
+        if (5 == property_val)
+        {
+            Debug.Log("swapped to property 5");
+            SetAllFlagsFalse();
+            AI_Flag_5 = true;
+        }
+        if (6 == property_val)
+        {
+            Debug.Log("swapped to property 5");
+            SetAllFlagsFalse();
+            AI_Flag_6 = true;
+        }
+    }
+    void SetAllFlagsFalse()
+    {
+        AI_Flag_1 = false;
+        AI_Flag_2 = false;
+        AI_Flag_3 = false;
+        AI_Flag_4 = false;
+        AI_Flag_5 = false;
+        AI_Flag_6 = false;
+    }
+    
     }
