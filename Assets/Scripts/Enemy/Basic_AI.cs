@@ -13,6 +13,7 @@ public class Basic_AI : MonoBehaviour
     private Transform target;
     private float speed;
     public GameObject player_game_object;
+    private bool is_colliding_with_level;
 
 
     public bool AI_Flag_1; //moves horizontally in one direction until a wall is hit, then reverses direction
@@ -25,6 +26,7 @@ public class Basic_AI : MonoBehaviour
     /// Start is called before the first frame update
     void Start()
     {
+        is_colliding_with_level = false;
         ray = new Ray(transform.position, transform.forward);
         rb = GetComponent<Rigidbody2D>();
         b_collider = GetComponent<BoxCollider2D>();
@@ -108,12 +110,26 @@ public class Basic_AI : MonoBehaviour
     void OnCollisionStay2D(Collision2D collision)
     {
 
-        if (collision.gameObject.tag == "Level" && AI_Flag_2)
+        if (collision.gameObject.tag == "Level")
         {
-            Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), collision.collider);
+            is_colliding_with_level = true;
+            if (AI_Flag_2)
+            {
+                Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), collision.collider);
+            }
         }
 
     }
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        
+        if (collision.gameObject.tag == "Level")
+        {   
+            //Debug.Log("exited");
+            is_colliding_with_level = false;
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Bullet")
@@ -173,42 +189,45 @@ public class Basic_AI : MonoBehaviour
 
     void ChangeProperty(int property_val)
     {
-        if (1 == property_val)
+        if (!is_colliding_with_level)
         {
-            Debug.Log("swapped to property 1");
-            SetAllFlagsFalse();
-            AI_Flag_1 = true;
-            //GetComponent<Renderer>().material.color = new Color(255,0,0,1);
-        }
-        if (2 == property_val)
-        {
-            Debug.Log("swapped to property 2");
-            SetAllFlagsFalse();
-            AI_Flag_2 = true;
-        }
-        if (3 == property_val)
-        {
-            Debug.Log("swapped to property 3");
-            SetAllFlagsFalse();
-            AI_Flag_3 = true;
-        }
-        if (4 == property_val)
-        {
-            Debug.Log("swapped to property 4");
-            SetAllFlagsFalse();
-            AI_Flag_4 = true;
-        }
-        if (5 == property_val)
-        {
-            Debug.Log("swapped to property 5");
-            SetAllFlagsFalse();
-            AI_Flag_5 = true;
-        }
-        if (6 == property_val)
-        {
-            Debug.Log("swapped to property 6");
-            SetAllFlagsFalse();
-            AI_Flag_6 = true;
+            if (1 == property_val)
+            {
+                Debug.Log("swapped to property 1");
+                SetAllFlagsFalse();
+                AI_Flag_1 = true;
+                //GetComponent<Renderer>().material.color = new Color(255,0,0,1);
+            }
+            if (2 == property_val)
+            {
+                Debug.Log("swapped to property 2");
+                SetAllFlagsFalse();
+                AI_Flag_2 = true;
+            }
+            if (3 == property_val)
+            {
+                Debug.Log("swapped to property 3");
+                SetAllFlagsFalse();
+                AI_Flag_3 = true;
+            }
+            if (4 == property_val)
+            {
+                Debug.Log("swapped to property 4");
+                SetAllFlagsFalse();
+                AI_Flag_4 = true;
+            }
+            if (5 == property_val)
+            {
+                Debug.Log("swapped to property 5");
+                SetAllFlagsFalse();
+                AI_Flag_5 = true;
+            }
+            if (6 == property_val)
+            {
+                Debug.Log("swapped to property 6");
+                SetAllFlagsFalse();
+                AI_Flag_6 = true;
+            }
         }
     }
     void SetAllFlagsFalse()
