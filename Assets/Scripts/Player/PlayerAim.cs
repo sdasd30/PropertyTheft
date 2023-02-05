@@ -10,13 +10,6 @@ using UnityEngine;
 
 public class PlayerAim : MonoBehaviour
 {
-	public GameObject BulletPrefab;
-	public bool is_firing;
-
-	void Start()
-	{
-		is_firing = false;
-	}
 	void Update()
 	{
 		Vector3 mousePos = Input.mousePosition;
@@ -27,12 +20,6 @@ public class PlayerAim : MonoBehaviour
 
 		float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-
-		if (Input.GetMouseButton(0) && !is_firing)
-		{
-			Fire();
-			is_firing = true;
-		}
 	}
 
 	public Vector3 GetMousePos()
@@ -43,12 +30,5 @@ public class PlayerAim : MonoBehaviour
 		mousePos.x = mousePos.x - objectPos.x;
 		mousePos.y = mousePos.y - objectPos.y;
 		return mousePos;
-	}
-	private void Fire()
-	{
-		Vector3 bullet_location = new Vector3(transform.position.x + transform.right.x / transform.right.magnitude, transform.position.y + transform.right.y / transform.right.magnitude, transform.position.z);
-		GameObject new_bullet = Instantiate(BulletPrefab, bullet_location, transform.rotation*Quaternion.Euler(0,0,90));
-		//Quaternion bullet_rotation = 
-		new_bullet.GetComponent<Rigidbody2D>().velocity = 5f * transform.right;
 	}
 }
