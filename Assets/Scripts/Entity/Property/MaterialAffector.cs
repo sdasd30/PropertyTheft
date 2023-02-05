@@ -16,6 +16,7 @@ public class MaterialAffector : MonoBehaviour
         mSpriteRenderer.color = Color.magenta;
         Rigidbody2D mRigidBody = GetComponent<Rigidbody2D>();
         mRigidBody.mass = 1.0f;
+        Weight mWeight = GetComponent<Weight>();
 
         foreach (MaterialProperty material in materialList)
         {
@@ -27,6 +28,11 @@ public class MaterialAffector : MonoBehaviour
             if (material.mass != -1.0f)
             {
                 mRigidBody.mass = material.mass;
+            }
+            if (mWeight)
+            {
+                mWeight.ObjectWeight = material.mass;
+                mWeight.DestructionThreshold = material.destructionThreshold;
             }
         }
     }
