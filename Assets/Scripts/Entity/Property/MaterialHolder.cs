@@ -1,6 +1,6 @@
 /*
  *Author: Daniel Zhao
- *Last Modified: 1/27/2023
+ *Last Modified: 2/4/2023
  *Description: Any object with this script can hold at least one material.
 */
 
@@ -23,6 +23,8 @@ public class MaterialHolder : MonoBehaviour
     //Properties are ordered by priority. Lower indexed properties are applied first,
     //higher index properties are applied last. This makes them trump lower indexed properties.
     [SerializeField] private MaterialProperty defaultMaterial;
+    [SerializeField] private GameObject swapIcon;
+    private bool markedForSwap;
     private bool onDefaultMaterial;
     private MaterialAffector ma;
 
@@ -88,6 +90,10 @@ public class MaterialHolder : MonoBehaviour
         }
 
         ma.ApplyMaterials(propertyList);
+        if(swapIconGO)
+        {
+            Destroy(swapIconGO);
+        }
         return removedProperty;
     }
 
@@ -108,8 +114,19 @@ public class MaterialHolder : MonoBehaviour
             onDefaultMaterial = false;
             propertyList.RemoveAt(0);
         }
-
+        if(swapIconGO)
+        {
+            Destroy(swapIconGO);
+        }
         ma.ApplyMaterials(propertyList);
+    }
+
+    GameObject swapIconGO;
+    public void MarkForSwap()
+    {
+        swapIconGO = Instantiate
+            (swapIcon, transform.position, 
+            Quaternion.identity, transform);
     }
 
 }

@@ -10,19 +10,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class PlayerShoot : MonoBehaviour
+public class PlayerSwapProperty : MonoBehaviour
 {
     [SerializeField] GameObject projectile;
     private PlayerHeldProperty mPropertyHolder;
+    private GameObject swapObject;
     bool firing;
     //float coolDown = 0;
 
     void Start()
     {
         mPropertyHolder = gameObject.GetComponent<PlayerHeldProperty>();
+        swapObject = null;
     }
 
-    public void Update()
+    void Update()
     {
         if (Input.GetAxisRaw("Fire1") > .5)
         {
@@ -31,18 +33,15 @@ public class PlayerShoot : MonoBehaviour
 
                 Vector3 mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 mousePoint.z = 0.0f;
-                //Debug.Log(mousePoint);
-                //GameObject go = Instantiate(projectile, gun.position, Quaternion.identity);
-                //go.GetComponent<Projectile>().SetProjectile(mousePoint);
                 RaycastHit2D hit;
                 Vector3 direction = Vector3.Normalize(new Vector3(mousePoint.x - transform.position.x, 
                                                       mousePoint.y - transform.position.y, 0.0f));
                 hit = Physics2D.Raycast(transform.position, direction);
                 if (hit.collider != null)
                 {
-                    Debug.Log("Raycast hit something: " + hit.transform.name);
                     Debug.DrawLine(transform.position, hit.point, Color.red, 2.0f, false);
-                    mPropertyHolder.HitObject(hit);
+                    //mPropertyHolder.HitObject(hit);
+                    AttemptSwap(hit);
                 }
                 else 
                 {
@@ -59,4 +58,32 @@ public class PlayerShoot : MonoBehaviour
             firing = false;
         }
     }
+
+    private void AttemptSwap(RaycastHit2D hit)
+    {
+        GameObject hitObject = hit.transform.gameObject;
+        MaterialHolder hitHolder = hitObject.GetComponent<MaterialHolder>();
+
+        if (hitHolder)
+        {
+            
+            if (!swapObject)
+            {
+                //There is currently no object selected for swap. Add this as a swap object.
+                swapObject = hitObject;
+                hitHolder.MarkForSwap();
+            }
+            else
+            {
+                MaterialHolder swapHolder = swapObject.GetComponent<MaterialHolder>();
+                MaterialProperty swapMatHit = hitHolder.RemoveProperty();
+                MaterialProperty swapMatStored = swapHolder.RemoveProperty();
+                hitHolder.AddProperty(swapMatStored);
+                swapHolder.AddProperty(swapMatHit);
+
+                swapObject = null;
+            }
+        }
+    }
+
 }
