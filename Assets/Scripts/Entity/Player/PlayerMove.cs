@@ -23,7 +23,6 @@ public class PlayerMove : MonoBehaviour
     {
         mRigidBody = GetComponent<Rigidbody2D>();
         mCollider = GetComponent<BoxCollider2D>();
-
     }
 
     // Update is called once per frame

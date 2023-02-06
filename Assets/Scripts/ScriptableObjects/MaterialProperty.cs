@@ -26,6 +26,7 @@ public class MaterialProperty : ScriptableObject
 
     public float mass = -1.0f;
     public float health = -1.0f;
+    public float destructionThreshold = float.PositiveInfinity;
 
 
     public PropertyValue destructable = PropertyValue.PASS;
