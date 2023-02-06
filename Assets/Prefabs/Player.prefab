@@ -134,8 +134,8 @@ Rigidbody2D:
   m_GravityScale: 3
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &1611503105632125316
 MonoBehaviour:
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cfc6b74e5a18f6409e1ea683956c347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horitzontalMoveMultiplier: 10
+  horitzontalMoveMultiplier: 7
   jumpMultiplier: 12
   jumpableGround:
     serializedVersion: 2
