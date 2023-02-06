@@ -16,6 +16,7 @@ MonoBehaviour:
   colorModifier: {r: 0, g: 0.6886792, b: 0.057298426, a: 1}
   mass: 1
   health: 2
+  destructionThreshold: 1
   destructable: 2
   conductive: 1
   flammable: 2

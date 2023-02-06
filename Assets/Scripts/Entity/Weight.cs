@@ -1,7 +1,7 @@
 /*
  *Author: Daniel Zhao
  *Last Modified: 2/4/2023
- *Description: This script describes the weight of the object, and combined weight of all objects on top.
+ *Description: Any object with this script experiences weight.
 */
 
 using System.Collections;
@@ -16,8 +16,8 @@ public class Weight : MonoBehaviour
     }
     public float DestructionThreshold {set {destructionThreshold = value;}}
     private float destructionThreshold = float.PositiveInfinity;
-    private float myWeight = 1.0f;
-    private float combinedWeight;
+    [SerializeField] private float myWeight = 0.0f;
+    [SerializeField] private float combinedWeight;
     private Rigidbody2D mRigidBody;
     private BoxCollider2D mCollider;
     [SerializeField] private LayerMask detectLayers;
