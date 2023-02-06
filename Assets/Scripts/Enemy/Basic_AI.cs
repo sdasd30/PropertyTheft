@@ -36,6 +36,14 @@ public class Basic_AI : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         speed = 1f;
         player_game_object = GameObject.Find("WeaponHandler");
+        if (AI_Flag_5)
+        {
+            GetComponent<SpriteRenderer>().color = Color.green;
+        }
+        else if (AI_Flag_1)
+        {
+            GetComponent<SpriteRenderer>().color = Color.blue;
+        }
     }
 
     // Update is called once per frame
@@ -64,6 +72,7 @@ public class Basic_AI : MonoBehaviour
     }
     void AI_Movement_1_5()
     {
+        //rb.gravityScale = 10;
         rb.freezeRotation = true;
         rb.velocity = transform.right * speed;
         rb.SetRotation(0f);
@@ -189,15 +198,16 @@ public class Basic_AI : MonoBehaviour
 
     void ChangeProperty(int property_val)
     {
-        if (!is_colliding_with_level)
-        {
+        //if (!is_colliding_with_level)
+        //{
             if (1 == property_val)
             {
                 Debug.Log("swapped to property 1");
                 SetAllFlagsFalse();
                 AI_Flag_1 = true;
-                //GetComponent<Renderer>().material.color = new Color(255,0,0,1);
-            }
+                GetComponent<SpriteRenderer>().color = Color.blue;
+            //GetComponent<Renderer>().material.color = new Color(255,0,0,1);
+        }
             if (2 == property_val)
             {
                 Debug.Log("swapped to property 2");
@@ -219,6 +229,7 @@ public class Basic_AI : MonoBehaviour
             if (5 == property_val)
             {
                 Debug.Log("swapped to property 5");
+                GetComponent<SpriteRenderer>().color = Color.green;
                 SetAllFlagsFalse();
                 AI_Flag_5 = true;
             }
@@ -228,7 +239,6 @@ public class Basic_AI : MonoBehaviour
                 SetAllFlagsFalse();
                 AI_Flag_6 = true;
             }
-        }
     }
     void SetAllFlagsFalse()
     {
