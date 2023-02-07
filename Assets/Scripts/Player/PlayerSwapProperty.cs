@@ -37,7 +37,7 @@ public class PlayerSwapProperty : MonoBehaviour
                 Vector3 mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 mousePoint.z = 0.0f;
                 RaycastHit2D hit;
-                Vector3 direction = Vector3.Normalize(new Vector3(mousePoint.x - transform.position.x, 
+                Vector3 direction = Vector3.Normalize(new Vector3(mousePoint.x - transform.position.x,
                                                       mousePoint.y - transform.position.y, 0.0f));
                 hit = Physics2D.Raycast(transform.position, direction);
                 if (hit.collider != null)
@@ -48,20 +48,21 @@ public class PlayerSwapProperty : MonoBehaviour
                     if (hit.transform.gameObject.GetComponent<MaterialHolder>())
                     {
                         AttemptSwap(hit);
-                    } else
+                    }
+                    else
                     {
                         AttemptSwapAI(hit);
                     }
 
 
                 }
-                else 
+                else
                 {
                     Debug.DrawLine(transform.position, direction * 100, Color.green, 2.0f, false);
                 }
 
             }
-            
+
             firing = true;
 
         }
@@ -77,7 +78,7 @@ public class PlayerSwapProperty : MonoBehaviour
         MaterialHolder hitHolder = hitObject.GetComponent<MaterialHolder>();
         if (hitHolder)
         {
-            
+
             if (!swapObject)
             {
                 //There is currently no object selected for swap. Add this as a swap object.
@@ -94,7 +95,7 @@ public class PlayerSwapProperty : MonoBehaviour
 
                 swapObject = null;
             }
-        } 
+        }
     }
 
 
@@ -110,11 +111,14 @@ public class PlayerSwapProperty : MonoBehaviour
                 //There is currently no object selected for swap. Add this as a swap object.
                 swapObject = hitObject;
                 hitAIHolder.MarkForSwap();
-              
-            } else
+
+            }
+            else
             {
                 Basic_AI AIHolder = swapObject.GetComponent<Basic_AI>();
-                int AIHolder_type =
-                
+                //int AIHolder_type =
+
             }
         }
+    }
+}

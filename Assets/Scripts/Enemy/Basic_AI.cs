@@ -146,108 +146,109 @@ public class Basic_AI : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Bullet")
-        {
-            if (GameObject.Find("WeaponHandler").GetComponent<PlayerAim>().has_property)
-            {
-                int the_property = GameObject.Find("WeaponHandler").GetComponent<PlayerAim>().property;
-                ChangeProperty(the_property);
-                player_game_object.GetComponent<PlayerAim>().has_property = false;
-            }
-            else
-            {
-                player_game_object.GetComponent<PlayerAim>().has_property = true;
-                SetProperty();
-            }
-        }
-    }
+    //void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.tag == "Bullet")
+    //    {
+    //        if (GameObject.Find("WeaponHandler").GetComponent<PlayerAim>().has_property)
+    //        {
+    //            int the_property = GameObject.Find("WeaponHandler").GetComponent<PlayerAim>().property;
+    //            ChangeProperty(the_property);
+    //            player_game_object.GetComponent<PlayerAim>().has_property = false;
+    //        }
+    //        else
+    //        {
+    //            player_game_object.GetComponent<PlayerAim>().has_property = true;
+    //            SetProperty();
+    //        }
+    //    }
+    //}
 
 
 
-    void SetProperty()
-    {
-        if (AI_Flag_1)
-        {
-            Debug.Log("stole property 1");
-            player_game_object.GetComponent<PlayerAim>().property = 1;
-        }
-        else if (AI_Flag_2)
-        {
-            Debug.Log("stole property 2");
-            player_game_object.GetComponent<PlayerAim>().property = 2;
-        }
-        else if (AI_Flag_3)
-        {
-            Debug.Log("stole property 3");
-            player_game_object.GetComponent<PlayerAim>().property = 3;
-        }
-        else if (AI_Flag_4)
-        {
-            Debug.Log("stole property 4");
-            player_game_object.GetComponent<PlayerAim>().property = 4;
-        }
-        else if (AI_Flag_5)
-        {
-            Debug.Log("stole property 5");
-            player_game_object.GetComponent<PlayerAim>().property = 5;
-        }
-        else if (AI_Flag_6)
-        {
-            Debug.Log("stole property 6");
-            player_game_object.GetComponent<PlayerAim>().property = 6;
-        }
-        else
-        {
-            player_game_object.GetComponent<PlayerAim>().has_property = false;
-        }
-    }
+    //void SetProperty()
+    //{
+    //    if (AI_Flag_1)
+    //    {
+    //        Debug.Log("stole property 1");
+    //        player_game_object.GetComponent<PlayerAim>().property = 1;
+    //    }
+    //    else if (AI_Flag_2)
+    //    {
+    //        Debug.Log("stole property 2");
+    //        player_game_object.GetComponent<PlayerAim>().property = 2;
+    //    }
+    //    else if (AI_Flag_3)
+    //    {
+    //        Debug.Log("stole property 3");
+    //        player_game_object.GetComponent<PlayerAim>().property = 3;
+    //    }
+    //    else if (AI_Flag_4)
+    //    {
+    //        Debug.Log("stole property 4");
+    //        player_game_object.GetComponent<PlayerAim>().property = 4;
+    //    }
+    //    else if (AI_Flag_5)
+    //    {
+    //        Debug.Log("stole property 5");
+    //        player_game_object.GetComponent<PlayerAim>().property = 5;
+    //    }
+    //    else if (AI_Flag_6)
+    //    {
+    //        Debug.Log("stole property 6");
+    //        player_game_object.GetComponent<PlayerAim>().property = 6;
+    //    }
+    //    else
+    //    {
+    //        player_game_object.GetComponent<PlayerAim>().has_property = false;
+    //    }
+    //}
 
-    void ChangeProperty(int property_val)
-    {
-        //if (!is_colliding_with_level)
-        //{
-        if (1 == property_val)
-        {
-            Debug.Log("swapped to property 1");
-            SetAllFlagsFalse();
-            AI_Flag_1 = true;
-            GetComponent<SpriteRenderer>().color = Color.blue;
-            //GetComponent<Renderer>().material.color = new Color(255,0,0,1);
-        }
-        if (2 == property_val)
-        {
-            Debug.Log("swapped to property 2");
-            SetAllFlagsFalse();
-            AI_Flag_2 = true;
-        }
-        if (3 == property_val)
-        {
-            Debug.Log("swapped to property 3");
-            SetAllFlagsFalse();
-            AI_Flag_3 = true;
-        }
-        if (4 == property_val)
-        {
-            Debug.Log("swapped to property 4");
-            SetAllFlagsFalse();
-            AI_Flag_4 = true;
-        }
-        if (5 == property_val)
-        {
-            Debug.Log("swapped to property 5");
-            GetComponent<SpriteRenderer>().color = Color.green;
-            SetAllFlagsFalse();
-            AI_Flag_5 = true;
-        }
-        if (6 == property_val)
-        {
-            Debug.Log("swapped to property 6");
-            SetAllFlagsFalse();
-            AI_Flag_6 = true;
-        }
-    }
+    //void ChangeProperty(int property_val)
+    //{
+    //    //if (!is_colliding_with_level)
+    //    //{
+    //    if (1 == property_val)
+    //    {
+    //        Debug.Log("swapped to property 1");
+    //        SetAllFlagsFalse();
+    //        AI_Flag_1 = true;
+    //        GetComponent<SpriteRenderer>().color = Color.blue;
+    //        //GetComponent<Renderer>().material.color = new Color(255,0,0,1);
+    //    }
+    //    if (2 == property_val)
+    //    {
+    //        Debug.Log("swapped to property 2");
+    //        SetAllFlagsFalse();
+    //        AI_Flag_2 = true;
+    //    }
+    //    if (3 == property_val)
+    //    {
+    //        Debug.Log("swapped to property 3");
+    //        SetAllFlagsFalse();
+    //        AI_Flag_3 = true;
+    //    }
+    //    if (4 == property_val)
+    //    {
+    //        Debug.Log("swapped to property 4");
+    //        SetAllFlagsFalse();
+    //        AI_Flag_4 = true;
+    //    }
+    //    if (5 == property_val)
+    //    {
+    //        Debug.Log("swapped to property 5");
+    //        GetComponent<SpriteRenderer>().color = Color.green;
+    //        SetAllFlagsFalse();
+    //        AI_Flag_5 = true;
+    //    }
+    //    if (6 == property_val)
+    //    {
+    //        Debug.Log("swapped to property 6");
+    //        SetAllFlagsFalse();
+    //        AI_Flag_6 = true;
+    //    }
+    //}
+
     void SetAllFlagsFalse()
     {
         AI_Flag_1 = false;
