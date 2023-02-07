@@ -115,8 +115,8 @@ public class PlayerSwapProperty : MonoBehaviour
             else
             {
                 Basic_AI AIHolder = swapObject.GetComponent<Basic_AI>();
-                int AIHolder_type = AIHolder.Find_AI_Type();
-                int AI_Holder_type_other = hitAIHolder.Find_AI_Type();
+                int AIHolder_type = AIHolder.AI_type;
+                int AI_Holder_type_other = hitAIHolder.AI_type;
                 AIHolder.Set_Flag(AI_Holder_type_other);
                 hitAIHolder.Set_Flag(AIHolder_type);
                 swapObject = null;
