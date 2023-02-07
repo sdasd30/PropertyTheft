@@ -45,7 +45,7 @@ public class PlayerSwapProperty : MonoBehaviour
                     Debug.DrawLine(transform.position, hit.point, Color.red, 2.0f, false);
                     //mPropertyHolder.HitObject(hit);
                     //Winston: Modified code for AI case.
-                    if (hit.transform.gameObject.GetComponent<MaterialHolder>())
+                    if (!swap_AI)
                     {
                         AttemptSwap(hit);
                     }
@@ -111,12 +111,15 @@ public class PlayerSwapProperty : MonoBehaviour
                 //There is currently no object selected for swap. Add this as a swap object.
                 swapObject = hitObject;
                 hitAIHolder.MarkForSwap();
-
             }
             else
             {
                 Basic_AI AIHolder = swapObject.GetComponent<Basic_AI>();
-                //int AIHolder_type =
+                int AIHolder_type = AIHolder.Find_AI_Type();
+                int AI_Holder_type_other = hitAIHolder.Find_AI_Type();
+                AIHolder.Set_Flag(AI_Holder_type_other);
+                hitAIHolder.Set_Flag(AIHolder_type);
+                swapObject = null;
 
             }
         }

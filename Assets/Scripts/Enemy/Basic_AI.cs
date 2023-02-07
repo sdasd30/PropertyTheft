@@ -39,14 +39,8 @@ public class Basic_AI : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         speed = 1f;
         player_game_object = GameObject.Find("WeaponHandler");
-        if (AI_Flag_5)
-        {
-            GetComponent<SpriteRenderer>().color = Color.green;
-        }
-        else if (AI_Flag_1)
-        {
-            GetComponent<SpriteRenderer>().color = Color.blue;
-        }
+        Find_AI_Type();
+
     }
 
     // Update is called once per frame
@@ -146,109 +140,6 @@ public class Basic_AI : MonoBehaviour
         }
     }
 
-    //void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Bullet")
-    //    {
-    //        if (GameObject.Find("WeaponHandler").GetComponent<PlayerAim>().has_property)
-    //        {
-    //            int the_property = GameObject.Find("WeaponHandler").GetComponent<PlayerAim>().property;
-    //            ChangeProperty(the_property);
-    //            player_game_object.GetComponent<PlayerAim>().has_property = false;
-    //        }
-    //        else
-    //        {
-    //            player_game_object.GetComponent<PlayerAim>().has_property = true;
-    //            SetProperty();
-    //        }
-    //    }
-    //}
-
-
-
-    //void SetProperty()
-    //{
-    //    if (AI_Flag_1)
-    //    {
-    //        Debug.Log("stole property 1");
-    //        player_game_object.GetComponent<PlayerAim>().property = 1;
-    //    }
-    //    else if (AI_Flag_2)
-    //    {
-    //        Debug.Log("stole property 2");
-    //        player_game_object.GetComponent<PlayerAim>().property = 2;
-    //    }
-    //    else if (AI_Flag_3)
-    //    {
-    //        Debug.Log("stole property 3");
-    //        player_game_object.GetComponent<PlayerAim>().property = 3;
-    //    }
-    //    else if (AI_Flag_4)
-    //    {
-    //        Debug.Log("stole property 4");
-    //        player_game_object.GetComponent<PlayerAim>().property = 4;
-    //    }
-    //    else if (AI_Flag_5)
-    //    {
-    //        Debug.Log("stole property 5");
-    //        player_game_object.GetComponent<PlayerAim>().property = 5;
-    //    }
-    //    else if (AI_Flag_6)
-    //    {
-    //        Debug.Log("stole property 6");
-    //        player_game_object.GetComponent<PlayerAim>().property = 6;
-    //    }
-    //    else
-    //    {
-    //        player_game_object.GetComponent<PlayerAim>().has_property = false;
-    //    }
-    //}
-
-    //void ChangeProperty(int property_val)
-    //{
-    //    //if (!is_colliding_with_level)
-    //    //{
-    //    if (1 == property_val)
-    //    {
-    //        Debug.Log("swapped to property 1");
-    //        SetAllFlagsFalse();
-    //        AI_Flag_1 = true;
-    //        GetComponent<SpriteRenderer>().color = Color.blue;
-    //        //GetComponent<Renderer>().material.color = new Color(255,0,0,1);
-    //    }
-    //    if (2 == property_val)
-    //    {
-    //        Debug.Log("swapped to property 2");
-    //        SetAllFlagsFalse();
-    //        AI_Flag_2 = true;
-    //    }
-    //    if (3 == property_val)
-    //    {
-    //        Debug.Log("swapped to property 3");
-    //        SetAllFlagsFalse();
-    //        AI_Flag_3 = true;
-    //    }
-    //    if (4 == property_val)
-    //    {
-    //        Debug.Log("swapped to property 4");
-    //        SetAllFlagsFalse();
-    //        AI_Flag_4 = true;
-    //    }
-    //    if (5 == property_val)
-    //    {
-    //        Debug.Log("swapped to property 5");
-    //        GetComponent<SpriteRenderer>().color = Color.green;
-    //        SetAllFlagsFalse();
-    //        AI_Flag_5 = true;
-    //    }
-    //    if (6 == property_val)
-    //    {
-    //        Debug.Log("swapped to property 6");
-    //        SetAllFlagsFalse();
-    //        AI_Flag_6 = true;
-    //    }
-    //}
-
     void SetAllFlagsFalse()
     {
         AI_Flag_1 = false;
@@ -266,5 +157,85 @@ public class Basic_AI : MonoBehaviour
             Quaternion.identity, transform);
     }
 
+    public int Find_AI_Type()
+    {
+        
+        if (AI_Flag_1)
+        {
+            AI_type = 1;
+        }
+        else if (AI_Flag_2)
+        {
+            AI_type = 2;
+        }
+        else if (AI_Flag_3)
+        {
+            AI_type = 3;
+        }
+        else if (AI_Flag_4)
+        {
+            AI_type = 4;
+        }
+        else if (AI_Flag_5)
+        {
+            AI_type = 5;
+        }
+        else if (AI_Flag_6)
+        {
+            AI_type = 6;
+        }
+        else
+        {
+            AI_type = 0;
+        }
+        return AI_type;
+    }
 
+    public void Set_Flag(int type)
+    {
+        if (type == 1)
+        {
+            AI_type = 1;
+            SetAllFlagsFalse();
+            AI_Flag_1 = true;
+
+        }
+        else if (type == 2)
+        {
+            AI_type = 2;
+            SetAllFlagsFalse();
+            AI_Flag_1 = true;
+        }
+        else if (type == 3)
+        {
+            AI_type = 3;
+            SetAllFlagsFalse();
+            AI_Flag_1 = true;
+        }
+        else if (type == 4)
+        {
+            AI_type = 4;
+            SetAllFlagsFalse();
+            AI_Flag_1 = true;
+        }
+        else if (type == 5)
+        {
+            AI_type = 5;
+            SetAllFlagsFalse();
+            AI_Flag_1 = true;
+        }
+        else if (type == 6)
+        {
+            AI_type = 6;
+            SetAllFlagsFalse();
+            AI_Flag_1 = true;
+        }
+        else
+        {
+            AI_type = 0;
+            SetAllFlagsFalse();
+        }
+    }
+
+   
 }
