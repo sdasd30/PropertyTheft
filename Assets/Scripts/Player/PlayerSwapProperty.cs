@@ -1,6 +1,6 @@
 /*
  *Author: Daniel Zhao
- *Last Modified: 2/3/2023
+ *Last Modified: 2/7/2023
  *Description: This script lets the player fire their weapon.
 */
 
@@ -12,6 +12,9 @@ using UnityEngine;
 
 public class PlayerSwapProperty : MonoBehaviour
 {
+    public delegate void SwapEventHandler(PlayerSwapProperty psp);
+    public event SwapEventHandler SuccessfulSwap;
+
     private GameObject gunObject;
     private SpriteRenderer gunSprite;
     private GameObject swapObject;
@@ -82,6 +85,12 @@ public class PlayerSwapProperty : MonoBehaviour
                 hitHolder.MarkForSwap();
                 gunSprite.sprite = activeGunSpr;
             }
+            else if (swapObject == hitObject)
+            {
+                hitHolder.DemarkForSwap();
+                swapObject = null;
+                gunSprite.sprite = inactiveGunSpr;
+            }
             else
             {
                 MaterialHolder swapHolder = swapObject.GetComponent<MaterialHolder>();
@@ -92,6 +101,10 @@ public class PlayerSwapProperty : MonoBehaviour
 
                 swapObject = null;
                 gunSprite.sprite = inactiveGunSpr;
+                if (SuccessfulSwap != null)
+                {
+                    SuccessfulSwap(this);
+                }
             }
         }
     }
