@@ -16,6 +16,9 @@ public class PlayerSwapProperty : MonoBehaviour
     private PlayerHeldProperty mPropertyHolder;
     private GameObject swapObject;
     bool firing;
+
+    //Winston: Bool to determine whether we are swapping AI or not. (used in order to change whether we are swapping materials or AI.
+    bool swap_AI;
     //float coolDown = 0;
 
     void Start()
@@ -41,7 +44,16 @@ public class PlayerSwapProperty : MonoBehaviour
                 {
                     Debug.DrawLine(transform.position, hit.point, Color.red, 2.0f, false);
                     //mPropertyHolder.HitObject(hit);
-                    AttemptSwap(hit);
+                    //Winston: Modified code for AI case.
+                    if (hit.transform.gameObject.GetComponent<MaterialHolder>())
+                    {
+                        AttemptSwap(hit);
+                    } else
+                    {
+                        AttemptSwapAI(hit);
+                    }
+
+
                 }
                 else 
                 {
@@ -63,7 +75,6 @@ public class PlayerSwapProperty : MonoBehaviour
     {
         GameObject hitObject = hit.transform.gameObject;
         MaterialHolder hitHolder = hitObject.GetComponent<MaterialHolder>();
-
         if (hitHolder)
         {
             
@@ -83,7 +94,27 @@ public class PlayerSwapProperty : MonoBehaviour
 
                 swapObject = null;
             }
-        }
+        } 
     }
 
-}
+
+    //Winston's added swap function for the AI case.
+    private void AttemptSwapAI(RaycastHit2D hit)
+    {
+        GameObject hitObject = hit.transform.gameObject;
+        Basic_AI hitAIHolder = hitObject.GetComponent<Basic_AI>();
+        if (hitAIHolder)
+        {
+            if (!swapObject)
+            {
+                //There is currently no object selected for swap. Add this as a swap object.
+                swapObject = hitObject;
+                hitAIHolder.MarkForSwap();
+              
+            } else
+            {
+                Basic_AI AIHolder = swapObject.GetComponent<Basic_AI>();
+                int AIHolder_type =
+                
+            }
+        }
