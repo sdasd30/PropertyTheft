@@ -20,7 +20,6 @@ public class PlayerAim : MonoBehaviour
 
 		float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
 		transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-		
 	}
 
 	public Vector3 GetMousePos()

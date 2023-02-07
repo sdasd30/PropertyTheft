@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Level
   layers:
   - Default
   - TransparentFX
@@ -15,7 +16,7 @@ TagManager:
   - Background
   - Entities
   - Standable Entities
-  - 
+  - Forground
   - 
   - 
   - 
@@ -47,9 +48,15 @@ TagManager:
   - name: Level
     uniqueID: 1766980681
     locked: 0
+  - name: Entities
+    uniqueID: 3328430471
+    locked: 0
   - name: Player
     uniqueID: 97546359
     locked: 0
   - name: Foreground
     uniqueID: 2886170483
+    locked: 0
+  - name: WorldUI
+    uniqueID: 1798303231
     locked: 0
