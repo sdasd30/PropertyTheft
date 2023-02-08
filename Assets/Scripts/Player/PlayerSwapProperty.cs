@@ -25,6 +25,7 @@ public class PlayerSwapProperty : MonoBehaviour
     {
         mPropertyHolder = gameObject.GetComponent<PlayerHeldProperty>();
         swapObject = null;
+        swap_AI = true;
     }
 
     void Update()
@@ -108,6 +109,7 @@ public class PlayerSwapProperty : MonoBehaviour
         {
             if (!swapObject)
             {
+                
                 //There is currently no object selected for swap. Add this as a swap object.
                 swapObject = hitObject;
                 hitAIHolder.MarkForSwap();

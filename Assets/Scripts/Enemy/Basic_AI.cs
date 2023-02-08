@@ -19,6 +19,7 @@ public class Basic_AI : MonoBehaviour
     public int AI_type;
 
 
+
     public bool AI_Flag_1; //moves horizontally in one direction until a wall is hit, then reverses direction
     public bool AI_Flag_2; //Follows the player and ignores walls and gravity. 
     public bool AI_Flag_3; //Follows the player. Does not ignore walls. Ignores gravity. 
@@ -34,12 +35,13 @@ public class Basic_AI : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         b_collider = GetComponent<BoxCollider2D>();
         Vector3 dims = b_collider.size;
-        maxDistanceX = dims.x / 2 + 0.2f;
-        maxDistanceY = dims.y / 2 + 0.2f;
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        speed = 1f;
+        maxDistanceX = dims.x / 2 + .01f;
+        maxDistanceY = dims.y / 2 + .01f;
+        //target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        speed = 3f;
         player_game_object = GameObject.Find("WeaponHandler");
         Find_AI_Type();
+        Set_Flag(AI_type);
 
     }
 
@@ -72,21 +74,22 @@ public class Basic_AI : MonoBehaviour
     }
     void AI_Movement_1_5()
     {
-        //rb.gravityScale = 10;
+        //rb.gravityScale = 0;
         rb.freezeRotation = true;
         rb.velocity = transform.right * speed;
         rb.SetRotation(0f);
         RaycastHit2D hits;
-        if (AI_Flag_1)
+
+        hits = Physics2D.Raycast(transform.position, transform.right, maxDistanceX, layershit);
+        if (hits)
         {
-            hits = Physics2D.Raycast(transform.position, transform.right, maxDistanceX, layershit);
-            if (hits)
-            {
-                transform.right = -1f * transform.right;
-            }
+            transform.right = -1f * transform.right;
         }
-        else
+
+        if (AI_Flag_5)
         {
+            
+
             hits = Physics2D.Raycast(transform.position + transform.right * maxDistanceX, -1f * transform.up, maxDistanceY, layershit);
             if (!hits)
             {
@@ -150,9 +153,11 @@ public class Basic_AI : MonoBehaviour
         AI_Flag_6 = false;
     }
 
+    GameObject swapIconGO;
+
     public void MarkForSwap()
     {
-        GameObject swapIconGO = Instantiate
+        swapIconGO = Instantiate
             (swapIcon, transform.position,
             Quaternion.identity, transform);
     }
@@ -204,36 +209,40 @@ public class Basic_AI : MonoBehaviour
         {
             AI_type = 2;
             SetAllFlagsFalse();
-            AI_Flag_1 = true;
+            AI_Flag_2 = true;
         }
         else if (type == 3)
         {
             AI_type = 3;
             SetAllFlagsFalse();
-            AI_Flag_1 = true;
+            AI_Flag_3 = true;
         }
         else if (type == 4)
         {
             AI_type = 4;
             SetAllFlagsFalse();
-            AI_Flag_1 = true;
+            AI_Flag_4 = true;
         }
         else if (type == 5)
         {
             AI_type = 5;
             SetAllFlagsFalse();
-            AI_Flag_1 = true;
+            AI_Flag_5 = true;
         }
         else if (type == 6)
         {
             AI_type = 6;
             SetAllFlagsFalse();
-            AI_Flag_1 = true;
+            AI_Flag_6 = true;
         }
         else
         {
             AI_type = 0;
             SetAllFlagsFalse();
+        }
+        if (swapIconGO)
+        {
+            Destroy(swapIconGO);
         }
     }
 
