@@ -9,15 +9,18 @@ public class Basic_AI : MonoBehaviour
     float maxDistanceX;
     float maxDistanceY;
     public LayerMask layershit;
+    public LayerMask fanhit;
     public Rigidbody2D rb;
     public BoxCollider2D b_collider;
     private Transform target;
     private float speed;
+    private GameObject swapObject;
     public GameObject player_game_object;
-    private bool is_colliding_with_level;
+    //private bool is_colliding_with_level;
     [SerializeField] private GameObject swapIcon;
     public int AI_type;
-
+    public int fan_range;
+    private float orig_vel;
 
 
     public bool AI_Flag_1; //moves horizontally in one direction until a wall is hit, then reverses direction
@@ -26,11 +29,13 @@ public class Basic_AI : MonoBehaviour
     public bool AI_Flag_4; // Rotates in the direction of the player. 
     public bool AI_Flag_5; // Moves in one direction and reverses direction when about to fall off a cliff.
     public bool AI_Flag_6; // Moves in one direction indefinitely.
+    public bool AI_Flag_7;
     private bool AI_Flag_2_3_set;
     /// Start is called before the first frame update
     void Start()
     {
-        is_colliding_with_level = false;
+        //is_colliding_with_level = false;
+        fan_range = 1;
         ray = new Ray(transform.position, transform.forward);
         rb = GetComponent<Rigidbody2D>();
         b_collider = GetComponent<BoxCollider2D>();
@@ -69,9 +74,35 @@ public class Basic_AI : MonoBehaviour
         else if (AI_Flag_6)
         {
             AI_Movement_6();
+        } else if (AI_Flag_7)
+        {
+            AI_Movement_7();
         }
 
     }
+
+    void AI_Movement_7()
+    {
+        RaycastHit2D hits = Physics2D.Raycast(transform.position, transform.right, maxDistanceX + fan_range, fanhit);
+
+        
+        if (hits)
+        {
+            //Debug.Log("here");
+            GameObject hitObject = hits.transform.gameObject;
+            Rigidbody2D objectbody = hitObject.GetComponent<Rigidbody2D>();
+            if (!swapObject)
+            {
+                orig_vel = objectbody.velocity.x;
+            }
+
+            //objectbody.velocity = new Vector3(objectbody.velocity.x + 2, objectbody.velocity.y, 0);
+            objectbody.position = new Vector3(objectbody.position.x + .5f*Time.deltaTime, objectbody.position.y, 0);
+        } 
+        
+
+    }
+
     void AI_Movement_1_5()
     {
         //rb.gravityScale = 0;
@@ -88,8 +119,7 @@ public class Basic_AI : MonoBehaviour
 
         if (AI_Flag_5)
         {
-            
-
+          
             hits = Physics2D.Raycast(transform.position + transform.right * maxDistanceX, -1f * transform.up, maxDistanceY, layershit);
             if (!hits)
             {
@@ -120,12 +150,14 @@ public class Basic_AI : MonoBehaviour
         rb.velocity = transform.right * speed;
 
     }
+
+
     void OnCollisionStay2D(Collision2D collision)
     {
 
         if (collision.gameObject.tag == "Level")
         {
-            is_colliding_with_level = true;
+            //is_colliding_with_level = true;
             if (AI_Flag_2)
             {
                 Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), collision.collider);
@@ -139,7 +171,7 @@ public class Basic_AI : MonoBehaviour
         if (collision.gameObject.tag == "Level")
         {
             //Debug.Log("exited");
-            is_colliding_with_level = false;
+            //is_colliding_with_level = false;
         }
     }
 
@@ -150,6 +182,7 @@ public class Basic_AI : MonoBehaviour
         AI_Flag_3 = false;
         AI_Flag_4 = false;
         AI_Flag_5 = false;
+        AI_Flag_6 = false;
         AI_Flag_6 = false;
     }
 
@@ -188,6 +221,9 @@ public class Basic_AI : MonoBehaviour
         else if (AI_Flag_6)
         {
             AI_type = 6;
+        } else if (AI_Flag_7)
+        {
+            AI_type = 7;
         }
         else
         {
@@ -234,6 +270,11 @@ public class Basic_AI : MonoBehaviour
             AI_type = 6;
             SetAllFlagsFalse();
             AI_Flag_6 = true;
+        } else if (type == 7)
+        {
+            AI_type = 7;
+            SetAllFlagsFalse();
+            AI_Flag_7 = true;
         }
         else
         {
