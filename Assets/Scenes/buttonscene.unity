@@ -142,7 +142,7 @@ PrefabInstance:
     - target: {fileID: 8447275229503799272, guid: c3c57558370e1764aa3a77083520ea1e, type: 3}
       propertyPath: propertyList.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: d8efb9edaf4ef584aadc0f6c3d0de556, type: 2}
+      objectReference: {fileID: 11400000, guid: 0da3900f6f44dc84eb5c037f602af290, type: 2}
     - target: {fileID: 8798265860937204504, guid: c3c57558370e1764aa3a77083520ea1e, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -772,7 +772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb79679097765bf78bc096b3ee8032c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayDivisor: 11
+  displayDivisor: 13
 --- !u!224 &1352744897
 RectTransform:
   m_ObjectHideFlags: 0
@@ -879,12 +879,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 1352744899}
-  m_maskType: 0
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 1352744899}
+  m_maskType: 0
 --- !u!23 &1352744899
 MeshRenderer:
   m_ObjectHideFlags: 0
