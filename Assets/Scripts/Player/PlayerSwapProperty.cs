@@ -1,6 +1,6 @@
 /*
  *Author: Daniel Zhao
- *Last Modified: 2/3/2023
+ *Last Modified: 2/7/2023
  *Description: This script lets the player fire their weapon.
 */
 
@@ -12,9 +12,16 @@ using UnityEngine;
 
 public class PlayerSwapProperty : MonoBehaviour
 {
-    [SerializeField] GameObject projectile;
-    private PlayerHeldProperty mPropertyHolder;
+    public delegate void SwapEventHandler(PlayerSwapProperty psp);
+    public event SwapEventHandler SuccessfulSwap;
+
+    private GameObject gunObject;
+    private SpriteRenderer gunSprite;
     private GameObject swapObject;
+    [SerializeField] private TrailRenderer BulletTrail;
+    [SerializeField] private Sprite inactiveGunSpr;
+    [SerializeField] private Sprite activeGunSpr;
+
     bool firing;
 
     //Winston: Bool to determine whether we are swapping AI or not. (used in order to change whether we are swapping materials or AI.
@@ -23,7 +30,8 @@ public class PlayerSwapProperty : MonoBehaviour
 
     void Start()
     {
-        mPropertyHolder = gameObject.GetComponent<PlayerHeldProperty>();
+        gunObject = GetComponentInChildren<AutoMirror>().gameObject;
+        gunSprite = gunObject.GetComponent<SpriteRenderer>();
         swapObject = null;
         swap_AI = true;
     }
@@ -41,9 +49,11 @@ public class PlayerSwapProperty : MonoBehaviour
                 Vector3 direction = Vector3.Normalize(new Vector3(mousePoint.x - transform.position.x,
                                                       mousePoint.y - transform.position.y, 0.0f));
                 hit = Physics2D.Raycast(transform.position, direction);
+                Vector3 hitpoint;
                 if (hit.collider != null)
                 {
                     Debug.DrawLine(transform.position, hit.point, Color.red, 2.0f, false);
+
                     //mPropertyHolder.HitObject(hit);
                     //Winston: Modified code for AI case.
                     if (!swap_AI)
@@ -56,12 +66,17 @@ public class PlayerSwapProperty : MonoBehaviour
                     }
 
 
+
+                    hitpoint = hit.point;
+
                 }
                 else
                 {
                     Debug.DrawLine(transform.position, direction * 100, Color.green, 2.0f, false);
+                    hitpoint = direction * 100;
                 }
-
+                TrailRenderer trail = Instantiate(BulletTrail, gunObject.transform.position, Quaternion.identity);
+                StartCoroutine(SpawnTrail(trail, hitpoint));
             }
 
             firing = true;
@@ -85,6 +100,13 @@ public class PlayerSwapProperty : MonoBehaviour
                 //There is currently no object selected for swap. Add this as a swap object.
                 swapObject = hitObject;
                 hitHolder.MarkForSwap();
+                gunSprite.sprite = activeGunSpr;
+            }
+            else if (swapObject == hitObject)
+            {
+                hitHolder.DemarkForSwap();
+                swapObject = null;
+                gunSprite.sprite = inactiveGunSpr;
             }
             else
             {
@@ -95,9 +117,15 @@ public class PlayerSwapProperty : MonoBehaviour
                 swapHolder.AddProperty(swapMatHit);
 
                 swapObject = null;
+                gunSprite.sprite = inactiveGunSpr;
+                if (SuccessfulSwap != null)
+                {
+                    SuccessfulSwap(this);
+                }
             }
         }
     }
+
 
 
     //Winston's added swap function for the AI case.
@@ -125,5 +153,25 @@ public class PlayerSwapProperty : MonoBehaviour
 
             }
         }
+    }
+}
+
+    private IEnumerator SpawnTrail(TrailRenderer trail, Vector3 hitpoint)
+    {
+        float BulletSpeed = 260f;
+        Vector3 startPosn = trail.transform.position;
+
+        float distance = Vector3.Distance(startPosn, hitpoint);
+        float remainingDistance = distance;
+
+        while (remainingDistance > 0)
+        {
+            trail.transform.position = Vector3.Lerp(startPosn, hitpoint, 1 - (remainingDistance / distance));
+            remainingDistance -= BulletSpeed * Time.deltaTime;
+            yield return null;
+        }
+
+        trail.transform.position = hitpoint;
+        Destroy(trail.gameObject, trail.time);
     }
 }
