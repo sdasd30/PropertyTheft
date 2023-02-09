@@ -19,6 +19,6 @@ public class SwapCounter : MonoBehaviour
     private void UpdateText(PlayerSwapProperty psp)
     {
         swapCount += 1;
-        mText.text = $"Swaps\n{swapCount}/{parSwaps}";
+        mText.text = $"Swaps\n{swapCount}\nPar:\n{parSwaps}";
     }
 }
