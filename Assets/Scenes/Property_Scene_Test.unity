@@ -208,17 +208,22 @@ MonoBehaviour:
   layershit:
     serializedVersion: 2
     m_Bits: 0
+  fanhit:
+    serializedVersion: 2
+    m_Bits: 0
   rb: {fileID: 0}
   b_collider: {fileID: 0}
   player_game_object: {fileID: 0}
   swapIcon: {fileID: 0}
   AI_type: 0
+  fan_range: 0
   AI_Flag_1: 0
   AI_Flag_2: 0
   AI_Flag_3: 0
   AI_Flag_4: 0
   AI_Flag_5: 0
   AI_Flag_6: 0
+  AI_Flag_7: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -544,18 +549,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layershit:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
+  fanhit:
+    serializedVersion: 2
+    m_Bits: 512
   rb: {fileID: 0}
   b_collider: {fileID: 0}
   player_game_object: {fileID: 0}
-  swapIcon: {fileID: 0}
+  swapIcon: {fileID: 7710707278093201530, guid: 627e24d5d8927c44c8a237325bbfcc51, type: 3}
   AI_type: 0
+  fan_range: 0
   AI_Flag_1: 0
   AI_Flag_2: 0
   AI_Flag_3: 0
   AI_Flag_4: 0
   AI_Flag_5: 1
   AI_Flag_6: 0
+  AI_Flag_7: 0
 --- !u!1001 &1472194281
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -725,6 +735,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8447275228532266595, guid: c3c57558370e1764aa3a77083520ea1e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 8447275228532266595, guid: c3c57558370e1764aa3a77083520ea1e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.24
+      objectReference: {fileID: 0}
     - target: {fileID: 8447275229503799272, guid: c3c57558370e1764aa3a77083520ea1e, type: 3}
       propertyPath: swapIcon
       value: 
@@ -814,18 +832,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layershit:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
+  fanhit:
+    serializedVersion: 2
+    m_Bits: 512
   rb: {fileID: 0}
   b_collider: {fileID: 0}
-  player_game_object: {fileID: 0}
-  swapIcon: {fileID: 0}
+  player_game_object: {fileID: 7710707278093201530, guid: 627e24d5d8927c44c8a237325bbfcc51, type: 3}
+  swapIcon: {fileID: 7710707278093201530, guid: 627e24d5d8927c44c8a237325bbfcc51, type: 3}
   AI_type: 0
+  fan_range: 0
   AI_Flag_1: 1
   AI_Flag_2: 0
   AI_Flag_3: 0
   AI_Flag_4: 0
   AI_Flag_5: 0
   AI_Flag_6: 0
+  AI_Flag_7: 0
 --- !u!483693784 &1507949357673021197
 TilemapRenderer:
   m_ObjectHideFlags: 0

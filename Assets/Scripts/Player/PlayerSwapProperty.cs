@@ -25,45 +25,58 @@ public class PlayerSwapProperty : MonoBehaviour
     {
         mPropertyHolder = gameObject.GetComponent<PlayerHeldProperty>();
         swapObject = null;
-        swap_AI = true;
+        swap_AI = false;
     }
 
     void Update()
     {
-        if (Input.GetAxisRaw("Fire1") > .5)
+        if (Input.GetAxisRaw("Fire1") > .5 || Input.GetAxisRaw("Fire2") > .5)
         {
             if (!firing)
             {
 
-                Vector3 mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                mousePoint.z = 0.0f;
-                RaycastHit2D hit;
-                Vector3 direction = Vector3.Normalize(new Vector3(mousePoint.x - transform.position.x,
-                                                      mousePoint.y - transform.position.y, 0.0f));
-                hit = Physics2D.Raycast(transform.position, direction);
-                if (hit.collider != null)
+                if (Input.GetAxisRaw("Fire1") > .5)
                 {
-                    Debug.DrawLine(transform.position, hit.point, Color.red, 2.0f, false);
-                    //mPropertyHolder.HitObject(hit);
-                    //Winston: Modified code for AI case.
-                    if (!swap_AI)
+                    Vector3 mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    mousePoint.z = 0.0f;
+                    RaycastHit2D hit;
+                    Vector3 direction = Vector3.Normalize(new Vector3(mousePoint.x - transform.position.x,
+                                                          mousePoint.y - transform.position.y, 0.0f));
+                    hit = Physics2D.Raycast(transform.position, direction);
+                    if (hit.collider != null)
                     {
-                        AttemptSwap(hit);
+                        Debug.DrawLine(transform.position, hit.point, Color.red, 2.0f, false);
+                        //mPropertyHolder.HitObject(hit);
+                        //Winston: Modified code for AI case.
+                        if (!swap_AI)
+                        {
+                            AttemptSwap(hit);
+                        }
+                        else
+                        {
+                            AttemptSwapAI(hit);
+                        }
+
+
                     }
                     else
                     {
-                        AttemptSwapAI(hit);
+                        Debug.DrawLine(transform.position, direction * 100, Color.green, 2.0f, false);
                     }
-
-
-                }
-                else
+                } else if (Input.GetAxisRaw("Fire2") > .5)
                 {
-                    Debug.DrawLine(transform.position, direction * 100, Color.green, 2.0f, false);
+                    if (!swap_AI)
+                    {
+                        swap_AI = true;
+                    }
+                    else
+                    {
+                        swap_AI = false;
+                    }
                 }
 
             }
-
+                
             firing = true;
 
         }
@@ -71,6 +84,27 @@ public class PlayerSwapProperty : MonoBehaviour
         {
             firing = false;
         }
+
+        //if (Input.GetAxisRaw("Fire2") > .5)
+        //{
+
+        //    if (!firing) { 
+        //        if (!swap_AI)
+        //        {
+        //            swap_AI = true;
+        //        }
+        //        else
+        //        {
+        //            swap_AI = false;
+        //        }
+        //    }
+        //    firing = true;
+        //}
+        //else
+        //{
+        //    firing = false;
+        //}
+
     }
 
     private void AttemptSwap(RaycastHit2D hit)
