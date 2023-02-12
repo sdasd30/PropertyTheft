@@ -22,13 +22,13 @@ public class Basic_AI : MonoBehaviour
     private float orig_vel;
 
 
-    public bool AI_Flag_1; //moves horizontally in one direction until a wall is hit, then reverses direction
-    public bool AI_Flag_2; //Follows the player and ignores walls and gravity. 
-    public bool AI_Flag_3; //Follows the player. Does not ignore walls. Ignores gravity. 
-    public bool AI_Flag_4; // Rotates in the direction of the player. 
-    public bool AI_Flag_5; // Moves in one direction and reverses direction when about to fall off a cliff.
-    public bool AI_Flag_6; // Moves in one direction indefinitely.
-    public bool AI_Flag_7;
+    //public bool AI_Flag_1; //moves horizontally in one direction until a wall is hit, then reverses direction
+    //public bool AI_Flag_2; //Follows the player and ignores walls and gravity. 
+    //public bool AI_Flag_3; //Follows the player. Does not ignore walls. Ignores gravity. 
+    //public bool AI_Flag_4; // Rotates in the direction of the player. 
+    //public bool AI_Flag_5; // Moves in one direction and reverses direction when about to fall off a cliff.
+    //public bool AI_Flag_6; // Moves in one direction indefinitely.
+    //public bool AI_Flag_7;
     private bool AI_Flag_2_3_set;
     /// Start is called before the first frame update
     void Start()
@@ -44,23 +44,21 @@ public class Basic_AI : MonoBehaviour
         //target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         speed = 3f;
         player_game_object = GameObject.Find("WeaponHandler");
-        Find_AI_Type();
-        Set_Flag(AI_type);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (AI_Flag_1 || AI_Flag_5)
+        if (AI_type == 1 || AI_type == 5)
         {
             AI_Movement_1_5();
         }
-        else if (AI_Flag_4)
+        else if (AI_type == 4)
         {
             AI_Movement_4();
         }
-        else if (AI_Flag_2 || AI_Flag_3)
+        else if (AI_type == 2 || AI_type== 3)
         {
             //AI_Movement_4();
             if (!AI_Flag_2_3_set)
@@ -70,11 +68,11 @@ public class Basic_AI : MonoBehaviour
             }
             AI_Movement_3();
         }
-        else if (AI_Flag_6)
+        else if (AI_type == 6)
         {
             AI_Movement_6();
         }
-        else if (AI_Flag_7)
+        else if (AI_type == 7)
         {
             AI_Movement_7();
         }
@@ -117,7 +115,7 @@ public class Basic_AI : MonoBehaviour
             transform.right = -1f * transform.right;
         }
 
-        if (AI_Flag_5)
+        if (AI_type == 5)
         {
 
             hits = Physics2D.Raycast(transform.position + transform.right * maxDistanceX, -1f * transform.up, maxDistanceY, layershit);
@@ -158,7 +156,7 @@ public class Basic_AI : MonoBehaviour
         if (collision.gameObject.tag == "Level")
         {
             //is_colliding_with_level = true;
-            if (AI_Flag_2)
+            if (AI_type == 2)
             {
                 Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), collision.collider);
             }
@@ -175,17 +173,6 @@ public class Basic_AI : MonoBehaviour
         }
     }
 
-    void SetAllFlagsFalse()
-    {
-        AI_Flag_1 = false;
-        AI_Flag_2 = false;
-        AI_Flag_3 = false;
-        AI_Flag_4 = false;
-        AI_Flag_5 = false;
-        AI_Flag_6 = false;
-        AI_Flag_6 = false;
-    }
-
     GameObject swapIconGO;
 
     public void MarkForSwap()
@@ -195,93 +182,40 @@ public class Basic_AI : MonoBehaviour
             Quaternion.identity, transform);
     }
 
-    public int Find_AI_Type()
-    {
 
-        if (AI_Flag_1)
-        {
-            AI_type = 1;
-        }
-        else if (AI_Flag_2)
-        {
-            AI_type = 2;
-        }
-        else if (AI_Flag_3)
-        {
-            AI_type = 3;
-        }
-        else if (AI_Flag_4)
-        {
-            AI_type = 4;
-        }
-        else if (AI_Flag_5)
-        {
-            AI_type = 5;
-        }
-        else if (AI_Flag_6)
-        {
-            AI_type = 6;
-        }
-        else if (AI_Flag_7)
-        {
-            AI_type = 7;
-        }
-        else
-        {
-            AI_type = 0;
-        }
-        return AI_type;
-    }
-
-    public void Set_Flag(int type)
+    public void Set_Type(int type)
     {
         if (type == 1)
         {
             AI_type = 1;
-            SetAllFlagsFalse();
-            AI_Flag_1 = true;
-
         }
         else if (type == 2)
         {
             AI_type = 2;
-            SetAllFlagsFalse();
-            AI_Flag_2 = true;
         }
         else if (type == 3)
         {
             AI_type = 3;
-            SetAllFlagsFalse();
-            AI_Flag_3 = true;
         }
         else if (type == 4)
         {
             AI_type = 4;
-            SetAllFlagsFalse();
-            AI_Flag_4 = true;
         }
         else if (type == 5)
         {
             AI_type = 5;
-            SetAllFlagsFalse();
-            AI_Flag_5 = true;
         }
         else if (type == 6)
         {
             AI_type = 6;
-            SetAllFlagsFalse();
-            AI_Flag_6 = true;
         }
         else if (type == 7)
         {
             AI_type = 7;
-            SetAllFlagsFalse();
-            AI_Flag_7 = true;
         }
         else
         {
             AI_type = 0;
-            SetAllFlagsFalse();
         }
         if (swapIconGO)
         {
