@@ -15,10 +15,7 @@ public class PlayerMove : MonoBehaviour
     private BoxCollider2D mCollider;
     public float horitzontalMoveMultiplier;
     public float jumpMultiplier;
-    public float coyoteTime = 5/60;
 
-
-    private float canJump;
     [SerializeField] private LayerMask jumpableGround;
 
     // Start is called before the first frame update
@@ -35,22 +32,10 @@ public class PlayerMove : MonoBehaviour
         float dirY = Input.GetAxisRaw("Vertical");
 
         mRigidBody.velocity = new Vector3(horitzontalMoveMultiplier * dirX, mRigidBody.velocity.y, 0);
-        bool grounded = IsGrounded();
-        if (grounded)
+
+        if (IsGrounded() && Input.GetButtonDown("Jump"))
         {
-            canJump = coyoteTime;
-        }
-        else
-        {
-            canJump -= Time.deltaTime;
-        }
-        if (canJump > 0)
-        {
-            if (Input.GetButtonDown("Jump"))
-            {
-                canJump = 0f;
-                mRigidBody.velocity = new Vector3(mRigidBody.velocity.x, jumpMultiplier, 0);
-            }
+            mRigidBody.velocity = new Vector3(mRigidBody.velocity.x, jumpMultiplier, 0);
         }
     }
 
