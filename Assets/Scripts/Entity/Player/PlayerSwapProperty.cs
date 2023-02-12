@@ -9,11 +9,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+public enum SwapStatus
+{
+    StartSwap,
+    EndSwap,
+    CancelSwap
+}
 public class PlayerSwapProperty : MonoBehaviour
 {
-    public delegate void SwapEventHandler(PlayerSwapProperty psp);
-    public event SwapEventHandler SuccessfulSwap;
+    public delegate void SwapEventHandler(PlayerSwapProperty psp, SwapStatus swapType, GameObject hitobj);
+    public event SwapEventHandler SwapEvent;
 
     private GameObject gunObject;
     private SpriteRenderer gunSprite;
@@ -84,12 +89,16 @@ public class PlayerSwapProperty : MonoBehaviour
                 swapObject = hitObject;
                 hitHolder.MarkForSwap();
                 gunSprite.sprite = activeGunSpr;
+                if (SwapEvent != null)
+                    SwapEvent(this, SwapStatus.StartSwap, hitObject);
             }
             else if (swapObject == hitObject)
             {
                 hitHolder.DemarkForSwap();
                 swapObject = null;
                 gunSprite.sprite = inactiveGunSpr;
+                if (SwapEvent != null)
+                    SwapEvent(this, SwapStatus.CancelSwap, hitObject);
             }
             else
             {
@@ -101,10 +110,8 @@ public class PlayerSwapProperty : MonoBehaviour
 
                 swapObject = null;
                 gunSprite.sprite = inactiveGunSpr;
-                if (SuccessfulSwap != null)
-                {
-                    SuccessfulSwap(this);
-                }
+                if (SwapEvent != null)
+                    SwapEvent(this, SwapStatus.EndSwap, hitObject);
             }
         }
     }
