@@ -12,13 +12,16 @@ public class SwapCounter : MonoBehaviour
     void Start()
     {
         mText = GetComponent<TextMeshProUGUI>();
-        FindObjectOfType<PlayerSwapProperty>().SuccessfulSwap += UpdateText;
-        mText.text = $"Swaps\n0/{parSwaps}";
+        FindObjectOfType<PlayerSwapProperty>().SwapEvent += UpdateText;
+        mText.text = $"Swaps\n{swapCount}\nPar:\n{parSwaps}";
     }
 
-    private void UpdateText(PlayerSwapProperty psp)
+    private void UpdateText(PlayerSwapProperty psp, SwapStatus sws, GameObject hit)
     {
-        swapCount += 1;
-        mText.text = $"Swaps\n{swapCount}/{parSwaps}";
+        if (sws == SwapStatus.EndSwap)
+        {
+            swapCount += 1;
+            mText.text = $"Swaps\n{swapCount}\nPar:\n{parSwaps}";
+        }
     }
 }
