@@ -26,6 +26,7 @@ public class PlayerSwapProperty : MonoBehaviour
     [SerializeField] private TrailRenderer BulletTrail;
     [SerializeField] private Sprite inactiveGunSpr;
     [SerializeField] private Sprite activeGunSpr;
+    [SerializeField] private bool disableSwaps = false;
 
     bool firing;
     bool swap_AI;
@@ -41,7 +42,7 @@ public class PlayerSwapProperty : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetAxisRaw("Fire1") > .5 || Input.GetAxisRaw("Fire2") > .5)
+        if (!disableSwaps && Input.GetAxisRaw("Fire1") > .5 || Input.GetAxisRaw("Fire2") > .5)
         {
             if (!firing)
             {
