@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horitzontalMoveMultiplier: 5
   jumpMultiplier: 8.5
-  coyoteTime: 0
+  coyoteTime: 0.083333336
   jumpableGround:
     serializedVersion: 2
     m_Bits: 576
