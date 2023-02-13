@@ -5,7 +5,31 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TestScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/World0 (Tutorial)/w-1_s-1.unity
+    guid: 405df7353ae5d1445b3b56a5dadedf39
+  - enabled: 1
+    path: Assets/Scenes/World0 (Tutorial)/w0_s1.unity
+    guid: 3710594454c12eb4ab26c211eefb09de
+  - enabled: 1
+    path: Assets/Scenes/World0 (Tutorial)/w0_s2.unity
+    guid: 8eaefe471b04f644d98ea46528c07659
+  - enabled: 1
+    path: Assets/Scenes/World0 (Tutorial)/w0_s3.unity
+    guid: 0924e552d9fbde44e9e4ee4bb93a2fe9
+  - enabled: 1
+    path: Assets/Scenes/World0 (Tutorial)/w0_s4.unity
+    guid: 2da3b18be693ce54792d685deccff3ba
+  - enabled: 1
+    path: Assets/Scenes/World0 (Tutorial)/w0_s5.unity
+    guid: 329dded3866e9b349a67128c2469c214
+  - enabled: 1
+    path: Assets/Scenes/World0 (Tutorial)/w0_s6.unity
+    guid: e388ec35dacd00a4fbe6df22a5752cb4
+  - enabled: 1
+    path: Assets/Scenes/World0 (Tutorial)/w0_s7.unity
+    guid: 82f82c67d726b8e49abce655b5c45f03
   m_configObjects: {}
