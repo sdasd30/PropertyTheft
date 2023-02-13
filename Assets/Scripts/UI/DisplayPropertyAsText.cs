@@ -50,8 +50,6 @@ public class DisplayPropertyAsText : MonoBehaviour
             matColor.a = 1;
         }
 
-
-        Debug.Log(matColor.a);
         TextMesh.color = matColor;
         
     }

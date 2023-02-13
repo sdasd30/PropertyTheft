@@ -38,7 +38,6 @@ public class PlayerMove : MonoBehaviour
         bool grounded = IsGrounded();
         if (grounded)
         {
-            Debug.Log("Grounded");
             canJump = coyoteTime;
         }
         else
