@@ -13,7 +13,7 @@ public class GameSceneManager : MonoBehaviour
             SceneProperties sp = GetComponent<SceneProperties>();
             if (sp.worldClimax)
             {
-                world += 1;
+                world = sp.worldNum + 1;
                 stage = 1;
             }    
             else
