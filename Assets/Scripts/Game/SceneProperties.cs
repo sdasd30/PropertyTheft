@@ -6,6 +6,12 @@ public class SceneProperties : MonoBehaviour
 {
     public int parSwaps = 0;
 
+    public int worldNum = -1;
+    public int stageNum = -1;
+
+    public bool worldClimax = false;
+
+
     // Start is called before the first frame update
     void Start()
     {
