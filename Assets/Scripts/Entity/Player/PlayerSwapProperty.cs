@@ -38,6 +38,7 @@ public class PlayerSwapProperty : MonoBehaviour
         gunSprite = gunObject.GetComponent<SpriteRenderer>();
         swapObject = null;
         swap_AI = false;
+        gunSprite.color = new Color(255, 0, 0);
     }
 
     void Update()
@@ -78,14 +79,29 @@ public class PlayerSwapProperty : MonoBehaviour
 
                 } else if (Input.GetAxisRaw("Fire2") > .5)
                 {
+
                     if (!swap_AI)
                     {
-                        Debug.Log("swapAI");
+                        if (swapObject)
+                        {
+                            MaterialHolder hitHolder = swapObject.GetComponent<MaterialHolder>();
+                            hitHolder.DemarkForSwap();
+                            swapObject = null;
+                        }
                         swap_AI = true;
+                        gunSprite.color = new Color(0, 0, 255);
                     }
                     else
                     {
+                        if (swapObject)
+                        {
+                            Basic_AI AIHolder = swapObject.GetComponent<Basic_AI>();
+                            int AIHolder_type = AIHolder.AI_type;
+                            AIHolder.Set_Type(AIHolder_type);
+                            swapObject = null;
+                        }
                         swap_AI = false;
+                        gunSprite.color = new Color(255, 0, 0);
                     }
                 }
 
