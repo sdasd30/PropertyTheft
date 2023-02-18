@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Wooden
   m_EditorClassIdentifier: 
   materialName: Wooden
+  spriteTexture: {fileID: 21300000, guid: cdeb05459ee96574f9f9b10174e593bc, type: 3}
   colorModifier: {r: 0.7264151, g: 0.4862205, b: 0.01027944, a: 1}
   mass: 3
   health: 10
