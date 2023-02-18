@@ -103,14 +103,18 @@ public class Basic_AI : MonoBehaviour
 
     void AI_Movement_1_5()
     {
-        //rb.gravityScale = 0;
+        //rb.gravityScale = 5;
         rb.freezeRotation = true;
-        rb.velocity = transform.right * speed;
+        rb.velocity = new Vector3(transform.right.x * speed, rb.velocity.y);
         rb.SetRotation(0f);
         RaycastHit2D hits;
 
-        hits = Physics2D.Raycast(transform.position, transform.right, maxDistanceX, layershit);
-        if (hits)
+
+        RaycastHit2D hits1 = Physics2D.Raycast(transform.position, transform.right, maxDistanceX, layershit);
+        RaycastHit2D hits2 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - (maxDistanceY - 0.1f)), transform.right, maxDistanceX, layershit);
+        RaycastHit2D hits3 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + (maxDistanceY - 0.1f)), transform.right, maxDistanceX, layershit);
+
+        if (hits1 || hits2 || hits3)
         {
             transform.right = -1f * transform.right;
         }
