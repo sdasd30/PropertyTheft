@@ -38,9 +38,9 @@ public class Basic_AI : MonoBehaviour
         ray = new Ray(transform.position, transform.forward);
         rb = GetComponent<Rigidbody2D>();
         b_collider = GetComponent<BoxCollider2D>();
-        Vector3 dims = b_collider.size;
-        maxDistanceX = dims.x / 2 + .01f;
-        maxDistanceY = dims.y / 2 + .01f;
+        Vector3 dims = b_collider.bounds.size;
+        maxDistanceX = (dims.x) / 2 + .05f;
+        maxDistanceY = (dims.y) / 2 + .05f;
         //target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         speed = 3f;
         player_game_object = GameObject.Find("WeaponHandler");
@@ -111,12 +111,15 @@ public class Basic_AI : MonoBehaviour
 
         //int layers = 416;
 
-        RaycastHit2D hits1 = Physics2D.Raycast(transform.position, transform.right, maxDistanceX, layershit1);
+        RaycastHit2D hits1 = Physics2D.Raycast(transform.position, transform.right, maxDistanceX , layershit1);
+        //Debug.DrawRay(transform.position, new Vector3(transform.right.x + maxDistanceX, transform.right.y), Color.red, 0f,  false);
+        //Debug.DrawLine(transform.position, new Vector3(transform.right.x + maxDistanceX, transform.right.y), Color.red, .1f ,false);
         RaycastHit2D hits2 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - (maxDistanceY - 0.1f)), transform.right, maxDistanceX, layershit1);
         RaycastHit2D hits3 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + (maxDistanceY - 0.1f)), transform.right, maxDistanceX, layershit1);
-
+        //Debug.Log("hit");
         if (hits1 || hits2 || hits3)
         {
+            
             transform.right = -1f * transform.right;
         }
 
@@ -170,9 +173,11 @@ public class Basic_AI : MonoBehaviour
     }
     void OnCollisionExit2D(Collision2D collision)
     {
+        Basic_AI hitAIHolder = collision.gameObject.GetComponent<Basic_AI>();
 
-        if (collision.gameObject.tag == "Level")
+        if (hitAIHolder)
         {
+            Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), collision.collider);
             //Debug.Log("exited");
             //is_colliding_with_level = false;
         }
