@@ -81,21 +81,23 @@ public class Basic_AI : MonoBehaviour
 
     void AI_Movement_7()
     {
-        RaycastHit2D hits = Physics2D.Raycast(transform.position, transform.right, maxDistanceX + fan_range, fanhit);
+        RaycastHit2D hits1 = Physics2D.Raycast(transform.position, transform.right, maxDistanceX + fan_range, fanhit);
+        //RaycastHit2D hits2 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - (maxDistanceY - 0.1f)), transform.right, maxDistanceX + fan_range, layershit1);
+        //RaycastHit2D hits3 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + (maxDistanceY - 0.1f)), transform.right, maxDistanceX + fan_range , layershit1);
 
-
-        if (hits)
+        if (hits1 /*|| hits2 || hits3*/)
         {
-            //Debug.Log("here");
-            GameObject hitObject = hits.transform.gameObject;
+            
+            GameObject hitObject = hits1.transform.gameObject;
             Rigidbody2D objectbody = hitObject.GetComponent<Rigidbody2D>();
-            if (!swapObject)
-            {
-                orig_vel = objectbody.velocity.x;
-            }
+            objectbody.AddForce(new Vector3(1, 0, 0));
+            //if (!swapObject)
+            //{
+            //    orig_vel = objectbody.velocity.x;
+            //}
 
             //objectbody.velocity = new Vector3(objectbody.velocity.x + 2, objectbody.velocity.y, 0);
-            objectbody.position = new Vector3(objectbody.position.x + .5f * Time.deltaTime, objectbody.position.y, 0);
+            //objectbody.position = new Vector3(objectbody.position.x + .5f * Time.deltaTime, objectbody.position.y, 0);
         }
 
 
