@@ -17,8 +17,10 @@ public class Basic_AI : MonoBehaviour
     public GameObject player_game_object;
     //private bool is_colliding_with_level;
     [SerializeField] private GameObject swapIcon;
+    [SerializeField] private GameObject Wind;
     public int AI_type;
     public int fan_range;
+    public int fan_speed;
     private float orig_vel;
 
 
@@ -34,7 +36,7 @@ public class Basic_AI : MonoBehaviour
     void Start()
     {
         //is_colliding_with_level = false;
-        fan_range = 1;
+        //fan_range = 5;
         ray = new Ray(transform.position, transform.forward);
         rb = GetComponent<Rigidbody2D>();
         b_collider = GetComponent<BoxCollider2D>();
@@ -44,6 +46,15 @@ public class Basic_AI : MonoBehaviour
         //target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         speed = 3f;
         player_game_object = GameObject.Find("WeaponHandler");
+        if (AI_type == 7)
+        {
+            for (int i = 1; i < fan_range + 1; i++)
+            {
+                Instantiate
+                    (Wind, new Vector3(transform.position.x + i, transform.position.y),
+                    Quaternion.identity, transform);
+            }
+        }
 
     }
 
@@ -87,16 +98,16 @@ public class Basic_AI : MonoBehaviour
 
         if (hits1 /*|| hits2 || hits3*/)
         {
-            
+            Debug.Log("hit");
             GameObject hitObject = hits1.transform.gameObject;
             Rigidbody2D objectbody = hitObject.GetComponent<Rigidbody2D>();
-            objectbody.AddForce(new Vector3(1, 0, 0));
+            //objectbody.AddForce(transform.right*5);
             //if (!swapObject)
             //{
             //    orig_vel = objectbody.velocity.x;
             //}
 
-            //objectbody.velocity = new Vector3(objectbody.velocity.x + 2, objectbody.velocity.y, 0);
+            objectbody.velocity = new Vector3(objectbody.velocity.x + fan_speed*Time.deltaTime, objectbody.velocity.y, 0);
             //objectbody.position = new Vector3(objectbody.position.x + .5f * Time.deltaTime, objectbody.position.y, 0);
         }
 
@@ -196,7 +207,10 @@ public class Basic_AI : MonoBehaviour
 
 
     public void Set_Type(int type)
-    {
+    {   if (type == 0)
+        {
+            AI_type = 0;
+        }
         if (type == 1)
         {
             AI_type = 1;
@@ -224,6 +238,12 @@ public class Basic_AI : MonoBehaviour
         else if (type == 7)
         {
             AI_type = 7;
+            for (int i = 1; i < fan_range + 1; i++)
+            {
+                Instantiate
+                    (Wind, new Vector3(transform.position.x + i, transform.position.y),
+                    Quaternion.identity, transform);
+            }
         }
         else
         {
