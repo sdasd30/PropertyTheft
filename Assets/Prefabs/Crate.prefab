@@ -556,4 +556,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd0a8c38513814345a3d82dc2f18e7e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OverrideSize: {x: 1, y: 1}
+  OverrideSize: {x: -1, y: -1}
