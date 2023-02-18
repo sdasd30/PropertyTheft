@@ -7,7 +7,7 @@ public class Basic_AI : MonoBehaviour
     Ray ray;
     float maxDistanceX;
     float maxDistanceY;
-    public LayerMask layershit;
+    public LayerMask layershit1;
     public LayerMask fanhit;
     public Rigidbody2D rb;
     public BoxCollider2D b_collider;
@@ -109,10 +109,11 @@ public class Basic_AI : MonoBehaviour
         rb.SetRotation(0f);
         RaycastHit2D hits;
 
+        //int layers = 416;
 
-        RaycastHit2D hits1 = Physics2D.Raycast(transform.position, transform.right, maxDistanceX, layershit);
-        RaycastHit2D hits2 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - (maxDistanceY - 0.1f)), transform.right, maxDistanceX, layershit);
-        RaycastHit2D hits3 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + (maxDistanceY - 0.1f)), transform.right, maxDistanceX, layershit);
+        RaycastHit2D hits1 = Physics2D.Raycast(transform.position, transform.right, maxDistanceX, layershit1);
+        RaycastHit2D hits2 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - (maxDistanceY - 0.1f)), transform.right, maxDistanceX, layershit1);
+        RaycastHit2D hits3 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + (maxDistanceY - 0.1f)), transform.right, maxDistanceX, layershit1);
 
         if (hits1 || hits2 || hits3)
         {
@@ -122,7 +123,7 @@ public class Basic_AI : MonoBehaviour
         if (AI_type == 5)
         {
 
-            hits = Physics2D.Raycast(transform.position + transform.right * maxDistanceX, -1f * transform.up, maxDistanceY, layershit);
+            hits = Physics2D.Raycast(transform.position + transform.right * maxDistanceX, -1f * transform.up, maxDistanceY, layershit1);
             if (!hits)
             {
                 transform.right = -1f * transform.right;
