@@ -7,13 +7,13 @@ public class SwapCounter : MonoBehaviour
 {
     TextMeshProUGUI mText;
     SceneProperties sceneProperties;
-    private int swapCount = 0;
+    public int swapCount = 0;
     private int parSwaps = 0;
     // Start is called before the first frame update
     void Start()
     {
         mText = GetComponent<TextMeshProUGUI>();
-        FindObjectOfType<PlayerSwapProperty>().SwapEvent += UpdateText;
+        FindObjectOfType<PlayerSwapProperty>().SwapEvent += UpdateCounter;
         
         sceneProperties = FindObjectOfType<SceneProperties>();
         if (sceneProperties == null)
@@ -22,15 +22,13 @@ public class SwapCounter : MonoBehaviour
             Destroy(this.gameObject);
         }
         parSwaps = sceneProperties.parSwaps;
-        mText.text = $"Swaps\n{swapCount}\nPar:\n{parSwaps}";
     }
 
-    private void UpdateText(PlayerSwapProperty psp, SwapStatus sws, GameObject hit)
+    private void UpdateCounter(PlayerSwapProperty psp, SwapStatus sws, GameObject hit)
     {
         if (sws == SwapStatus.EndSwap)
         {
             swapCount += 1;
-            mText.text = $"Swaps\n{swapCount}\nPar:\n{parSwaps}";
         }
     }
 }
