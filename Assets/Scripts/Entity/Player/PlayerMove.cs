@@ -58,4 +58,15 @@ public class PlayerMove : MonoBehaviour
     {
         return Physics2D.BoxCast(mCollider.bounds.center, mCollider.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
     }
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        Basic_AI hitAIHolder = collision.gameObject.GetComponent<Basic_AI>();
+
+        if (hitAIHolder && hitAIHolder.AI_type == 1)
+        {
+            Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), collision.collider);
+            //Debug.Log("exited");
+            //is_colliding_with_level = false;
+        }
+    }
 }

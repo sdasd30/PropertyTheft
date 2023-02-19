@@ -17,8 +17,10 @@ public class Basic_AI : MonoBehaviour
     public GameObject player_game_object;
     //private bool is_colliding_with_level;
     [SerializeField] private GameObject swapIcon;
+    [SerializeField] private GameObject Wind;
     public int AI_type;
     public int fan_range;
+    public int fan_speed;
     private float orig_vel;
 
 
@@ -34,16 +36,25 @@ public class Basic_AI : MonoBehaviour
     void Start()
     {
         //is_colliding_with_level = false;
-        fan_range = 1;
+        //fan_range = 5;
         ray = new Ray(transform.position, transform.forward);
         rb = GetComponent<Rigidbody2D>();
         b_collider = GetComponent<BoxCollider2D>();
-        Vector3 dims = b_collider.size;
-        maxDistanceX = dims.x / 2 + .01f;
-        maxDistanceY = dims.y / 2 + .01f;
+        Vector3 dims = b_collider.bounds.size;
+        maxDistanceX = (dims.x) / 2 + .05f;
+        maxDistanceY = (dims.y) / 2 + .05f;
         //target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         speed = 3f;
         player_game_object = GameObject.Find("WeaponHandler");
+        if (AI_type == 7)
+        {
+            for (int i = 1; i < fan_range + 1; i++)
+            {
+                Instantiate
+                    (Wind, new Vector3(transform.position.x + i, transform.position.y),
+                    Quaternion.identity, transform);
+            }
+        }
 
     }
 
@@ -81,21 +92,23 @@ public class Basic_AI : MonoBehaviour
 
     void AI_Movement_7()
     {
-        RaycastHit2D hits = Physics2D.Raycast(transform.position, transform.right, maxDistanceX + fan_range, fanhit);
+        RaycastHit2D hits1 = Physics2D.Raycast(transform.position, transform.right, maxDistanceX + fan_range, fanhit);
+        //RaycastHit2D hits2 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - (maxDistanceY - 0.1f)), transform.right, maxDistanceX + fan_range, layershit1);
+        //RaycastHit2D hits3 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + (maxDistanceY - 0.1f)), transform.right, maxDistanceX + fan_range , layershit1);
 
-
-        if (hits)
+        if (hits1 /*|| hits2 || hits3*/)
         {
-            //Debug.Log("here");
-            GameObject hitObject = hits.transform.gameObject;
+            Debug.Log("hit");
+            GameObject hitObject = hits1.transform.gameObject;
             Rigidbody2D objectbody = hitObject.GetComponent<Rigidbody2D>();
-            if (!swapObject)
-            {
-                orig_vel = objectbody.velocity.x;
-            }
+            //objectbody.AddForce(transform.right*5);
+            //if (!swapObject)
+            //{
+            //    orig_vel = objectbody.velocity.x;
+            //}
 
-            //objectbody.velocity = new Vector3(objectbody.velocity.x + 2, objectbody.velocity.y, 0);
-            objectbody.position = new Vector3(objectbody.position.x + .5f * Time.deltaTime, objectbody.position.y, 0);
+            objectbody.velocity = new Vector3(objectbody.velocity.x + fan_speed*Time.deltaTime, objectbody.velocity.y, 0);
+            //objectbody.position = new Vector3(objectbody.position.x + .5f * Time.deltaTime, objectbody.position.y, 0);
         }
 
 
@@ -111,12 +124,15 @@ public class Basic_AI : MonoBehaviour
 
         //int layers = 416;
 
-        RaycastHit2D hits1 = Physics2D.Raycast(transform.position, transform.right, maxDistanceX, layershit1);
+        RaycastHit2D hits1 = Physics2D.Raycast(transform.position, transform.right, maxDistanceX , layershit1);
+        //Debug.DrawRay(transform.position, new Vector3(transform.right.x + maxDistanceX, transform.right.y), Color.red, 0f,  false);
+        //Debug.DrawLine(transform.position, new Vector3(transform.right.x + maxDistanceX, transform.right.y), Color.red, .1f ,false);
         RaycastHit2D hits2 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - (maxDistanceY - 0.1f)), transform.right, maxDistanceX, layershit1);
         RaycastHit2D hits3 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + (maxDistanceY - 0.1f)), transform.right, maxDistanceX, layershit1);
-
+        //Debug.Log("hit");
         if (hits1 || hits2 || hits3)
         {
+            
             transform.right = -1f * transform.right;
         }
 
@@ -170,9 +186,11 @@ public class Basic_AI : MonoBehaviour
     }
     void OnCollisionExit2D(Collision2D collision)
     {
+        Basic_AI hitAIHolder = collision.gameObject.GetComponent<Basic_AI>();
 
-        if (collision.gameObject.tag == "Level")
+        if (hitAIHolder)
         {
+            Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), collision.collider);
             //Debug.Log("exited");
             //is_colliding_with_level = false;
         }
@@ -189,7 +207,10 @@ public class Basic_AI : MonoBehaviour
 
 
     public void Set_Type(int type)
-    {
+    {   if (type == 0)
+        {
+            AI_type = 0;
+        }
         if (type == 1)
         {
             AI_type = 1;
@@ -217,6 +238,12 @@ public class Basic_AI : MonoBehaviour
         else if (type == 7)
         {
             AI_type = 7;
+            for (int i = 1; i < fan_range + 1; i++)
+            {
+                Instantiate
+                    (Wind, new Vector3(transform.position.x + i, transform.position.y),
+                    Quaternion.identity, transform);
+            }
         }
         else
         {
