@@ -25,6 +25,7 @@ public class Basic_AI : MonoBehaviour
     private float orig_vel;
     public int fan_direction;
     public int AI_1_fan_dir_hit;
+    public bool swapped;
 
 
     //public bool AI_Flag_1; //moves horizontally in one direction until a wall is hit, then reverses direction
@@ -122,6 +123,7 @@ public class Basic_AI : MonoBehaviour
 
     void AI_Movement_7()
     {
+
         RaycastHit2D hits1 = Physics2D.Raycast(transform.position, transform.right, maxDistanceX + fan_range, fanhit);
         RaycastHit2D hits2 = Physics2D.Raycast(transform.position, transform.right, maxDistanceX + fan_range, fanhit);
         RaycastHit2D hits3 = Physics2D.Raycast(transform.position, transform.right, maxDistanceX + fan_range, fanhit);
@@ -148,74 +150,75 @@ public class Basic_AI : MonoBehaviour
             hits2 = Physics2D.Raycast(new Vector3(transform.position.x + maxDistanceX, transform.position.y), new Vector3(0, 1, 0), maxDistanceY + fan_range, fanhit);
             hits3 = Physics2D.Raycast(new Vector3(transform.position.x - maxDistanceX, transform.position.y), new Vector3(0, 1, 0), maxDistanceY + fan_range, fanhit);
         }
+
         
-
-        if (hits1 || hits2 || hits3)
+        if (hits1)
         {
-            //Debug.Log("hit");
-            RaycastHit2D the_hit = hits1;
 
-            if (hits1)
-            {
-                the_hit = hits1;
-            } else if (hits2)
-            {
-                the_hit = hits2;
-            } else if (hits3)
-            {
-                the_hit = hits3;
-            }
-
-            GameObject hitObject = the_hit.transform.gameObject;
-            Rigidbody2D objectbody = hitObject.GetComponent<Rigidbody2D>();
-            if (fan_direction == 1) //FAN PUSH RIGHT
-            {
-                if (hitObject.GetComponent<Basic_AI>().AI_type != 1)
-                {
-
-                    hitObject.GetComponent<Basic_AI>().AI_1_fan_dir_hit = 1;
-                   
-                } else
-                {
-                    objectbody.AddForce(transform.right * fan_speed, ForceMode2D.Force);
-                }
-
-            } else if (fan_direction == 2) //FAN PUSH DOWN
-            {
-                objectbody.AddForce(-1*transform.up * fan_speed, ForceMode2D.Force);
-            } else if (fan_direction == 3) //FAN PUSH LEFT
-            {
-                if (hitObject.GetComponent<Basic_AI>().AI_type != 1)
-                {
-
-                    hitObject.GetComponent<Basic_AI>().AI_1_fan_dir_hit = 3;
-                   
-                }
-                else
-                {
-                    objectbody.AddForce(-1 * transform.right * fan_speed, ForceMode2D.Force);
-                }
-                
-            } else if (fan_direction == 4) //FAN PUSH UP
-            {
-                float distance_to_object = the_hit.transform.position.y - (transform.position.y + maxDistanceY);
-                float percent = 1 - (distance_to_object / fan_range);
-                if (percent > 0.01)
-                {
-                    objectbody.AddForce(transform.up * fan_speed, ForceMode2D.Force);
-                }
-                else
-                {
-                    objectbody.velocity = new Vector3(objectbody.velocity.x, 0, 0);
-                }
-
-            }
-
-            //objectbody.position = new Vector3(objectbody.position.x + .5f * Time.deltaTime, objectbody.position.y, 0);
-            
+            fan_push_helper(hits1);
+        }
+        if (hits2 /*&& !GameObject.ReferenceEquals(hits1.transform.gameObject, hits2.transform.gameObject)*/)
+        {
+            fan_push_helper(hits2);
+        } 
+        if (hits3 /*&& !GameObject.ReferenceEquals(hits1.transform.gameObject, hits3.transform.gameObject)*/)
+        {
+            fan_push_helper(hits3);
         }
 
 
+
+        
+    }
+
+    void fan_push_helper(RaycastHit2D the_hit)
+    {
+        GameObject hitObject = the_hit.transform.gameObject;
+        Rigidbody2D objectbody = hitObject.GetComponent<Rigidbody2D>();
+        if (fan_direction == 1) //FAN PUSH RIGHT
+        {
+            if (hitObject.GetComponent<Basic_AI>().AI_type == 1)
+            {
+
+                hitObject.GetComponent<Basic_AI>().AI_1_fan_dir_hit = 1;
+
+            }
+            else
+            {
+                objectbody.AddForce(transform.right * fan_speed, ForceMode2D.Force);
+            }
+
+        }
+        else if (fan_direction == 2) //FAN PUSH DOWN
+        {
+            objectbody.AddForce(-1 * transform.up * fan_speed, ForceMode2D.Force);
+        }
+        else if (fan_direction == 3) //FAN PUSH LEFT
+        {
+            if (hitObject.GetComponent<Basic_AI>().AI_type == 1)
+            {
+
+                hitObject.GetComponent<Basic_AI>().AI_1_fan_dir_hit = 3;
+
+            }
+            else
+            {
+                objectbody.AddForce(-1 * transform.right * fan_speed, ForceMode2D.Force);
+            }
+        }
+        else if (fan_direction == 4) //FAN PUSH UP
+        {
+            float distance_to_object = the_hit.transform.position.y - (transform.position.y + 1.7f * maxDistanceY);
+            float percent = 1 - (distance_to_object / fan_range);
+            if (percent > 0.01)
+            {
+                objectbody.AddForce(transform.up * fan_speed, ForceMode2D.Force);
+            }
+            else
+            {
+                objectbody.velocity = new Vector3(objectbody.velocity.x, 0, 0);
+            }
+        }
     }
 
     void AI_Movement_1_5()
@@ -350,10 +353,18 @@ public class Basic_AI : MonoBehaviour
         {
             AI_type = 7;
             fan_direction = dir;
-            
+
             if (create)
             {
                 //Debug.Log(range);
+                if (swapped == false)
+                {
+                    swapped = true;
+                } else
+                {
+                    swapped = false;
+                }
+
                 fan_range = range;
                 fan_speed = speed;
                 for (int i = 1; i < fan_range + 1; i++)
