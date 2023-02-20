@@ -462,6 +462,7 @@ MonoBehaviour:
   AI_type: 0
   fan_range: 0
   fan_speed: 0
+  fan_direction: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -609,7 +610,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8798265860937204504, guid: c3c57558370e1764aa3a77083520ea1e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.49
+      value: -2.44
       objectReference: {fileID: 0}
     - target: {fileID: 8798265860937204504, guid: c3c57558370e1764aa3a77083520ea1e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -876,6 +877,7 @@ MonoBehaviour:
   AI_type: 0
   fan_range: 0
   fan_speed: 0
+  fan_direction: 0
 --- !u!1001 &1036456894
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -972,6 +974,7 @@ MonoBehaviour:
   AI_type: 0
   fan_range: 0
   fan_speed: 0
+  fan_direction: 0
 --- !u!1001 &1162484402
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1080,6 +1083,7 @@ MonoBehaviour:
   AI_type: 0
   fan_range: 0
   fan_speed: 0
+  fan_direction: 0
 --- !u!1001 &1362820295
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1273,10 +1277,11 @@ MonoBehaviour:
   b_collider: {fileID: 0}
   player_game_object: {fileID: 0}
   swapIcon: {fileID: 7710707278093201530, guid: 627e24d5d8927c44c8a237325bbfcc51, type: 3}
-  Wind: {fileID: 0}
+  Wind: {fileID: 3644807705190726212, guid: 8ca6ff3cce20c5c4094bfdfee6d414fb, type: 3}
   AI_type: 0
   fan_range: 3
   fan_speed: 40
+  fan_direction: 0
 --- !u!1 &2020673005 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8798265860937204508, guid: c3c57558370e1764aa3a77083520ea1e, type: 3}
@@ -1308,6 +1313,7 @@ MonoBehaviour:
   AI_type: 7
   fan_range: 5
   fan_speed: 40
+  fan_direction: 0
 --- !u!1 &2046557275 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8798265860937204508, guid: c3c57558370e1764aa3a77083520ea1e, type: 3}
@@ -1339,6 +1345,7 @@ MonoBehaviour:
   AI_type: 0
   fan_range: 0
   fan_speed: 0
+  fan_direction: 0
 --- !u!1 &2061211079 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8798265860937204508, guid: c3c57558370e1764aa3a77083520ea1e, type: 3}
@@ -1370,6 +1377,7 @@ MonoBehaviour:
   AI_type: 0
   fan_range: 0
   fan_speed: 0
+  fan_direction: 0
 --- !u!1001 &2084196009
 PrefabInstance:
   m_ObjectHideFlags: 0

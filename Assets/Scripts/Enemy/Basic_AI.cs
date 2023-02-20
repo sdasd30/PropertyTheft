@@ -22,6 +22,7 @@ public class Basic_AI : MonoBehaviour
     public int fan_range;
     public int fan_speed;
     private float orig_vel;
+    public int fan_direction;
 
 
     //public bool AI_Flag_1; //moves horizontally in one direction until a wall is hit, then reverses direction
@@ -34,7 +35,8 @@ public class Basic_AI : MonoBehaviour
     private bool AI_Flag_2_3_set;
     /// Start is called before the first frame update
     void Start()
-    {
+    {   
+        
         //is_colliding_with_level = false;
         //fan_range = 5;
         ray = new Ray(transform.position, transform.forward);
@@ -50,9 +52,29 @@ public class Basic_AI : MonoBehaviour
         {
             for (int i = 1; i < fan_range + 1; i++)
             {
-                Instantiate
-                    (Wind, new Vector3(transform.position.x + i, transform.position.y),
-                    Quaternion.identity, transform);
+                if (fan_direction == 1)
+                {
+                    Instantiate
+                        (Wind, new Vector3(transform.position.x + i, transform.position.y),
+                        Quaternion.identity, transform);
+                } else if (fan_direction == 2)
+                {
+                    Instantiate
+                        (Wind, new Vector3(transform.position.x, transform.position.y - i),
+                        Quaternion.identity*Quaternion.Euler(0,90,0), transform);
+                }
+                else if (fan_direction == 3)
+                {
+                    Instantiate
+                        (Wind, new Vector3(transform.position.x - i, transform.position.y),
+                        Quaternion.identity* Quaternion.Euler(0, 180, 0), transform);
+                }
+                else if (fan_direction == 4)
+                {
+                    Instantiate
+                        (Wind, new Vector3(transform.position.x, transform.position.y + i),
+                        Quaternion.identity* Quaternion.Euler(0, 270, 0), transform);
+                }
             }
         }
 
@@ -206,7 +228,7 @@ public class Basic_AI : MonoBehaviour
     }
 
 
-    public void Set_Type(int type)
+    public void Set_Type(int type, int dir, bool create)
     {   if (type == 0)
         {
             AI_type = 0;
@@ -235,14 +257,44 @@ public class Basic_AI : MonoBehaviour
         {
             AI_type = 6;
         }
-        else if (type == 7)
+        else if (type == 7 )
         {
             AI_type = 7;
-            for (int i = 1; i < fan_range + 1; i++)
+            fan_direction = dir;
+            if (create)
             {
-                Instantiate
-                    (Wind, new Vector3(transform.position.x + i, transform.position.y),
-                    Quaternion.identity, transform);
+                for (int i = 1; i < fan_range + 1; i++)
+                {
+                    if (dir == 1)
+                    {
+                        Debug.Log("1");
+                        Instantiate
+                            (Wind, new Vector3(transform.position.x + i, transform.position.y),
+                            Quaternion.identity, transform);
+                    }
+                    else if (dir == 2)
+                    {
+                        Debug.Log("2");
+                        Instantiate
+                            (Wind, new Vector3(transform.position.x, transform.position.y - i),
+                            Quaternion.identity * Quaternion.Euler(0, 90, 0), transform);
+
+                    }
+                    else if (dir == 3)
+                    {
+                        Debug.Log("3");
+                        Instantiate
+                            (Wind, new Vector3(transform.position.x - i, transform.position.y),
+                            Quaternion.identity * Quaternion.Euler(0, 180, 0), transform);
+                    }
+                    else if (dir == 4)
+                    {
+                        Debug.Log("4");
+                        Instantiate
+                            (Wind, new Vector3(transform.position.x, transform.position.y + i),
+                            Quaternion.identity * Quaternion.Euler(0, 270, 0), transform);
+                    }
+                }
             }
         }
         else
