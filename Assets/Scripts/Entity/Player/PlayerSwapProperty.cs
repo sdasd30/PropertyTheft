@@ -35,6 +35,7 @@ public class PlayerSwapProperty : MonoBehaviour
     RaycastHit2D saved_hit;
     int saved_dir;
     int saved_range;
+    int saved_speed;
     //float coolDown = 0;
 
     void Start()
@@ -104,7 +105,7 @@ public class PlayerSwapProperty : MonoBehaviour
                         {
                             Basic_AI AIHolder = swapObject.GetComponent<Basic_AI>();
                             int AIHolder_type = AIHolder.AI_type;
-                            AIHolder.Set_Type(AIHolder_type, saved_dir, false, saved_range );
+                            AIHolder.Set_Type(AIHolder_type, saved_dir, false,  saved_range, saved_speed);
                             swapObject = null;
                         }
                         swap_AI = false;
@@ -194,6 +195,7 @@ public class PlayerSwapProperty : MonoBehaviour
                 swapObject = hitObject;
                 saved_dir = hitObject.GetComponent<Basic_AI>().fan_direction;
                 saved_range = hitObject.GetComponent<Basic_AI>().fan_range;
+                saved_speed = hitObject.GetComponent<Basic_AI>().fan_speed;
                 saved_hit = hit;
                 hitAIHolder.MarkForSwap();
             }
@@ -207,20 +209,15 @@ public class PlayerSwapProperty : MonoBehaviour
                 int direction2 = hitAIHolder.fan_direction;
                 int fan_range1 = AIHolder.fan_range;
                 int fan_range2 = hitAIHolder.fan_range;
-                //Debug.Log(saved_dir);
-                //Debug.Log(direction2);
-
-                hitAIHolder.Set_Type(0, direction1, true, fan_range1);
-                AIHolder.Set_Type(0, direction2, true, fan_range2);
                 if (!GameObject.ReferenceEquals(hit.transform.gameObject, saved_hit.transform.gameObject)) {
 
-                    hitAIHolder.Set_Type(AIHolder_type, direction1, true, fan_range1);
-                    AIHolder.Set_Type(AI_Holder_type_other, direction2, true, fan_range2);
+                    hitAIHolder.Set_Type(AIHolder_type, direction1, true, fan_range1, saved_speed);
+                    AIHolder.Set_Type(AI_Holder_type_other, direction2, true, fan_range2, AIHolder.fan_speed);
                 }
                 else
                 {
-                    hitAIHolder.Set_Type(AIHolder_type, direction1, false, fan_range1);
-                    AIHolder.Set_Type(AI_Holder_type_other, direction2, false, fan_range2);
+                    hitAIHolder.Set_Type(AIHolder_type, direction1, false, fan_range1, saved_speed);
+                    AIHolder.Set_Type(AI_Holder_type_other, direction2, false, fan_range2, AIHolder.fan_speed);
                 }
 
                 swapObject = null;

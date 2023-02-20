@@ -26,11 +26,11 @@ public class Basic_AI : MonoBehaviour
 
 
     //public bool AI_Flag_1; //moves horizontally in one direction until a wall is hit, then reverses direction
-    //public bool AI_Flag_2; //Follows the player and ignores walls and gravity. 
-    //public bool AI_Flag_3; //Follows the player. Does not ignore walls. Ignores gravity. 
-    //public bool AI_Flag_4; // Rotates in the direction of the player. 
+    //public bool AI_Flag_2; //Follows the player and ignores walls and gravity. BAD
+    //public bool AI_Flag_3; //Follows the player. Does not ignore walls. Ignores gravity. BAD
+    //public bool AI_Flag_4; // Rotates in the direction of the player. BAD
     //public bool AI_Flag_5; // Moves in one direction and reverses direction when about to fall off a cliff.
-    //public bool AI_Flag_6; // Moves in one direction indefinitely.
+    //public bool AI_Flag_6; // Moves in one direction indefinitely. BAD
     //public bool AI_Flag_7;
     private bool AI_Flag_2_3_set;
     /// Start is called before the first frame update
@@ -115,27 +115,50 @@ public class Basic_AI : MonoBehaviour
     void AI_Movement_7()
     {
         RaycastHit2D hits1 = Physics2D.Raycast(transform.position, transform.right, maxDistanceX + fan_range, fanhit);
+        RaycastHit2D hits2 = Physics2D.Raycast(transform.position, transform.right, maxDistanceX + fan_range, fanhit);
+        RaycastHit2D hits3 = Physics2D.Raycast(transform.position, transform.right, maxDistanceX + fan_range, fanhit);
+
         if (fan_direction == 1)
         {
             hits1 = Physics2D.Raycast(transform.position, transform.right, maxDistanceX + fan_range, fanhit);
+            hits2 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - maxDistanceY), new Vector3(1, 0, 0), maxDistanceX + fan_range, fanhit);
+            hits3 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + maxDistanceY), new Vector3(1, 0, 0), maxDistanceX + fan_range, fanhit);
         } else if (fan_direction == 2) {
             hits1 = Physics2D.Raycast(transform.position, new Vector3(0, -1, 0), maxDistanceY + fan_range, fanhit);
+            hits2 = Physics2D.Raycast(new Vector3(transform.position.x + maxDistanceX, transform.position.y), new Vector3(0, -1, 0), maxDistanceY + fan_range, fanhit);
+            hits3 = Physics2D.Raycast(new Vector3(transform.position.x - maxDistanceX, transform.position.y), new Vector3(0, -1, 0), maxDistanceY + fan_range, fanhit);
         }
         else if (fan_direction == 3)
         {
             hits1 = Physics2D.Raycast(transform.position, new Vector3(-1, 0, 0), maxDistanceX + fan_range, fanhit);
+            hits2 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - maxDistanceY), new Vector3(-1, 0, 0), maxDistanceX + fan_range, fanhit);
+            hits3 = Physics2D.Raycast(new Vector3(transform.position.x - maxDistanceX, transform.position.y + maxDistanceY), new Vector3(-1, 0, 0), maxDistanceX + fan_range, fanhit);
         }
         else if (fan_direction == 4)
         {
             hits1 = Physics2D.Raycast(transform.position, new Vector3(0,1,0), maxDistanceY + fan_range, fanhit);
+            hits2 = Physics2D.Raycast(new Vector3(transform.position.x + maxDistanceX, transform.position.y), new Vector3(0, 1, 0), maxDistanceY + fan_range, fanhit);
+            hits3 = Physics2D.Raycast(new Vector3(transform.position.x - maxDistanceX, transform.position.y), new Vector3(0, 1, 0), maxDistanceY + fan_range, fanhit);
         }
-        //RaycastHit2D hits2 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - (maxDistanceY - 0.1f)), transform.right, maxDistanceX + fan_range, layershit1);
-        //RaycastHit2D hits3 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + (maxDistanceY - 0.1f)), transform.right, maxDistanceX + fan_range , layershit1);
+        
 
-        if (hits1 /*|| hits2 || hits3*/)
+        if (hits1 || hits2 || hits3)
         {
             //Debug.Log("hit");
-            GameObject hitObject = hits1.transform.gameObject;
+            RaycastHit2D the_hit = hits1;
+
+            if (hits1)
+            {
+                the_hit = hits1;
+            } else if (hits2)
+            {
+                the_hit = hits2;
+            } else if (hits3)
+            {
+                the_hit = hits3;
+            }
+
+            GameObject hitObject = the_hit.transform.gameObject;
             Rigidbody2D objectbody = hitObject.GetComponent<Rigidbody2D>();
             //objectbody.AddForce(transform.right*5);
             //if (!swapObject)
@@ -144,16 +167,16 @@ public class Basic_AI : MonoBehaviour
             //}
             if (fan_direction == 1) //FAN PUSH RIGHT
             {
-                objectbody.velocity = new Vector3(objectbody.velocity.x + fan_speed * Time.deltaTime, objectbody.velocity.y, 0);
+                objectbody.AddForce(transform.right * fan_speed, ForceMode2D.Force);
             } else if (fan_direction == 2) //FAN PUSH DOWN
             {
-                objectbody.velocity = new Vector3(objectbody.velocity.x, objectbody.velocity.y - fan_speed * Time.deltaTime, 0);
+                objectbody.AddForce(-1*transform.up * fan_speed, ForceMode2D.Force);
             } else if (fan_direction == 3) //FAN PUSH LEFT
             {
-                objectbody.velocity = new Vector3(objectbody.velocity.x - fan_speed * Time.deltaTime, objectbody.velocity.y, 0);
+                objectbody.AddForce(-1*transform.right * fan_speed, ForceMode2D.Force);
             } else if (fan_direction == 4) //FAN PUSH UP
             {
-                float distance_to_object = hits1.transform.position.y - (transform.position.y + maxDistanceY);
+                float distance_to_object = the_hit.transform.position.y - (transform.position.y + maxDistanceY);
                 float percent = 1 - (distance_to_object / fan_range);
                 if (percent > 0.01)
                 {
@@ -265,7 +288,7 @@ public class Basic_AI : MonoBehaviour
     }
 
 
-    public void Set_Type(int type, int dir, bool create, int range)
+    public void Set_Type(int type, int dir, bool create, int range, int speed)
     {   if (type == 0)
         {
             AI_type = 0;
@@ -303,6 +326,7 @@ public class Basic_AI : MonoBehaviour
             {
                 //Debug.Log(range);
                 fan_range = range;
+                fan_speed = speed;
                 for (int i = 1; i < fan_range + 1; i++)
                 {
                     if (dir == 1)
