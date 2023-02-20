@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
-
     public List<Sprite> backgroundSprites;
     Image mBackground;
     GameObject UIChildren;
@@ -15,8 +14,20 @@ public class PauseMenu : MonoBehaviour
     {
         mBackground = GetComponent<Image>();
         UIChildren = transform.GetChild(0).gameObject;
+        FindObjectOfType<PauseGame>().PauseEvent += MenuEvent;
     }
 
+    private void MenuEvent(PauseGame pg, bool isPause)
+    {
+        if (isPause)
+        {
+            OpenMenu();
+        }
+        else
+        {
+            CloseMenu();
+        }
+    }
 
     public void OpenMenu()
     {
