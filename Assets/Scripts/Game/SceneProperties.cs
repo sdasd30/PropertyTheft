@@ -11,6 +11,8 @@ public class SceneProperties : MonoBehaviour
 
     public bool worldClimax = false;
 
+    public bool bypassVictoryScreen = false;
+
 
     // Start is called before the first frame update
     void Start()

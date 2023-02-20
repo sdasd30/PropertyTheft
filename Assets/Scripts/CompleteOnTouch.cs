@@ -10,6 +10,11 @@ public class CompleteOnTouch : MonoBehaviour
     {
         if (collision.GetComponent<PlayerMove>())
         {
+            if (FindObjectOfType<SceneProperties>().bypassVictoryScreen)
+            {
+                FindObjectOfType<GameSceneManager>().LoadNextScene(nextWorld, nextScene);
+                return;
+            }
             FindObjectOfType<VictoryScreenDriver>().ShowScreen();
         }
     }
