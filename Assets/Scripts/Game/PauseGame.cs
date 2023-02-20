@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PauseGame : MonoBehaviour
 {
+    public delegate void PauseEventHandler(PauseGame pg, bool paused);
+    public event PauseEventHandler PauseEvent;
+
     public bool isPaused;
 
     private bool held = true;
@@ -16,22 +19,15 @@ public class PauseGame : MonoBehaviour
         {
             held = true;
             Debug.Log("Pause attempt");
-            PauseMenu pmenu = FindObjectOfType<PauseMenu>();
             if (!isPaused)
             {
                 StopGame();
-                if (pmenu)
-                {
-                    pmenu.OpenMenu();
-                }
+                PauseEvent(this, true);
             }
             else
             {
                 ResumeGame();
-                if (pmenu)
-                {
-                    pmenu.CloseMenu();
-                }
+                PauseEvent(this, false);
             }
             
         }
@@ -47,18 +43,12 @@ public class PauseGame : MonoBehaviour
         if (isPaused)
         {
             StopGame();
-            if (pmenu)
-            {
-                pmenu.OpenMenu();
-            }
+            PauseEvent(this, true);
         }
         else
         {
             ResumeGame();
-            if (pmenu)
-            {
-                pmenu.CloseMenu();
-            }
+            PauseEvent(this, false);
         }
     }
 
