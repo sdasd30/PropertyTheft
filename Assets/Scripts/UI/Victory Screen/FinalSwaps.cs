@@ -14,5 +14,9 @@ public class FinalSwaps : MonoBehaviour
         sCounter = FindObjectOfType<SwapCounter>();
         sceneProperties = FindObjectOfType<SceneProperties>();
         mText.text = $"{sCounter.swapCount}\n{sceneProperties.parSwaps}";
+        if (sCounter.swapCount <= sceneProperties.parSwaps)
+        {
+            FindObjectOfType<FinalSwapText>().NewRecordText();
+        }
     }
 }
