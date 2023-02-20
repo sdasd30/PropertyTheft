@@ -13,6 +13,7 @@ public class Basic_AI : MonoBehaviour
     public BoxCollider2D b_collider;
     private Transform target;
     private float speed;
+    private float AI_1_speed;
     private GameObject swapObject;
     public GameObject player_game_object;
     //private bool is_colliding_with_level;
@@ -23,6 +24,7 @@ public class Basic_AI : MonoBehaviour
     public int fan_speed;
     private float orig_vel;
     public int fan_direction;
+    public int AI_1_fan_dir_hit;
 
 
     //public bool AI_Flag_1; //moves horizontally in one direction until a wall is hit, then reverses direction
@@ -35,16 +37,22 @@ public class Basic_AI : MonoBehaviour
     private bool AI_Flag_2_3_set;
     /// Start is called before the first frame update
     void Start()
-    {   
-        
+    {
+
         //is_colliding_with_level = false;
         //fan_range = 5;
+        AI_1_fan_dir_hit = 0;
         ray = new Ray(transform.position, transform.forward);
         rb = GetComponent<Rigidbody2D>();
         b_collider = GetComponent<BoxCollider2D>();
         Vector3 dims = b_collider.bounds.size;
         maxDistanceX = (dims.x) / 2 + .05f;
         maxDistanceY = (dims.y) / 2 + .05f;
+        AI_1_speed = speed;
+        if (AI_type == 1)
+        {
+            rb.velocity = new Vector3(transform.right.x * AI_1_speed, 0);
+        }
         //target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         speed = 3f;
         player_game_object = GameObject.Find("WeaponHandler");
@@ -160,20 +168,34 @@ public class Basic_AI : MonoBehaviour
 
             GameObject hitObject = the_hit.transform.gameObject;
             Rigidbody2D objectbody = hitObject.GetComponent<Rigidbody2D>();
-            //objectbody.AddForce(transform.right*5);
-            //if (!swapObject)
-            //{
-            //    orig_vel = objectbody.velocity.x;
-            //}
             if (fan_direction == 1) //FAN PUSH RIGHT
             {
-                objectbody.AddForce(transform.right * fan_speed, ForceMode2D.Force);
+                if (hitObject.GetComponent<Basic_AI>().AI_type != 1)
+                {
+
+                    hitObject.GetComponent<Basic_AI>().AI_1_fan_dir_hit = 1;
+                   
+                } else
+                {
+                    objectbody.AddForce(transform.right * fan_speed, ForceMode2D.Force);
+                }
+
             } else if (fan_direction == 2) //FAN PUSH DOWN
             {
                 objectbody.AddForce(-1*transform.up * fan_speed, ForceMode2D.Force);
             } else if (fan_direction == 3) //FAN PUSH LEFT
             {
-                objectbody.AddForce(-1*transform.right * fan_speed, ForceMode2D.Force);
+                if (hitObject.GetComponent<Basic_AI>().AI_type != 1)
+                {
+
+                    hitObject.GetComponent<Basic_AI>().AI_1_fan_dir_hit = 3;
+                   
+                }
+                else
+                {
+                    objectbody.AddForce(-1 * transform.right * fan_speed, ForceMode2D.Force);
+                }
+                
             } else if (fan_direction == 4) //FAN PUSH UP
             {
                 float distance_to_object = the_hit.transform.position.y - (transform.position.y + maxDistanceY);
@@ -200,12 +222,18 @@ public class Basic_AI : MonoBehaviour
     {
         //rb.gravityScale = 5;
         rb.freezeRotation = true;
+        if ((AI_1_fan_dir_hit == 1 && rb.velocity.x < 0) || (AI_1_fan_dir_hit == 3 && rb.velocity.x > 0))
+        {
+            rb.velocity = new Vector3(0, rb.velocity.y);
+        } else
+        {
+            rb.velocity = new Vector3(transform.right.x * speed, rb.velocity.y);
+        }
         rb.velocity = new Vector3(transform.right.x * speed, rb.velocity.y);
+        AI_1_fan_dir_hit = 0;
         rb.SetRotation(0f);
         RaycastHit2D hits;
-
         //int layers = 416;
-
         RaycastHit2D hits1 = Physics2D.Raycast(transform.position, transform.right, maxDistanceX , layershit1);
         //Debug.DrawRay(transform.position, new Vector3(transform.right.x + maxDistanceX, transform.right.y), Color.red, 0f,  false);
         //Debug.DrawLine(transform.position, new Vector3(transform.right.x + maxDistanceX, transform.right.y), Color.red, .1f ,false);
@@ -296,6 +324,7 @@ public class Basic_AI : MonoBehaviour
         if (type == 1)
         {
             AI_type = 1;
+            rb.velocity = new Vector3(transform.right.x * AI_1_speed, 0);
         }
         else if (type == 2)
         {
