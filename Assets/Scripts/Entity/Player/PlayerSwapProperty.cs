@@ -34,6 +34,7 @@ public class PlayerSwapProperty : MonoBehaviour
     bool swap_AI;
     RaycastHit2D saved_hit;
     int saved_dir;
+    int saved_range;
     //float coolDown = 0;
 
     void Start()
@@ -103,7 +104,7 @@ public class PlayerSwapProperty : MonoBehaviour
                         {
                             Basic_AI AIHolder = swapObject.GetComponent<Basic_AI>();
                             int AIHolder_type = AIHolder.AI_type;
-                            AIHolder.Set_Type(AIHolder_type, saved_dir, false);
+                            AIHolder.Set_Type(AIHolder_type, saved_dir, false, saved_range );
                             swapObject = null;
                         }
                         swap_AI = false;
@@ -192,6 +193,7 @@ public class PlayerSwapProperty : MonoBehaviour
                 //There is currently no object selected for swap. Add this as a swap object.
                 swapObject = hitObject;
                 saved_dir = hitObject.GetComponent<Basic_AI>().fan_direction;
+                saved_range = hitObject.GetComponent<Basic_AI>().fan_range;
                 saved_hit = hit;
                 hitAIHolder.MarkForSwap();
             }
@@ -201,54 +203,59 @@ public class PlayerSwapProperty : MonoBehaviour
                 int AIHolder_type = AIHolder.AI_type;
                 int AI_Holder_type_other = hitAIHolder.AI_type;
 
-                int direction1 = calc_dir(hit);
-                int direction2 = calc_dir(saved_hit);
+                int direction1 = saved_dir;
+                int direction2 = hitAIHolder.fan_direction;
+                int fan_range1 = AIHolder.fan_range;
+                int fan_range2 = hitAIHolder.fan_range;
+                //Debug.Log(saved_dir);
+                //Debug.Log(direction2);
 
-                if (!GameObject.ReferenceEquals(hit.transform.gameObject, saved_hit.transform.gameObject)) { 
-                hitAIHolder.Set_Type(AIHolder_type, direction1, true);
-                AIHolder.Set_Type(AI_Holder_type_other, direction2, true);
-            }
+                hitAIHolder.Set_Type(0, direction1, true, fan_range1);
+                AIHolder.Set_Type(0, direction2, true, fan_range2);
+                if (!GameObject.ReferenceEquals(hit.transform.gameObject, saved_hit.transform.gameObject)) {
+
+                    hitAIHolder.Set_Type(AIHolder_type, direction1, true, fan_range1);
+                    AIHolder.Set_Type(AI_Holder_type_other, direction2, true, fan_range2);
+                }
                 else
                 {
-                    hitAIHolder.Set_Type(AIHolder_type, direction1, false);
-                    AIHolder.Set_Type(AI_Holder_type_other, direction2, false);
+                    hitAIHolder.Set_Type(AIHolder_type, direction1, false, fan_range1);
+                    AIHolder.Set_Type(AI_Holder_type_other, direction2, false, fan_range2);
                 }
-                
-                
-                
+
                 swapObject = null;
 
             }
         }
     }
 
-    private int calc_dir(RaycastHit2D hit)
-    {
-        Vector3 ray_contact = hit.point;
-        BoxCollider2D b_collider = hit.transform.gameObject.GetComponent<BoxCollider2D>();
-        Vector3 dims = b_collider.bounds.size;
-        float DistanceX = (dims.x) / 2;
-        float DistanceY = (dims.y) / 2;
-        int direction = 0;
+    //private int calc_dir(int hit)
+    //{
+    //    //Vector3 ray_contact = hit.point;
+    //    //BoxCollider2D b_collider = hit.transform.gameObject.GetComponent<BoxCollider2D>();
+    //    //Vector3 dims = b_collider.bounds.size;
+    //    //float DistanceX = (dims.x) / 2;
+    //    //float DistanceY = (dims.y) / 2;
+    //    //int direction = 0;
 
-        Debug.Log(hit.point.y);
-        Debug.Log(hit.transform.gameObject.transform.position.y + DistanceY - 0.1f);
-        if ((hit.point.x >= hit.transform.gameObject.transform.position.x + DistanceX - 0.1f) && (hit.point.y >= hit.transform.gameObject.transform.position.y - DistanceY - 0.1f) && (hit.point.y <= hit.transform.gameObject.transform.position.y + DistanceY - 0.1f))
-        {
-            direction = 1;
-        }
-        else if (hit.point.x <= hit.transform.gameObject.transform.position.x + DistanceX - 0.1f)
-        {
-            direction = 3;
-        }
-        else if (hit.point.y >= hit.transform.gameObject.transform.position.y + DistanceY - 0.1f)
-        {
-            direction = 4;
-        }
-        else if (hit.point.y <= hit.transform.gameObject.transform.position.y - DistanceY - 0.1f)
-        {
-            direction = 2;
-        }
-        return direction;
-    }
+    //    //Debug.Log(hit.point.y);
+    //    //Debug.Log(hit.transform.gameObject.transform.position.y + DistanceY - 0.1f);
+    //    //if ((hit.point.x >= hit.transform.gameObject.transform.position.x + DistanceX - 0.1f) && (hit.point.y >= hit.transform.gameObject.transform.position.y - DistanceY - 0.1f) && (hit.point.y <= hit.transform.gameObject.transform.position.y + DistanceY - 0.1f))
+    //    //{
+    //    //    direction = 1;
+    //    //}
+    //    //else if (hit.point.x <= hit.transform.gameObject.transform.position.x + DistanceX - 0.1f)
+    //    //{
+    //    //    direction = 3;
+    //    //}
+    //    //else if (hit.point.y >= hit.transform.gameObject.transform.position.y + DistanceY - 0.1f)
+    //    //{
+    //    //    direction = 4;
+    //    //}
+    //    //else if (hit.point.y <= hit.transform.gameObject.transform.position.y - DistanceY - 0.1f)
+    //    //{
+    //    //    direction = 2;
+    //    //}
+    //    //return direction;
+    //}
 }

@@ -61,19 +61,19 @@ public class Basic_AI : MonoBehaviour
                 {
                     Instantiate
                         (Wind, new Vector3(transform.position.x, transform.position.y - i),
-                        Quaternion.identity*Quaternion.Euler(0,90,0), transform);
+                        Quaternion.identity*Quaternion.Euler(0,0, -90), transform);
                 }
                 else if (fan_direction == 3)
                 {
                     Instantiate
                         (Wind, new Vector3(transform.position.x - i, transform.position.y),
-                        Quaternion.identity* Quaternion.Euler(0, 180, 0), transform);
+                        Quaternion.identity* Quaternion.Euler(0, 0, 180), transform);
                 }
                 else if (fan_direction == 4)
                 {
                     Instantiate
                         (Wind, new Vector3(transform.position.x, transform.position.y + i),
-                        Quaternion.identity* Quaternion.Euler(0, 270, 0), transform);
+                        Quaternion.identity* Quaternion.Euler(0, 0, -270), transform);
                 }
             }
         }
@@ -115,12 +115,26 @@ public class Basic_AI : MonoBehaviour
     void AI_Movement_7()
     {
         RaycastHit2D hits1 = Physics2D.Raycast(transform.position, transform.right, maxDistanceX + fan_range, fanhit);
+        if (fan_direction == 1)
+        {
+            hits1 = Physics2D.Raycast(transform.position, transform.right, maxDistanceX + fan_range, fanhit);
+        } else if (fan_direction == 2) {
+            hits1 = Physics2D.Raycast(transform.position, new Vector3(0, -1, 0), maxDistanceY + fan_range, fanhit);
+        }
+        else if (fan_direction == 3)
+        {
+            hits1 = Physics2D.Raycast(transform.position, new Vector3(-1, 0, 0), maxDistanceX + fan_range, fanhit);
+        }
+        else if (fan_direction == 4)
+        {
+            hits1 = Physics2D.Raycast(transform.position, new Vector3(0,1,0), maxDistanceY + fan_range, fanhit);
+        }
         //RaycastHit2D hits2 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - (maxDistanceY - 0.1f)), transform.right, maxDistanceX + fan_range, layershit1);
         //RaycastHit2D hits3 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + (maxDistanceY - 0.1f)), transform.right, maxDistanceX + fan_range , layershit1);
 
         if (hits1 /*|| hits2 || hits3*/)
         {
-            Debug.Log("hit");
+            //Debug.Log("hit");
             GameObject hitObject = hits1.transform.gameObject;
             Rigidbody2D objectbody = hitObject.GetComponent<Rigidbody2D>();
             //objectbody.AddForce(transform.right*5);
@@ -128,9 +142,32 @@ public class Basic_AI : MonoBehaviour
             //{
             //    orig_vel = objectbody.velocity.x;
             //}
+            if (fan_direction == 1) //FAN PUSH RIGHT
+            {
+                objectbody.velocity = new Vector3(objectbody.velocity.x + fan_speed * Time.deltaTime, objectbody.velocity.y, 0);
+            } else if (fan_direction == 2) //FAN PUSH DOWN
+            {
+                objectbody.velocity = new Vector3(objectbody.velocity.x, objectbody.velocity.y - fan_speed * Time.deltaTime, 0);
+            } else if (fan_direction == 3) //FAN PUSH LEFT
+            {
+                objectbody.velocity = new Vector3(objectbody.velocity.x - fan_speed * Time.deltaTime, objectbody.velocity.y, 0);
+            } else if (fan_direction == 4) //FAN PUSH UP
+            {
+                float distance_to_object = hits1.transform.position.y - (transform.position.y + maxDistanceY);
+                float percent = 1 - (distance_to_object / fan_range);
+                if (percent > 0.01)
+                {
+                    objectbody.AddForce(transform.up * fan_speed, ForceMode2D.Force);
+                }
+                else
+                {
+                    objectbody.velocity = new Vector3(objectbody.velocity.x, 0, 0);
+                }
 
-            objectbody.velocity = new Vector3(objectbody.velocity.x + fan_speed*Time.deltaTime, objectbody.velocity.y, 0);
+            }
+
             //objectbody.position = new Vector3(objectbody.position.x + .5f * Time.deltaTime, objectbody.position.y, 0);
+            
         }
 
 
@@ -208,14 +245,14 @@ public class Basic_AI : MonoBehaviour
     }
     void OnCollisionExit2D(Collision2D collision)
     {
-        Basic_AI hitAIHolder = collision.gameObject.GetComponent<Basic_AI>();
+        //Basic_AI hitAIHolder = collision.gameObject.GetComponent<Basic_AI>();
 
-        if (hitAIHolder)
-        {
-            Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), collision.collider);
-            //Debug.Log("exited");
-            //is_colliding_with_level = false;
-        }
+        //if (hitAIHolder)
+        //{
+        //    Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), collision.collider);
+        //    //Debug.Log("exited");
+        //    //is_colliding_with_level = false;
+        //}
     }
 
     GameObject swapIconGO;
@@ -228,7 +265,7 @@ public class Basic_AI : MonoBehaviour
     }
 
 
-    public void Set_Type(int type, int dir, bool create)
+    public void Set_Type(int type, int dir, bool create, int range)
     {   if (type == 0)
         {
             AI_type = 0;
@@ -261,38 +298,41 @@ public class Basic_AI : MonoBehaviour
         {
             AI_type = 7;
             fan_direction = dir;
+            
             if (create)
             {
+                //Debug.Log(range);
+                fan_range = range;
                 for (int i = 1; i < fan_range + 1; i++)
                 {
                     if (dir == 1)
                     {
-                        Debug.Log("1");
+                        //Debug.Log("1");
                         Instantiate
                             (Wind, new Vector3(transform.position.x + i, transform.position.y),
                             Quaternion.identity, transform);
                     }
                     else if (dir == 2)
                     {
-                        Debug.Log("2");
+                        //Debug.Log("2");
                         Instantiate
                             (Wind, new Vector3(transform.position.x, transform.position.y - i),
-                            Quaternion.identity * Quaternion.Euler(0, 90, 0), transform);
+                            Quaternion.identity * Quaternion.Euler(0, 0, -90), transform);
 
                     }
                     else if (dir == 3)
                     {
-                        Debug.Log("3");
+                        //Debug.Log("3");
                         Instantiate
                             (Wind, new Vector3(transform.position.x - i, transform.position.y),
-                            Quaternion.identity * Quaternion.Euler(0, 180, 0), transform);
+                            Quaternion.identity * Quaternion.Euler(0, 0, 180), transform);
                     }
                     else if (dir == 4)
                     {
-                        Debug.Log("4");
+                        //Debug.Log("4");
                         Instantiate
                             (Wind, new Vector3(transform.position.x, transform.position.y + i),
-                            Quaternion.identity * Quaternion.Euler(0, 270, 0), transform);
+                            Quaternion.identity * Quaternion.Euler(0, 0, -270), transform);
                     }
                 }
             }
