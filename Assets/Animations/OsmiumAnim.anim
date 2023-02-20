@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WoodAnim
+  m_Name: OsmiumAnim
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,11 +20,11 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 1fac1262d1381b64d872293277aac937, type: 3}
+      value: {fileID: 21300000, guid: aa10632ba2150de4ea2e42682771a461, type: 3}
     - time: 0.2
-      value: {fileID: 21300000, guid: 02b593f2e68a43b40afab2f6da12a58a, type: 3}
+      value: {fileID: 21300000, guid: 1656a3c5158a55342af6193501f31b65, type: 3}
     - time: 0.4
-      value: {fileID: 21300000, guid: 600020c29926d674aaf3ae48ba3f5f58, type: 3}
+      value: {fileID: 21300000, guid: 516fbb59ccb28e54eaeeae0defaae6d3, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,9 +44,9 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 1fac1262d1381b64d872293277aac937, type: 3}
-    - {fileID: 21300000, guid: 02b593f2e68a43b40afab2f6da12a58a, type: 3}
-    - {fileID: 21300000, guid: 600020c29926d674aaf3ae48ba3f5f58, type: 3}
+    - {fileID: 21300000, guid: aa10632ba2150de4ea2e42682771a461, type: 3}
+    - {fileID: 21300000, guid: 1656a3c5158a55342af6193501f31b65, type: 3}
+    - {fileID: 21300000, guid: 516fbb59ccb28e54eaeeae0defaae6d3, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

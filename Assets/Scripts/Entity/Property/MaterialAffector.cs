@@ -27,7 +27,8 @@ public class MaterialAffector : MonoBehaviour
             //Check color property. Apply if color is not PASS color (FF00FF)
             if (material.colorModifier != Color.magenta)
             {
-                mSpriteRenderer.color = material.colorModifier;
+                mSpriteRenderer.color = Color.white;
+                //mSpriteRenderer.color = material.colorModifier;
             }
             if (material.mass != -1.0f)
             {
