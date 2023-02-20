@@ -12,19 +12,19 @@ public class MaterialAffector : MonoBehaviour
 {
     public void ApplyMaterials(List<MaterialProperty> materialList)
     {
-        SpriteRenderer mSpriteRenderer = GetComponent<SpriteRenderer>();
-        mSpriteRenderer.color = Color.magenta;
+        //SpriteRenderer mSpriteRenderer = GetComponent<SpriteRenderer>();
+        //mSpriteRenderer.color = Color.magenta;
         Rigidbody2D mRigidBody = GetComponent<Rigidbody2D>();
         mRigidBody.mass = 1.0f;
         Weight mWeight = GetComponent<Weight>();
-        TextureMasker mTextureMasker = GetComponent<TextureMasker>();
+        //TextureMasker mTextureMasker = GetComponent<TextureMasker>();
 
         foreach (MaterialProperty material in materialList)
         {
             //Check color property. Apply if color is not PASS color (FF00FF)
             if (material.colorModifier != Color.magenta)
             {
-                mSpriteRenderer.color = material.colorModifier;
+                //mSpriteRenderer.color = material.colorModifier;
             }
             if (material.mass != -1.0f)
             {
@@ -37,11 +37,11 @@ public class MaterialAffector : MonoBehaviour
             }
             if (material.spriteTexture)
             {
-                mTextureMasker.ApplyNewTexture(material.spriteTexture);
+                //mTextureMasker.ApplyNewTexture(material.spriteTexture);
             }
             else
             {
-                mTextureMasker.DisableTexture();
+                //mTextureMasker.DisableTexture();
             }
         }
     }
