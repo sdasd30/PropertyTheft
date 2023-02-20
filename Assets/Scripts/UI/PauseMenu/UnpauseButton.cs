@@ -14,6 +14,6 @@ public class UnpauseButton : MonoBehaviour
 
     public void UnPause()
     {
-        pg.TogglePauseState();
+        pg.ResumeGame();
     }
 }

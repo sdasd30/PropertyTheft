@@ -22,6 +22,7 @@ public class ReloadScene : MonoBehaviour
 
     public void SceneReload()
     {
+        FindObjectOfType<PauseGame>().ResumeGame();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // loads current scene
     }
 }
