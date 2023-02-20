@@ -15,7 +15,7 @@ public class PauseGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxisRaw("Menu") > .5f && held == false)
+        if (Input.GetAxisRaw("Cancel") > .5f && held == false)
         {
             held = true;
             Debug.Log("Pause attempt");
@@ -31,7 +31,7 @@ public class PauseGame : MonoBehaviour
             }
             
         }
-        else if (Input.GetAxisRaw("Menu") < .5 && held == true)
+        else if (Input.GetAxisRaw("Cancel") < .5 && held == true)
         {
             held = false;
         }
@@ -39,16 +39,13 @@ public class PauseGame : MonoBehaviour
 
     public void TogglePauseState()
     {
-        PauseMenu pmenu = FindObjectOfType<PauseMenu>();
         if (isPaused)
         {
             StopGame();
-            PauseEvent(this, true);
         }
         else
         {
             ResumeGame();
-            PauseEvent(this, false);
         }
     }
 
@@ -56,11 +53,13 @@ public class PauseGame : MonoBehaviour
     {
         Time.timeScale = 0.0f;
         isPaused = true;
+        PauseEvent(this, true);
     }
 
     public void ResumeGame()
     {
         Time.timeScale = 1.0f;
         isPaused = false;
+        PauseEvent(this, false);
     }
 }
