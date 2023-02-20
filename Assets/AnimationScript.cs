@@ -14,9 +14,19 @@ public class AnimationScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            animator.Play("leafIdle");
+            animator.Play("LeafIdle");
+        }
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            animator.Play("SteelIdle");
+        }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            animator.Play("UnknownIdle");
         }
     }
 }
