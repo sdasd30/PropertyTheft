@@ -20,6 +20,7 @@ public class PlayerSwapProperty : MonoBehaviour
     public delegate void SwapEventHandler(PlayerSwapProperty psp, SwapStatus swapType, GameObject hitobj);
     public event SwapEventHandler SwapEvent;
 
+    private PauseGame pauseGame;
     private GameObject gunObject;
     private SpriteRenderer gunSprite;
     private GameObject swapObject;
@@ -39,6 +40,7 @@ public class PlayerSwapProperty : MonoBehaviour
     {
         gunObject = GetComponentInChildren<AutoMirror>().gameObject;
         gunSprite = gunObject.GetComponent<SpriteRenderer>();
+        pauseGame = FindObjectOfType<PauseGame>();
         swapObject = null;
         swap_AI = false;
         gunSprite.color = new Color(255, 0, 0);
@@ -46,6 +48,7 @@ public class PlayerSwapProperty : MonoBehaviour
 
     void Update()
     {
+        if (pauseGame.isPaused) return;
         if (!disableSwaps && Input.GetAxisRaw("Fire1") > .5 || Input.GetAxisRaw("Fire2") > .5)
         {
             if (!firing)

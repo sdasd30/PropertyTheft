@@ -10,8 +10,15 @@ using UnityEngine;
 
 public class PlayerAim : MonoBehaviour
 {
-	void Update()
+	private PauseGame pauseGame;
+    private void Start()
+    {
+		pauseGame = FindObjectOfType<PauseGame>();
+
+	}
+    void Update()
 	{
+		if (pauseGame.isPaused) return;
 		Vector3 mousePos = Input.mousePosition;
 
 		Vector3 objectPos = Camera.main.WorldToScreenPoint(transform.position);

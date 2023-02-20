@@ -17,6 +17,7 @@ public class MaterialAffector : MonoBehaviour
         Rigidbody2D mRigidBody = GetComponent<Rigidbody2D>();
         mRigidBody.mass = 1.0f;
         Weight mWeight = GetComponent<Weight>();
+        TextureMasker mTextureMasker = GetComponent<TextureMasker>();
 
         foreach (MaterialProperty material in materialList)
         {
@@ -33,6 +34,14 @@ public class MaterialAffector : MonoBehaviour
             {
                 mWeight.ObjectWeight = material.mass;
                 mWeight.DestructionThreshold = material.destructionThreshold;
+            }
+            if (material.spriteTexture)
+            {
+                mTextureMasker.ApplyNewTexture(material.spriteTexture);
+            }
+            else
+            {
+                mTextureMasker.DisableTexture();
             }
         }
     }
