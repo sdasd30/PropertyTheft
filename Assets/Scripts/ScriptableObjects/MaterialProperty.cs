@@ -23,6 +23,7 @@ public class MaterialProperty : ScriptableObject
 {
     public string materialName = "Unnamed Property";
     public Sprite spriteTexture = null;
+    public string materialAnimation = "UnnamedIdle";
     public Color colorModifier = Color.magenta;
 
     public float mass = -1.0f;

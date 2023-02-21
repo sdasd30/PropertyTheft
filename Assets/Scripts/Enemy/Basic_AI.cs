@@ -96,24 +96,24 @@ public class Basic_AI : MonoBehaviour
         {
             AI_Movement_1_5();
         }
-        else if (AI_type == 4)
-        {
-            AI_Movement_4();
-        }
-        else if (AI_type == 2 || AI_type== 3)
-        {
-            //AI_Movement_4();
-            if (!AI_Flag_2_3_set)
-            {
-                AI_Start_2_3();
-                AI_Flag_2_3_set = true;
-            }
-            AI_Movement_3();
-        }
-        else if (AI_type == 6)
-        {
-            AI_Movement_6();
-        }
+        //else if (AI_type == 4)
+        //{
+        //    AI_Movement_4();
+        //}
+        //else if (AI_type == 2 || AI_type== 3)
+        //{
+        //    //AI_Movement_4();
+        //    if (!AI_Flag_2_3_set)
+        //    {
+        //        AI_Start_2_3();
+        //        AI_Flag_2_3_set = true;
+        //    }
+        //    AI_Movement_3();
+        //}
+        //else if (AI_type == 6)
+        //{
+        //    AI_Movement_6();
+        //}
         else if (AI_type == 7)
         {
             AI_Movement_7();
@@ -146,9 +146,12 @@ public class Basic_AI : MonoBehaviour
         }
         else if (fan_direction == 4)
         {
-            hits1 = Physics2D.Raycast(transform.position, new Vector3(0,1,0), maxDistanceY + fan_range, fanhit);
-            hits2 = Physics2D.Raycast(new Vector3(transform.position.x + maxDistanceX, transform.position.y), new Vector3(0, 1, 0), maxDistanceY + fan_range, fanhit);
-            hits3 = Physics2D.Raycast(new Vector3(transform.position.x - maxDistanceX, transform.position.y), new Vector3(0, 1, 0), maxDistanceY + fan_range, fanhit);
+            hits1 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + maxDistanceY), new Vector3(0,1,0), maxDistanceY + fan_range, fanhit);
+            hits2 = Physics2D.Raycast(new Vector3(transform.position.x + maxDistanceX, transform.position.y + maxDistanceY), new Vector3(0, 1, 0), maxDistanceY + fan_range, fanhit);
+            hits3 = Physics2D.Raycast(new Vector3(transform.position.x - maxDistanceX, transform.position.y + maxDistanceY), new Vector3(0, 1, 0), maxDistanceY + fan_range, fanhit);
+            Debug.DrawRay(new Vector3(transform.position.x - maxDistanceX, transform.position.y + maxDistanceY), new Vector3(0, maxDistanceY + fan_range, 0), Color.red, 1f, false);
+            Debug.DrawRay(new Vector3(transform.position.x + maxDistanceX, transform.position.y + maxDistanceY), new Vector3(0, maxDistanceY + fan_range, 0), Color.red, 1f, false);
+            Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + maxDistanceY), new Vector3(0, maxDistanceY + fan_range, 0), Color.red, 1f, false);
         }
 
         
@@ -212,7 +215,8 @@ public class Basic_AI : MonoBehaviour
             float percent = 1 - (distance_to_object / fan_range);
             if (percent > 0.01)
             {
-                objectbody.AddForce(transform.up * fan_speed, ForceMode2D.Force);
+                //Debug.Log(fan_speed);
+                objectbody.AddForce(new Vector3(0,1 * fan_speed , 0) , ForceMode2D.Force);
             }
             else
             {
