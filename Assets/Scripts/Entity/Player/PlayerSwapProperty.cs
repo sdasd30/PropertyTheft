@@ -47,6 +47,7 @@ public class PlayerSwapProperty : MonoBehaviour
         swapObject = null;
         swap_AI = false;
         gunSprite.color = new Color(255, 0, 0);
+        
     }
 
     void Update()
@@ -63,7 +64,9 @@ public class PlayerSwapProperty : MonoBehaviour
                     RaycastHit2D hit;
                     Vector3 direction = Vector3.Normalize(new Vector3(mousePoint.x - transform.position.x,
                                                           mousePoint.y - transform.position.y, 0.0f));
-                    hit = Physics2D.Raycast(transform.position, direction, Mathf.Infinity,  layer);
+
+                    hit = Physics2D.Raycast(transform.position, direction, Mathf.Infinity, layer);
+  
                     Vector3 hitpoint;
                     if (hit.collider != null)
                     {

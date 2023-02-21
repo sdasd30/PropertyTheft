@@ -777,6 +777,10 @@ PrefabInstance:
       propertyPath: disableSwaps
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3634931338695832354, guid: fbb7fdcd89dbf4d478fd7fdc969067c4, type: 3}
+      propertyPath: layer.m_Bits
+      value: 576
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fbb7fdcd89dbf4d478fd7fdc969067c4, type: 3}
 --- !u!1 &1829692650
@@ -1475,12 +1479,6 @@ CompositeCollider2D:
         Y: 0
       - X: 50000000
         Y: -30000000
-    - - X: 60000000
-        Y: -10000000
-      - X: 60000000
-        Y: -9999999
-      - X: 70000000
-        Y: -10000000
     - - X: -10000000
         Y: -10000000
       - X: -20000000
@@ -2692,8 +2690,8 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 1
-      m_TileSpriteIndex: 21
-      m_TileMatrixIndex: 2
+      m_TileSpriteIndex: 22
+      m_TileMatrixIndex: 4
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
@@ -3887,9 +3885,9 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 118
     m_Data: {fileID: -1442034998, guid: c72f9651b5bd8a5439090b96aafa52e0, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 619655129, guid: c72f9651b5bd8a5439090b96aafa52e0, type: 3}
-  - m_RefCount: 91
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 92
     m_Data: {fileID: -1540417820, guid: c72f9651b5bd8a5439090b96aafa52e0, type: 3}
   - m_RefCount: 6
     m_Data: {fileID: 502458257, guid: c72f9651b5bd8a5439090b96aafa52e0, type: 3}
@@ -3934,7 +3932,7 @@ Tilemap:
       e31: 0
       e32: 4.5904e-41
       e33: 0
-  - m_RefCount: 18
+  - m_RefCount: 17
     m_Data:
       e00: 0.000000059604645
       e01: -0.99999994
@@ -3970,7 +3968,7 @@ Tilemap:
       e31: 0
       e32: 0
       e33: 1
-  - m_RefCount: 153
+  - m_RefCount: 154
     m_Data:
       e00: 1
       e01: 0

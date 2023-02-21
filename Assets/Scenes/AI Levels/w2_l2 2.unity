@@ -2189,7 +2189,7 @@ MonoBehaviour:
   Wind: {fileID: 3644807705190726212, guid: 8ca6ff3cce20c5c4094bfdfee6d414fb, type: 3}
   AI_type: 7
   fan_range: 2
-  fan_speed: 100000
+  fan_speed: 60
   fan_direction: 3
   AI_1_fan_dir_hit: 0
   swapped: 0
