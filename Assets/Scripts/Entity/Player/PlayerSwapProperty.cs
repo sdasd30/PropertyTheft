@@ -28,7 +28,8 @@ public class PlayerSwapProperty : MonoBehaviour
     [SerializeField] private Sprite inactiveGunSpr;
     [SerializeField] private Sprite activeGunSpr;
     [SerializeField] private bool disableSwaps = false;
-    
+    public LayerMask layer;
+
 
     bool firing;
     bool swap_AI;
@@ -62,7 +63,7 @@ public class PlayerSwapProperty : MonoBehaviour
                     RaycastHit2D hit;
                     Vector3 direction = Vector3.Normalize(new Vector3(mousePoint.x - transform.position.x,
                                                           mousePoint.y - transform.position.y, 0.0f));
-                    hit = Physics2D.Raycast(transform.position, direction);
+                    hit = Physics2D.Raycast(transform.position, direction, Mathf.Infinity,  layer);
                     Vector3 hitpoint;
                     if (hit.collider != null)
                     {
