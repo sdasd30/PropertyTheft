@@ -130,19 +130,19 @@ public class Basic_AI : MonoBehaviour
 
         if (fan_direction == 1)
         {
-            hits1 = Physics2D.Raycast(new Vector3(transform.position.x + maxDistanceX + 0.05f, transform.position.y), transform.right,  fan_range, fanhit);
-            hits2 = Physics2D.Raycast(new Vector3(transform.position.x + maxDistanceX + 0.05f, transform.position.y - maxDistanceY), new Vector3(1, 0, 0),  fan_range, fanhit);
-            hits3 = Physics2D.Raycast(new Vector3(transform.position.x + maxDistanceX + 0.05f, transform.position.y + maxDistanceY), new Vector3(1, 0, 0),  fan_range, fanhit);
+            hits1 = Physics2D.Raycast(new Vector3(transform.position.x /*+ maxDistanceX + 0.05f*/, transform.position.y), transform.right,  fan_range + maxDistanceX, fanhit);
+            hits2 = Physics2D.Raycast(new Vector3(transform.position.x /*+ maxDistanceX + 0.05f*/, transform.position.y - maxDistanceY), new Vector3(1, 0, 0),  fan_range + maxDistanceX, fanhit);
+            hits3 = Physics2D.Raycast(new Vector3(transform.position.x /*+ maxDistanceX + 0.05f*/, transform.position.y + maxDistanceY), new Vector3(1, 0, 0),  fan_range + maxDistanceX, fanhit);
         } else if (fan_direction == 2) {
-            hits1 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - maxDistanceY - 0.05f), new Vector3(0, -1, 0), maxDistanceY + fan_range, fanhit);
-            hits2 = Physics2D.Raycast(new Vector3(transform.position.x + maxDistanceX, transform.position.y - maxDistanceY -0.05f), new Vector3(0, -1, 0), maxDistanceY + fan_range, fanhit);
-            hits3 = Physics2D.Raycast(new Vector3(transform.position.x - maxDistanceX, transform.position.y - maxDistanceY - 0.05f), new Vector3(0, -1, 0), maxDistanceY + fan_range, fanhit);
+            hits1 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y /*- maxDistanceY - 0.05f*/), new Vector3(0, -1, 0), maxDistanceY + fan_range, fanhit);
+            hits2 = Physics2D.Raycast(new Vector3(transform.position.x + maxDistanceX, transform.position.y /*- maxDistanceY -0.05f*/), new Vector3(0, -1, 0), maxDistanceY + fan_range, fanhit);
+            hits3 = Physics2D.Raycast(new Vector3(transform.position.x - maxDistanceX, transform.position.y /*- maxDistanceY - 0.05f*/), new Vector3(0, -1, 0), maxDistanceY + fan_range, fanhit);
         }
         else if (fan_direction == 3)
         {
-            hits1 = Physics2D.Raycast(new Vector3(transform.position.x - maxDistanceX - 0.05f, transform.position.y - maxDistanceY), new Vector3(-1, 0, 0), fan_range, fanhit);
-            hits2 = Physics2D.Raycast(new Vector3(transform.position.x - maxDistanceX  - 0.05f, transform.position.y - maxDistanceY), new Vector3(-1, 0, 0),  fan_range, fanhit);
-            hits3 = Physics2D.Raycast(new Vector3(transform.position.x - maxDistanceX - 0.05f, transform.position.y + maxDistanceY), new Vector3(-1, 0, 0),  fan_range, fanhit);
+            hits1 = Physics2D.Raycast(new Vector3(transform.position.x /*- maxDistanceX - 0.05f*/, transform.position.y), new Vector3(-1, 0, 0), fan_range + maxDistanceX, fanhit);
+            hits2 = Physics2D.Raycast(new Vector3(transform.position.x /*- maxDistanceX  - 0.05f*/, transform.position.y - maxDistanceY), new Vector3(-1, 0, 0),  fan_range + maxDistanceX, fanhit);
+            hits3 = Physics2D.Raycast(new Vector3(transform.position.x /*- maxDistanceX - 0.05f*/, transform.position.y + maxDistanceY), new Vector3(-1, 0, 0),  fan_range + maxDistanceX, fanhit);
         }
         else if (fan_direction == 4)
         {
@@ -199,7 +199,7 @@ public class Basic_AI : MonoBehaviour
         }
         else if (fan_direction == 3) //FAN PUSH LEFT
         {
-            objectbody.AddForce(-1 * transform.right * fan_speed, ForceMode2D.Force);
+            objectbody.AddForce(new Vector3(-1f  * fan_speed, 0,0), ForceMode2D.Force);
             //if (hitObject.GetComponent<Basic_AI>().AI_type == 1)
             //{
 

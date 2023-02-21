@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/World1/w1_s1.unity
     guid: 5fedb027509ff3e49872047a05728514
   - enabled: 1
-    path: Assets/Scenes/AI Levels/w2_s1.unity
+    path: Assets/Scenes/AI Levels/w2_s4.unity
     guid: e3dc7cb525420244d8712e77959b9078
   - enabled: 1
     path: Assets/Scenes/AI Levels/w2_s2.unity
@@ -30,7 +30,7 @@ EditorBuildSettings:
     path: Assets/Scenes/World1/w1_s6.unity
     guid: 6cbe566ee82b4a543b92b3dc9c5a6be0
   - enabled: 1
-    path: Assets/Scenes/AI Levels/w2_s3.unity
+    path: Assets/Scenes/AI Levels/w2_ls3.unity
     guid: 5a82dac5757beb64f96f2ecab94c3928
   - enabled: 0
     path: Assets/Scenes/TestScene.unity
