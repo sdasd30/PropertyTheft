@@ -8,23 +8,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//[RequireComponent(typeof(Animator))]
+
 public class MaterialAffector : MonoBehaviour
 {
     public void ApplyMaterials(List<MaterialProperty> materialList)
     {
         SpriteRenderer mSpriteRenderer = GetComponent<SpriteRenderer>();
+        Animator mAnimator = GetComponent<Animator>();
         mSpriteRenderer.color = Color.magenta;
         Rigidbody2D mRigidBody = GetComponent<Rigidbody2D>();
         mRigidBody.mass = 1.0f;
         Weight mWeight = GetComponent<Weight>();
-        TextureMasker mTextureMasker = GetComponent<TextureMasker>();
+        //TextureMasker mTextureMasker = GetComponent<TextureMasker>();
 
         foreach (MaterialProperty material in materialList)
         {
             //Check color property. Apply if color is not PASS color (FF00FF)
             if (material.colorModifier != Color.magenta)
             {
-                mSpriteRenderer.color = material.colorModifier;
+                mSpriteRenderer.color = Color.white;
+                //mSpriteRenderer.color = material.colorModifier;
             }
             if (material.mass != -1.0f)
             {
@@ -35,13 +39,14 @@ public class MaterialAffector : MonoBehaviour
                 mWeight.ObjectWeight = material.mass;
                 mWeight.DestructionThreshold = material.destructionThreshold;
             }
-            if (material.spriteTexture)
+            if (material.spriteTexture && mAnimator)
             {
-                mTextureMasker.ApplyNewTexture(material.spriteTexture);
+                mAnimator.Play(material.materialAnimation);
+                //mTextureMasker.ApplyNewTexture(material.spriteTexture);
             }
             else
             {
-                mTextureMasker.DisableTexture();
+                //mTextureMasker.DisableTexture();
             }
         }
     }
