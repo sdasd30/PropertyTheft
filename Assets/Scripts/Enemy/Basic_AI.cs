@@ -213,7 +213,7 @@ public class Basic_AI : MonoBehaviour
         }
         else if (fan_direction == 4) //FAN PUSH UP
         {
-            float distance_to_object = the_hit.transform.position.y - (transform.position.y + 1.7f * maxDistanceY);
+            float distance_to_object = the_hit.point.y  - (transform.position.y + /*1.7f **/ maxDistanceY);
             float percent = 1 - (distance_to_object / fan_range);
             //objectbody.AddForce(new Vector3(0, 1 * fan_speed, 0), ForceMode2D.Force);
             //Debug.Log(fan_speed);
@@ -235,13 +235,14 @@ public class Basic_AI : MonoBehaviour
     {
         //rb.gravityScale = 5;
         rb.freezeRotation = true;
-        if ((AI_1_fan_dir_hit == 1 && rb.velocity.x < 0) || (AI_1_fan_dir_hit == 3 && rb.velocity.x > 0))
-        {
-            rb.velocity = new Vector3(0, rb.velocity.y);
-        } else
-        {
-            rb.velocity = new Vector3(transform.right.x * speed, rb.velocity.y);
-        }
+        rb.velocity = new Vector3(transform.right.x * speed, rb.velocity.y);
+        //if ((AI_1_fan_dir_hit == 1 && rb.velocity.x < 0) || (AI_1_fan_dir_hit == 3 && rb.velocity.x > 0))
+        //{
+        //    rb.velocity = new Vector3(0, rb.velocity.y);
+        //} else
+        //{
+        //    rb.velocity = new Vector3(transform.right.x * speed, rb.velocity.y);
+        //}
         rb.velocity = new Vector3(transform.right.x * speed, rb.velocity.y);
         AI_1_fan_dir_hit = 0;
         rb.SetRotation(0f);
