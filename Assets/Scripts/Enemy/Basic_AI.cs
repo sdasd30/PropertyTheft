@@ -248,11 +248,11 @@ public class Basic_AI : MonoBehaviour
         rb.SetRotation(0f);
         RaycastHit2D hits;
         //int layers = 416;
-        RaycastHit2D hits1 = Physics2D.Raycast(transform.position, transform.right, maxDistanceX , layershit1);
+        RaycastHit2D hits1 = Physics2D.Raycast(transform.position, transform.right, maxDistanceX /*+ .05f*/, layershit1);
         //Debug.DrawRay(transform.position, new Vector3(transform.right.x + maxDistanceX, transform.right.y), Color.red, 0f,  false);
         //Debug.DrawLine(transform.position, new Vector3(transform.right.x + maxDistanceX, transform.right.y), Color.red, .1f ,false);
-        RaycastHit2D hits2 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - (maxDistanceY - 0.1f)), transform.right, maxDistanceX, layershit1);
-        RaycastHit2D hits3 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + (maxDistanceY - 0.1f)), transform.right, maxDistanceX, layershit1);
+        RaycastHit2D hits2 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - (maxDistanceY - 0.05f)), transform.right, maxDistanceX  /* + .05f*/, layershit1);
+        RaycastHit2D hits3 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + (maxDistanceY - 0.05f)), transform.right, maxDistanceX  /* + .05f*/, layershit1);
         //Debug.Log("hit");
         if (hits1 || hits2 || hits3)
         {
@@ -308,18 +308,33 @@ public class Basic_AI : MonoBehaviour
         }
 
     }
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        //Basic_AI hitAIHolder = collision.gameObject.GetComponent<Basic_AI>();
+    //void OnCollisionExit2D(Collision2D collision)
+    //{
+    //    Basic_AI hitAIHolder = collision.gameObject.GetComponent<Basic_AI>();
 
-        //if (hitAIHolder)
-        //{
-        //    Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), collision.collider);
-        //    //Debug.Log("exited");
-        //    //is_colliding_with_level = false;
-        //}
-    }
+    //    if (hitAIHolder)
+    //    {
+    //        Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), collision.collider);
+    //        //Debug.Log("exited");
+    //        //is_colliding_with_level = false;
+    //    }
+    //}
 
+    //void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    Basic_AI hitAIHolder = collision.gameObject.GetComponent<Basic_AI>();
+
+    //    if (AI_type == 1 && hitAIHolder)
+    //    {
+    //        Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), collision.collider, true);
+    //        //Debug.Log("exited");
+    //        //is_colliding_with_level = false;
+    //    } 
+    //    if (AI_type )
+    //    {
+    //        Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), collision.collider, false);
+    //    }
+    //}
     GameObject swapIconGO;
 
     public void MarkForSwap()
