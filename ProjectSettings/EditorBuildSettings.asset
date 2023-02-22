@@ -14,6 +14,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AI Levels/w2_s4.unity
     guid: e3dc7cb525420244d8712e77959b9078
+  - enabled: 1
+    path: Assets/Scenes/AI Levels/w2_s3.unity
+    guid: c2321a714458aa447a512e0e2b44ee09
+  - enabled: 1
+    path: Assets/Scenes/AI Levels/w2_s2.unity
+    guid: ee668e293ada2ce4a80d3cf585202df1
+  - enabled: 1
+    path: Assets/Scenes/AI Levels/w2_s1.unity
+    guid: 4f124631043520a4492cf0f104557f20
+  - enabled: 1
+    path: Assets/Scenes/AI Levels/w2_s5.unity
+    guid: bf7ec0a63b09be1488e04157e6e154d6
+  - enabled: 1
+    path: Assets/Scenes/AI Levels/w2_s6.unity
+    guid: b5f44154e19930b4b9c67d86554afb81
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
