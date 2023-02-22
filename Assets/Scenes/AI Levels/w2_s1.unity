@@ -317,7 +317,7 @@ PrefabInstance:
     - target: {fileID: 8447275229503799272, guid: c3c57558370e1764aa3a77083520ea1e, type: 3}
       propertyPath: defaultMaterial
       value: 
-      objectReference: {fileID: 11400000, guid: 848e4e893eae62e4192e1d7756b11355, type: 2}
+      objectReference: {fileID: 11400000, guid: 74a0d6347d2107341a0f4fe79b0d3aa4, type: 2}
     - target: {fileID: 8447275229503799272, guid: c3c57558370e1764aa3a77083520ea1e, type: 3}
       propertyPath: propertyList.Array.data[0]
       value: 
@@ -2356,7 +2356,7 @@ PrefabInstance:
     - target: {fileID: 8447275229503799272, guid: c3c57558370e1764aa3a77083520ea1e, type: 3}
       propertyPath: defaultMaterial
       value: 
-      objectReference: {fileID: 11400000, guid: 6979cd4569fee824e8a4ab01d53f8a77, type: 2}
+      objectReference: {fileID: 11400000, guid: 74a0d6347d2107341a0f4fe79b0d3aa4, type: 2}
     - target: {fileID: 8447275229503799272, guid: c3c57558370e1764aa3a77083520ea1e, type: 3}
       propertyPath: propertyList.Array.data[0]
       value: 
@@ -2934,7 +2934,7 @@ PrefabInstance:
     - target: {fileID: 8447275229503799272, guid: c3c57558370e1764aa3a77083520ea1e, type: 3}
       propertyPath: defaultMaterial
       value: 
-      objectReference: {fileID: 11400000, guid: 6979cd4569fee824e8a4ab01d53f8a77, type: 2}
+      objectReference: {fileID: 11400000, guid: 74a0d6347d2107341a0f4fe79b0d3aa4, type: 2}
     - target: {fileID: 8447275229503799272, guid: c3c57558370e1764aa3a77083520ea1e, type: 3}
       propertyPath: propertyList.Array.data[0]
       value: 
@@ -3422,7 +3422,7 @@ PrefabInstance:
     - target: {fileID: 8447275229503799272, guid: c3c57558370e1764aa3a77083520ea1e, type: 3}
       propertyPath: defaultMaterial
       value: 
-      objectReference: {fileID: 11400000, guid: 6979cd4569fee824e8a4ab01d53f8a77, type: 2}
+      objectReference: {fileID: 11400000, guid: 74a0d6347d2107341a0f4fe79b0d3aa4, type: 2}
     - target: {fileID: 8447275229503799272, guid: c3c57558370e1764aa3a77083520ea1e, type: 3}
       propertyPath: propertyList.Array.data[0]
       value: 
@@ -3847,7 +3847,7 @@ PrefabInstance:
     - target: {fileID: 8447275229503799272, guid: c3c57558370e1764aa3a77083520ea1e, type: 3}
       propertyPath: defaultMaterial
       value: 
-      objectReference: {fileID: 11400000, guid: 6979cd4569fee824e8a4ab01d53f8a77, type: 2}
+      objectReference: {fileID: 11400000, guid: 74a0d6347d2107341a0f4fe79b0d3aa4, type: 2}
     - target: {fileID: 8447275229503799272, guid: c3c57558370e1764aa3a77083520ea1e, type: 3}
       propertyPath: propertyList.Array.data[0]
       value: 
