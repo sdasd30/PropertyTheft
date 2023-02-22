@@ -21,14 +21,10 @@ public class PlayerAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool oldP = Input.GetKeyDown("-"); //change to Old Player
-        bool newP = Input.GetKeyDown("="); //change to New Player
-        if (newP)
+        bool oldP = Input.GetKeyDown("-"); //change to Old/New Player
+        if (oldP)
         {
-            pStatus = true;
-        } else if (oldP)
-        {
-            pStatus = false;
+            pStatus = !pStatus;
         }
         if (pStatus)
         {
