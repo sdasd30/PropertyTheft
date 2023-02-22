@@ -13,6 +13,7 @@ public class Wind_Behavior : MonoBehaviour
         parent = transform.parent.gameObject;
         start_fan_direction = parent.GetComponent<Basic_AI>().fan_direction;
         swapped = parent.GetComponent<Basic_AI>().swapped;
+
     }
 
     // Update is called once per frame
