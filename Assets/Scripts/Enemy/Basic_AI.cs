@@ -96,24 +96,6 @@ public class Basic_AI : MonoBehaviour
         {
             AI_Movement_1_5();
         }
-        //else if (AI_type == 4)
-        //{
-        //    AI_Movement_4();
-        //}
-        //else if (AI_type == 2 || AI_type== 3)
-        //{
-        //    //AI_Movement_4();
-        //    if (!AI_Flag_2_3_set)
-        //    {
-        //        AI_Start_2_3();
-        //        AI_Flag_2_3_set = true;
-        //    }
-        //    AI_Movement_3();
-        //}
-        //else if (AI_type == 6)
-        //{
-        //    AI_Movement_6();
-        //}
         else if (AI_type == 7)
         {
             AI_Movement_7();
@@ -167,10 +149,6 @@ public class Basic_AI : MonoBehaviour
         {
             fan_push_helper(hits3);
         }
-
-
-
-
     }
 
     void fan_push_helper(RaycastHit2D the_hit)
@@ -180,16 +158,6 @@ public class Basic_AI : MonoBehaviour
         if (fan_direction == 1) //FAN PUSH RIGHT
         {
             objectbody.AddForce(transform.right * fan_speed * Time.deltaTime * 200, ForceMode2D.Force);
-            //if (hitObject.GetComponent<Basic_AI>().AI_type == 1)
-            //{
-
-            //    hitObject.GetComponent<Basic_AI>().AI_1_fan_dir_hit = 1;
-
-            //}
-            //else
-            //{
-            //    objectbody.AddForce(transform.right * fan_speed, ForceMode2D.Force);
-            //}
 
         }
         else if (fan_direction == 2) //FAN PUSH DOWN
@@ -199,28 +167,13 @@ public class Basic_AI : MonoBehaviour
         else if (fan_direction == 3) //FAN PUSH LEFT
         {
             objectbody.AddForce(new Vector3(-1f  * fan_speed * Time.deltaTime * 200, 0,0), ForceMode2D.Force);
-            //if (hitObject.GetComponent<Basic_AI>().AI_type == 1)
-            //{
-
-            //    hitObject.GetComponent<Basic_AI>().AI_1_fan_dir_hit = 3;
-
-            //}
-            //else
-            //{
-            //    objectbody.AddForce(-1 * transform.right * fan_speed, ForceMode2D.Force);
-            //}
         }
         else //FAN PUSH UP
         {
             float distance_to_object = the_hit.point.y  - (transform.position.y + /*1.7f **/ maxDistanceY);
             float percent = 1 - (distance_to_object / fan_range);
-            //objectbody.AddForce(new Vector3(0, 1 * fan_speed, 0), ForceMode2D.Force);
-            //Debug.Log(fan_speed);
-            //objectbody.AddForce(new Vector3(0, 1 * fan_speed, 0), ForceMode2D.Force);
-
             if (percent >= 0.01f)
             {
-                //Debug.Log(fan_speed);
                 objectbody.AddForce(new Vector3(0, 1 * fan_speed * Time.deltaTime * 200, 0), ForceMode2D.Force);
             }
             else
@@ -235,24 +188,13 @@ public class Basic_AI : MonoBehaviour
         //rb.gravityScale = 5;
         rb.freezeRotation = true;
         rb.velocity = new Vector3(transform.right.x * speed, rb.velocity.y);
-        //if ((AI_1_fan_dir_hit == 1 && rb.velocity.x < 0) || (AI_1_fan_dir_hit == 3 && rb.velocity.x > 0))
-        //{
-        //    rb.velocity = new Vector3(0, rb.velocity.y);
-        //} else
-        //{
-        //    rb.velocity = new Vector3(transform.right.x * speed, rb.velocity.y);
-        //}
         rb.velocity = new Vector3(transform.right.x * speed, rb.velocity.y);
         AI_1_fan_dir_hit = 0;
         rb.SetRotation(0f);
         RaycastHit2D hits;
-        //int layers = 416;
         RaycastHit2D hits1 = Physics2D.Raycast(transform.position, transform.right, maxDistanceX /*+ .05f*/, layershit1);
-        //Debug.DrawRay(transform.position, new Vector3(transform.right.x + maxDistanceX, transform.right.y), Color.red, 0f,  false);
-        //Debug.DrawLine(transform.position, new Vector3(transform.right.x + maxDistanceX, transform.right.y), Color.red, .1f ,false);
         RaycastHit2D hits2 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - (maxDistanceY - 0.05f)), transform.right, maxDistanceX  /* + .05f*/, layershit1);
         RaycastHit2D hits3 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + (maxDistanceY - 0.05f)), transform.right, maxDistanceX  /* + .05f*/, layershit1);
-        //Debug.Log("hit");
         if (hits1 || hits2 || hits3)
         {
             
@@ -261,7 +203,6 @@ public class Basic_AI : MonoBehaviour
 
         if (AI_type == 5)
         {
-
             hits = Physics2D.Raycast(transform.position + transform.right * maxDistanceX, -1f * transform.up, maxDistanceY, layershit1);
             if (!hits)
             {
@@ -269,30 +210,6 @@ public class Basic_AI : MonoBehaviour
             }
         }
     }
-    void AI_Start_2_3()
-    {
-        rb.gravityScale = 0;
-        rb.velocity = new Vector3(0, 0, 0);
-
-    }
-    void AI_Movement_3()
-    {
-        rb.freezeRotation = true;
-        this.transform.position = Vector3.MoveTowards(this.transform.position, target.position, speed * Time.deltaTime);
-    }
-    void AI_Movement_4()
-    {
-        rb.freezeRotation = false;
-        Quaternion rotation = Quaternion.LookRotation(target.transform.position - transform.position, transform.TransformDirection(Vector3.up));
-        this.transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
-    }
-    void AI_Movement_6()
-    {
-        rb.freezeRotation = true;
-        rb.velocity = transform.right * speed;
-
-    }
-
 
     void OnCollisionStay2D(Collision2D collision)
     {
@@ -307,33 +224,6 @@ public class Basic_AI : MonoBehaviour
         }
 
     }
-    //void OnCollisionExit2D(Collision2D collision)
-    //{
-    //    Basic_AI hitAIHolder = collision.gameObject.GetComponent<Basic_AI>();
-
-    //    if (hitAIHolder)
-    //    {
-    //        Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), collision.collider);
-    //        //Debug.Log("exited");
-    //        //is_colliding_with_level = false;
-    //    }
-    //}
-
-    //void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    Basic_AI hitAIHolder = collision.gameObject.GetComponent<Basic_AI>();
-
-    //    if (AI_type == 1 && hitAIHolder)
-    //    {
-    //        Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), collision.collider, true);
-    //        //Debug.Log("exited");
-    //        //is_colliding_with_level = false;
-    //    } 
-    //    if (AI_type )
-    //    {
-    //        Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), collision.collider, false);
-    //    }
-    //}
     GameObject swapIconGO;
 
     public void MarkForSwap()
@@ -354,25 +244,9 @@ public class Basic_AI : MonoBehaviour
             AI_type = 1;
             rb.velocity = new Vector3(transform.right.x * AI_1_speed, 0);
         }
-        else if (type == 2)
-        {
-            AI_type = 2;
-        }
-        else if (type == 3)
-        {
-            AI_type = 3;
-        }
-        else if (type == 4)
-        {
-            AI_type = 4;
-        }
         else if (type == 5)
         {
             AI_type = 5;
-        }
-        else if (type == 6)
-        {
-            AI_type = 6;
         }
         else if (type == 7 )
         {
