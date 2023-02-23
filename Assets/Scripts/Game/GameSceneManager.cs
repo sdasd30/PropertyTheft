@@ -5,6 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class GameSceneManager : MonoBehaviour
 {
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            LoadNextScene();
+        }
+    }
     public void LoadNextScene(int world = -1, int stage = -1)
     {
         Time.timeScale = 1.0f;
