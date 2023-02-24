@@ -12,7 +12,7 @@ public class Basic_AI : MonoBehaviour
     public Rigidbody2D rb;
     public BoxCollider2D b_collider;
     private Transform target;
-    private float speed;
+    public float speed;
     public float AI_1_speed;
     private GameObject swapObject;
     public GameObject player_game_object;

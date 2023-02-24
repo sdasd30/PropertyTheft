@@ -6,9 +6,9 @@ using TMPro;
 public class TopBarUI : MonoBehaviour
 {
     public TMP_Text PlayerNameText;
-    public TMP_Text SwappingModeText;
     public TMP_Text MaterialTypeText;
     public TMP_Text MaterialWeightText;
+    public TMP_Text SwappingModeTexts;
     public TMP_Text MaterialThresholdText;
     public TMP_Text BehaviorTypeText;
     public TMP_Text FanDirectionText;
@@ -19,7 +19,17 @@ public class TopBarUI : MonoBehaviour
     public GameObject player_game_object;
     public GameObject MaterialOutline;
     public GameObject BehaviorOutline;
+    public GameObject MaterialContainer;
+    public GameObject BehaviorContainer;
+    public GameObject UI_Bar;
+    public GameObject SwappingContainer;
+    public GameObject PlayerContainer;
+    public GameObject UI_Outline;
+    public GameObject SwappingModeText;
+    public bool UI_Toggle;
     private PlayerSwapProperty player_swap_script;
+    private float cooldown;
+    private float marked_time;
     
 
 
@@ -28,100 +38,164 @@ public class TopBarUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        UI_Toggle = false;
+        UI_Outline.SetActive(false);
+        cooldown = .25f;
+        marked_time = Time.time;
         PlayerNameText.text = "RED";
         PlayerNameText.color = new Color(255, 0, 0);
         player_swap_script = player_game_object.GetComponent<PlayerSwapProperty>();
         MaterialTypeText.text = "NONE";
         MaterialWeightText.text = "NONE";
         MaterialThresholdText.text = "NONE";
-        BehaviorOutline.SetActive(false);
-        MaterialOutline.SetActive(false);
+
+        MaterialContainer.SetActive(false);
+        BehaviorContainer.SetActive(false);
+        SwappingContainer.SetActive(false);
+        PlayerContainer.SetActive(false);
+        SwappingModeText.SetActive(false);
+
+
     }
 
     // Update is called once per frame
     void Update()
-    {   
-        if (player_swap_script.swapObject)
+    {
+        if (Input.GetAxisRaw("Fire3") > .5 && Time.time > marked_time + cooldown )
         {
-            //Debug.Log("here");
-            GameObject hit_game_object = player_swap_script.swapObject;
-            MaterialHolder material_info = hit_game_object.GetComponent<MaterialHolder>();
-            MaterialTypeText.text = material_info.propertyList[0].materialName;
-            MaterialWeightText.text = material_info.propertyList[0].mass.ToString();
-            MaterialThresholdText.text = material_info.propertyList[0].destructionThreshold.ToString();
-
-            Basic_AI object_AI = player_swap_script.swapObject.GetComponent<Basic_AI>();
-            if (object_AI)
+            marked_time = Time.time;
+            if (UI_Toggle)
             {
-                if (object_AI.AI_type == 0)
-                {
-                    BehaviorTypeText.text = "NONE";
-                    FanContainer.SetActive(false);
-                    MoveContainer.SetActive(false);
-                }
-                if (object_AI.AI_type == 1)
-                {
-                    BehaviorTypeText.text = "MOVE BACK AND FORTH";
-                    MoveSpeedText.text = object_AI.AI_1_speed.ToString();
-                    MoveFallAvoidanceText.text = "FALSE";
-                    MoveContainer.SetActive(true);
-                    FanContainer.SetActive(false);
-                }
-                if (object_AI.AI_type == 7)
-                {
-                    BehaviorTypeText.text = "FAN";
-                    FanContainer.SetActive(true);
-                    MoveContainer.SetActive(false);
-                    if (object_AI.fan_direction == 1)
-                    {
-                        FanDirectionText.text = "RIGHT";
-                    }
-                    else if (object_AI.fan_direction == 2)
-                    {
-                        FanDirectionText.text = "DOWN";
-                    }
-                    else if (object_AI.fan_direction == 3)
-                    {
-                        FanDirectionText.text = "LEFT";
-                    } else
-                    { 
-                        FanDirectionText.text = "UP";
-                    }
+                DeactivateUI();
+                UI_Toggle = false;
+            }
+            else
+            {
+                ReactivateUI();
+                UI_Toggle = true;
+            }
+        }
 
-                    if (object_AI.fan_speed == 60)
-                    {
-                        FanForceText.text = "WOOD, PLASTIC";
-                    } else
-                    {
-                        FanForceText.text = "WOOD, PLASTIC, STEEL";
-                    }
+        if (UI_Toggle)
+        {
+            
+            if (player_swap_script.swapObject)
+            {
+                GameObject hit_game_object = player_swap_script.swapObject;
+                MaterialHolder material_info = hit_game_object.GetComponent<MaterialHolder>();
+                MaterialTypeText.text = material_info.propertyList[0].materialName;
+                MaterialWeightText.text = material_info.propertyList[0].mass.ToString() + " lb";
+                MaterialThresholdText.text = material_info.propertyList[0].destructionThreshold.ToString() + " lb";
 
-                    FanRangeText.text = object_AI.fan_range.ToString();
+                Basic_AI object_AI = player_swap_script.swapObject.GetComponent<Basic_AI>();
+                if (object_AI)
+                {
+                    if (object_AI.AI_type == 0)
+                    {
+                        BehaviorTypeText.text = "STATIONARY";
+                        FanContainer.SetActive(false);
+                        MoveContainer.SetActive(false);
+                    }
+                    if (object_AI.AI_type == 1)
+                    {
+                        BehaviorTypeText.text = "MOVING";
+                        MoveSpeedText.text = " " + object_AI.speed.ToString();
+                        MoveFallAvoidanceText.text = "FALSE";
+                        MoveContainer.SetActive(true);
+                        FanContainer.SetActive(false);
+                    }
+                    if (object_AI.AI_type == 7)
+                    {
+                        BehaviorTypeText.text = "FAN";
+                        FanContainer.SetActive(true);
+                        MoveContainer.SetActive(false);
+                        if (object_AI.fan_direction == 1)
+                        {
+                            FanDirectionText.text = "RIGHT";
+                        }
+                        else if (object_AI.fan_direction == 2)
+                        {
+                            FanDirectionText.text = "DOWN";
+                        }
+                        else if (object_AI.fan_direction == 3)
+                        {
+                            FanDirectionText.text = "LEFT";
+                        }
+                        else
+                        {
+                            FanDirectionText.text = "UP";
+                        }
+
+                        if (object_AI.fan_speed == 60)
+                        {
+                            FanForceText.text = "8 lb";
+                        }
+                        else
+                        {
+                            FanForceText.text = "24 lb";
+                        }
+
+                        FanRangeText.text = object_AI.fan_range.ToString();
+                    }
                 }
             }
-        } else
-        {
-            FanContainer.SetActive(false);
-            MoveContainer.SetActive(false);
-            MaterialTypeText.text = "NONE";
-            MaterialWeightText.text = "NONE";
-            MaterialThresholdText.text = "NONE";
-            BehaviorTypeText.text = "NONE";
+            else
+            {
+                FanContainer.SetActive(false);
+                MoveContainer.SetActive(false);
+                MaterialTypeText.text = "NONE";
+                MaterialWeightText.text = "NONE";
+                MaterialThresholdText.text = "NONE";
+                BehaviorTypeText.text = "NONE";
+            }
+            if (player_swap_script.swap_AI)
+            {
+                SwappingModeTexts.text = "Behavior";
+                SwappingModeTexts.color = new Color(0, 0, 255);
+                MaterialContainer.SetActive(false);
+                if (player_swap_script.swapObject)
+                {
+                    BehaviorContainer.SetActive(true);
+                }
+                else
+                {
+                    BehaviorContainer.SetActive(false);
+                }
 
+            }
+            else
+            {
+                SwappingModeTexts.text = "Material";
+                SwappingModeTexts.color = new Color(255, 0, 0);
+                BehaviorContainer.SetActive(false);
+                if (player_swap_script.swapObject)
+                {
+                    MaterialContainer.SetActive(true);
 
+                }
+                else
+                {
+                    MaterialContainer.SetActive(false);
+                }
+            }
         }
-        if (player_swap_script.swap_AI)
+
+
+
+    void ReactivateUI()
+       {
+            MaterialContainer.SetActive(true);
+            BehaviorContainer.SetActive(true);
+            SwappingContainer.SetActive(true);
+            SwappingModeText.SetActive(true);
+        }
+
+    void DeactivateUI()
         {
-            SwappingModeText.text = "Behavior";
-            SwappingModeText.color = new Color(0, 0, 255);
-            MaterialOutline.SetActive(false);
-            BehaviorOutline.SetActive(true);
-        } else
-        {
-            SwappingModeText.text = "Material";
-            SwappingModeText.color = new Color(255, 0, 0);
-            MaterialOutline.SetActive(true);
-            BehaviorOutline.SetActive(false);
+            MaterialContainer.SetActive(false);
+            BehaviorContainer.SetActive(false);
+            SwappingContainer.SetActive(false);
+            SwappingModeText.SetActive(false);
         }
         
     }
