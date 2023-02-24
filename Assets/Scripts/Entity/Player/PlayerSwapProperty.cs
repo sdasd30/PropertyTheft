@@ -219,12 +219,12 @@ public class PlayerSwapProperty : MonoBehaviour
                 if (!GameObject.ReferenceEquals(hit.transform.gameObject, saved_hit.transform.gameObject)) {
 
                     hitAIHolder.Set_Type(AIHolder_type, direction1, true, fan_range1, saved_speed);
-                    AIHolder.Set_Type(AI_Holder_type_other, direction2, true, fan_range2, AIHolder.fan_speed);
+                    AIHolder.Set_Type(AI_Holder_type_other, direction2, true, fan_range2, hitAIHolder.fan_speed);
                 }
                 else
                 {
                     hitAIHolder.Set_Type(AIHolder_type, direction1, false, fan_range1, saved_speed);
-                    AIHolder.Set_Type(AI_Holder_type_other, direction2, false, fan_range2, AIHolder.fan_speed);
+                    AIHolder.Set_Type(AI_Holder_type_other, direction2, false, fan_range2, hitAIHolder.fan_speed);
                 }
 
                 swapObject = null;

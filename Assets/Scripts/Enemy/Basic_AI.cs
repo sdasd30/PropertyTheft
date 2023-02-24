@@ -191,7 +191,7 @@ public class Basic_AI : MonoBehaviour
         rb.velocity = new Vector3(transform.right.x * speed, rb.velocity.y);
         AI_1_fan_dir_hit = 0;
         rb.SetRotation(0f);
-        RaycastHit2D hits;
+        //RaycastHit2D hits;
         RaycastHit2D hits1 = Physics2D.Raycast(transform.position, transform.right, maxDistanceX /*+ .05f*/, layershit1);
         RaycastHit2D hits2 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - (maxDistanceY - 0.05f)), transform.right, maxDistanceX  /* + .05f*/, layershit1);
         RaycastHit2D hits3 = Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + (maxDistanceY - 0.05f)), transform.right, maxDistanceX  /* + .05f*/, layershit1);
@@ -203,8 +203,11 @@ public class Basic_AI : MonoBehaviour
 
         if (AI_type == 5)
         {
-            hits = Physics2D.Raycast(transform.position + transform.right * maxDistanceX, -1f * transform.up, maxDistanceY, layershit1);
-            if (!hits)
+            hits1 = Physics2D.Raycast(transform.position + transform.right * maxDistanceX, -1f * transform.up, 2*maxDistanceY, layershit1);
+            hits2 = Physics2D.Raycast(transform.position + transform.right * 2*(maxDistanceX - .25f), -1f * transform.up, 2*maxDistanceY, layershit1);
+            Debug.DrawRay(transform.position + transform.right * maxDistanceX, -1f * transform.up*maxDistanceY, Color.red, 0f, false);
+            Debug.DrawRay(transform.position + transform.right * 2 * (maxDistanceX), -1f * transform.up* maxDistanceY, Color.red, 0f, false);
+            if (!hits1 && !hits2)
             {
                 transform.right = -1f * transform.right;
             }
@@ -274,6 +277,9 @@ public class Basic_AI : MonoBehaviour
 
                 fan_range = range;
                 fan_speed = speed;
+
+                Debug.Log(fan_range);
+                Debug.Log(fan_speed);
                 for (int i = 1; i < fan_range + 1; i++)
                 {
                     if (dir == 1)
