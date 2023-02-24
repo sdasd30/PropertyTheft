@@ -23,7 +23,7 @@ public class PlayerSwapProperty : MonoBehaviour
     private PauseGame pauseGame;
     private GameObject gunObject;
     private SpriteRenderer gunSprite;
-    private GameObject swapObject;
+    public GameObject swapObject;
     [SerializeField] private TrailRenderer BulletTrail;
     [SerializeField] private Sprite inactiveGunSpr;
     [SerializeField] private Sprite activeGunSpr;
@@ -32,11 +32,12 @@ public class PlayerSwapProperty : MonoBehaviour
 
 
     bool firing;
-    bool swap_AI;
-    RaycastHit2D saved_hit;
+    public bool swap_AI;
+    public RaycastHit2D saved_hit;
     int saved_dir;
     int saved_range;
     int saved_speed;
+    public bool is_hit;
     //float coolDown = 0;
 
     void Start()
@@ -72,6 +73,7 @@ public class PlayerSwapProperty : MonoBehaviour
                     {
                         Debug.DrawLine(transform.position, hit.point, Color.red, 2.0f, false);
                         hitpoint = hit.point;
+                    
                         if (!swap_AI)
                         {
                             AttemptSwap(hit);
@@ -139,7 +141,7 @@ public class PlayerSwapProperty : MonoBehaviour
             {
                 //There is currently no object selected for swap. Add this as a swap object.
                 swapObject = hitObject;
-                hitHolder.MarkForSwap();
+                hitHolder.MarkForSwap(swap_AI);
                 gunSprite.sprite = activeGunSpr;
                 if (SwapEvent != null)
                     SwapEvent(this, SwapStatus.StartSwap, hitObject);
@@ -201,7 +203,8 @@ public class PlayerSwapProperty : MonoBehaviour
                 saved_range = hitObject.GetComponent<Basic_AI>().fan_range;
                 saved_speed = hitObject.GetComponent<Basic_AI>().fan_speed;
                 saved_hit = hit;
-                hitAIHolder.MarkForSwap();
+                
+                hitAIHolder.MarkForSwap(swap_AI);
             }
             else
             {

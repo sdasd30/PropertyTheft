@@ -399,7 +399,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8798265860937204504, guid: c3c57558370e1764aa3a77083520ea1e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.9
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 8798265860937204504, guid: c3c57558370e1764aa3a77083520ea1e, type: 3}
       propertyPath: m_LocalScale.y
@@ -407,7 +407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8798265860937204504, guid: c3c57558370e1764aa3a77083520ea1e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.91
+      value: 6.77
       objectReference: {fileID: 0}
     - target: {fileID: 8798265860937204504, guid: c3c57558370e1764aa3a77083520ea1e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -508,6 +508,7 @@ MonoBehaviour:
     m_Bits: 512
   rb: {fileID: 0}
   b_collider: {fileID: 0}
+  AI_1_speed: 0
   player_game_object: {fileID: 0}
   swapIcon: {fileID: 7710707278093201530, guid: 627e24d5d8927c44c8a237325bbfcc51, type: 3}
   Wind: {fileID: 0}
@@ -1419,6 +1420,7 @@ MonoBehaviour:
     m_Bits: 512
   rb: {fileID: 0}
   b_collider: {fileID: 0}
+  AI_1_speed: 0
   player_game_object: {fileID: 0}
   swapIcon: {fileID: 7710707278093201530, guid: 627e24d5d8927c44c8a237325bbfcc51, type: 3}
   Wind: {fileID: 3644807705190726212, guid: 8ca6ff3cce20c5c4094bfdfee6d414fb, type: 3}
@@ -1661,6 +1663,7 @@ MonoBehaviour:
     m_Bits: 512
   rb: {fileID: 0}
   b_collider: {fileID: 0}
+  AI_1_speed: 0
   player_game_object: {fileID: 0}
   swapIcon: {fileID: 7710707278093201530, guid: 627e24d5d8927c44c8a237325bbfcc51, type: 3}
   Wind: {fileID: 0}
@@ -1898,6 +1901,7 @@ MonoBehaviour:
     m_Bits: 512
   rb: {fileID: 0}
   b_collider: {fileID: 0}
+  AI_1_speed: 0
   player_game_object: {fileID: 0}
   swapIcon: {fileID: 7710707278093201530, guid: 627e24d5d8927c44c8a237325bbfcc51, type: 3}
   Wind: {fileID: 0}
@@ -2118,6 +2122,7 @@ MonoBehaviour:
     m_Bits: 512
   rb: {fileID: 0}
   b_collider: {fileID: 0}
+  AI_1_speed: 0
   player_game_object: {fileID: 0}
   swapIcon: {fileID: 7710707278093201530, guid: 627e24d5d8927c44c8a237325bbfcc51, type: 3}
   Wind: {fileID: 0}
@@ -2152,6 +2157,7 @@ MonoBehaviour:
     m_Bits: 512
   rb: {fileID: 0}
   b_collider: {fileID: 0}
+  AI_1_speed: 0
   player_game_object: {fileID: 0}
   swapIcon: {fileID: 7710707278093201530, guid: 627e24d5d8927c44c8a237325bbfcc51, type: 3}
   Wind: {fileID: 0}
@@ -2186,6 +2192,7 @@ MonoBehaviour:
     m_Bits: 512
   rb: {fileID: 0}
   b_collider: {fileID: 0}
+  AI_1_speed: 0
   player_game_object: {fileID: 0}
   swapIcon: {fileID: 7710707278093201530, guid: 627e24d5d8927c44c8a237325bbfcc51, type: 3}
   Wind: {fileID: 0}
@@ -2220,6 +2227,7 @@ MonoBehaviour:
     m_Bits: 512
   rb: {fileID: 0}
   b_collider: {fileID: 0}
+  AI_1_speed: 0
   player_game_object: {fileID: 0}
   swapIcon: {fileID: 7710707278093201530, guid: 627e24d5d8927c44c8a237325bbfcc51, type: 3}
   Wind: {fileID: 0}

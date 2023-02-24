@@ -13,7 +13,7 @@ public class Basic_AI : MonoBehaviour
     public BoxCollider2D b_collider;
     private Transform target;
     private float speed;
-    private float AI_1_speed;
+    public float AI_1_speed;
     private GameObject swapObject;
     public GameObject player_game_object;
     //private bool is_colliding_with_level;
@@ -226,11 +226,19 @@ public class Basic_AI : MonoBehaviour
     }
     GameObject swapIconGO;
 
-    public void MarkForSwap()
+    public void MarkForSwap(bool swap_AI)
     {
         swapIconGO = Instantiate
             (swapIcon, transform.position,
             Quaternion.identity, transform);
+        //if (swap_AI)
+        //{
+        //    swapIconGO.GetComponent<SpriteRenderer>().color = new Color(0, 0, 255);
+        //}
+        //else
+        //{
+        //    swapIconGO.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
+        //}
     }
 
 
