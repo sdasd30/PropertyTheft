@@ -27,9 +27,11 @@ public class TopBarUI : MonoBehaviour
     public GameObject UI_Outline;
     public GameObject SwappingModeText;
     public bool UI_Toggle;
+    private bool UI_Toggle2;
     private PlayerSwapProperty player_swap_script;
     private float cooldown;
     private float marked_time;
+    private float marked_time2;
     
 
 
@@ -39,9 +41,12 @@ public class TopBarUI : MonoBehaviour
     void Start()
     {
         UI_Toggle = false;
+        UI_Toggle2 = false;
         UI_Outline.SetActive(false);
         cooldown = .25f;
+        
         marked_time = Time.time;
+        marked_time2 = Time.time;
         PlayerNameText.text = "RED";
         PlayerNameText.color = new Color(255, 0, 0);
         player_swap_script = player_game_object.GetComponent<PlayerSwapProperty>();
@@ -61,26 +66,55 @@ public class TopBarUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxisRaw("Fire3") > .5 && Time.time > marked_time + cooldown )
+        if (Input.GetAxisRaw("Fire4") > .5 && Time.time > marked_time + cooldown )
         {
             marked_time = Time.time;
             if (UI_Toggle)
             {
                 DeactivateUI();
+              
                 UI_Toggle = false;
             }
             else
             {
                 ReactivateUI();
+                
                 UI_Toggle = true;
             }
         }
 
-        if (UI_Toggle)
+        if (Input.GetAxisRaw("Fire3") > .5 && Time.time > marked_time2 + cooldown)
         {
+            marked_time2 = Time.time;
+            if (UI_Toggle2)
+            {
+                SwappingContainer.SetActive(false);
+                UI_Toggle2 = false;
+            }
+            else
+            {
+                SwappingContainer.SetActive(true);
+                UI_Toggle2 = true;
+            }
+        }
+
+        if (player_swap_script.swap_AI)
+        {
+            SwappingModeTexts.text = "Behavior";
+            SwappingModeTexts.color = new Color(0, 0, 255);
+        }
+        else
+        {
+            SwappingModeTexts.text = "Material";
+            SwappingModeTexts.color = new Color(255, 0, 0);
+        }
+
+        if (UI_Toggle)
+            {
             
             if (player_swap_script.swapObject)
             {
+                //UI_Outline.SetActive(true);
                 GameObject hit_game_object = player_swap_script.swapObject;
                 MaterialHolder material_info = hit_game_object.GetComponent<MaterialHolder>();
                 MaterialTypeText.text = material_info.propertyList[0].materialName;
@@ -126,13 +160,13 @@ public class TopBarUI : MonoBehaviour
                             FanDirectionText.text = "UP";
                         }
 
-                        if (object_AI.fan_speed == 60)
+                        if (object_AI.fan_speed <= 30)
                         {
-                            FanForceText.text = "8 lb";
+                            FanForceText.text = "3 lb";
                         }
-                        else
+                        else if (object_AI.fan_speed >= 120)
                         {
-                            FanForceText.text = "24 lb";
+                            FanForceText.text = "10 lb";
                         }
 
                         FanRangeText.text = object_AI.fan_range.ToString();
@@ -141,6 +175,7 @@ public class TopBarUI : MonoBehaviour
             }
             else
             {
+                //UI_Outline.SetActive(false);
                 FanContainer.SetActive(false);
                 MoveContainer.SetActive(false);
                 MaterialTypeText.text = "NONE";
@@ -148,30 +183,30 @@ public class TopBarUI : MonoBehaviour
                 MaterialThresholdText.text = "NONE";
                 BehaviorTypeText.text = "NONE";
             }
+
             if (player_swap_script.swap_AI)
             {
-                SwappingModeTexts.text = "Behavior";
-                SwappingModeTexts.color = new Color(0, 0, 255);
                 MaterialContainer.SetActive(false);
                 if (player_swap_script.swapObject)
                 {
                     BehaviorContainer.SetActive(true);
+                    
+
                 }
                 else
                 {
                     BehaviorContainer.SetActive(false);
+                 
                 }
 
             }
             else
             {
-                SwappingModeTexts.text = "Material";
-                SwappingModeTexts.color = new Color(255, 0, 0);
                 BehaviorContainer.SetActive(false);
                 if (player_swap_script.swapObject)
                 {
                     MaterialContainer.SetActive(true);
-
+                    
                 }
                 else
                 {
@@ -186,16 +221,16 @@ public class TopBarUI : MonoBehaviour
        {
             MaterialContainer.SetActive(true);
             BehaviorContainer.SetActive(true);
-            SwappingContainer.SetActive(true);
-            SwappingModeText.SetActive(true);
+            //SwappingContainer.SetActive(true);
+            //SwappingModeText.SetActive(true);
         }
 
     void DeactivateUI()
         {
             MaterialContainer.SetActive(false);
             BehaviorContainer.SetActive(false);
-            SwappingContainer.SetActive(false);
-            SwappingModeText.SetActive(false);
+            //SwappingContainer.SetActive(false);
+            //SwappingModeText.SetActive(false);
         }
         
     }

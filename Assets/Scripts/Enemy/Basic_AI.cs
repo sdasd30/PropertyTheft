@@ -189,6 +189,7 @@ public class Basic_AI : MonoBehaviour
         rb.freezeRotation = true;
         rb.velocity = new Vector3(transform.right.x * speed, rb.velocity.y);
         rb.velocity = new Vector3(transform.right.x * speed, rb.velocity.y);
+        rb.position = new Vector3(rb.position.x, rb.position.y + .01f, 0);
         AI_1_fan_dir_hit = 0;
         rb.SetRotation(0f);
         //RaycastHit2D hits;
