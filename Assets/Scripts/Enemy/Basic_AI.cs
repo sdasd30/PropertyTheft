@@ -26,6 +26,7 @@ public class Basic_AI : MonoBehaviour
     public int fan_direction;
     public int AI_1_fan_dir_hit;
     public bool swapped;
+    public bool other_player;
 
 
     //public bool AI_Flag_1; //moves horizontally in one direction until a wall is hit, then reverses direction
@@ -189,7 +190,11 @@ public class Basic_AI : MonoBehaviour
         rb.freezeRotation = true;
         rb.velocity = new Vector3(transform.right.x * speed, rb.velocity.y);
         rb.velocity = new Vector3(transform.right.x * speed, rb.velocity.y);
-        //rb.position = new Vector3(rb.position.x, rb.position.y + .01f, 0);
+        if (other_player)
+        {
+            rb.position = new Vector3(rb.position.x, rb.position.y + .01f, 0);
+        }
+
         AI_1_fan_dir_hit = 0;
         rb.SetRotation(0f);
         //RaycastHit2D hits;
