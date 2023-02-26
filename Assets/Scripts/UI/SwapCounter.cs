@@ -26,8 +26,10 @@ public class SwapCounter : MonoBehaviour
 
     private void UpdateCounter(PlayerSwapProperty psp, SwapStatus sws, GameObject hit)
     {
+        Debug.Log("Swap event");
         if (sws == SwapStatus.EndSwap)
         {
+            Debug.Log("Increment Counter");
             swapCount += 1;
         }
     }

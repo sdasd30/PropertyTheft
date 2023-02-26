@@ -11,8 +11,6 @@ public class LevelSelect : MonoBehaviour
     bool hasPlayer;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Collision enter");
-        Debug.Log(collision.name);
         if (collision.gameObject.GetComponent<LevelSelectMove>())
         {
             hasPlayer = true;
@@ -56,7 +54,6 @@ public class LevelSelect : MonoBehaviour
         }
         if (hasPlayer)
         {
-            Debug.Log("Has Player");    
             if (Input.GetKeyDown(KeyCode.Space))
             {
 

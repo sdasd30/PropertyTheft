@@ -24,6 +24,5 @@ public class LevelSelectProperties : MonoBehaviour
             selectable = true;
         }
         progress = pm.RequestIfComplete(loadWorld, loadStage);
-        Debug.Log(progress);
     }
 }
