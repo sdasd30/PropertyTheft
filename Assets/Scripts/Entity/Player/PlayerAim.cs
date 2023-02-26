@@ -12,9 +12,14 @@ public class PlayerAim : MonoBehaviour
 {
 	private PauseGame pauseGame;
 	public GameObject activeCam;
+	public bool open_world;
     private void Start()
     {
 		pauseGame = FindObjectOfType<PauseGame>();
+		if (!open_world)
+        {
+            activeCam = Camera.main.gameObject;
+        } 
 		//activeCam = Camera.main.gameObject;
 
 	}
@@ -23,6 +28,7 @@ public class PlayerAim : MonoBehaviour
 		if (pauseGame.isPaused) return;
 		Vector3 mousePos = Input.mousePosition;
 		Vector3 objectPos = activeCam.GetComponent<Camera>().WorldToScreenPoint(transform.position);
+
 
 		
 		mousePos.x = mousePos.x - objectPos.x;
