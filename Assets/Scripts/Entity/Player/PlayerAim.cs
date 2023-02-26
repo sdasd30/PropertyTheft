@@ -11,17 +11,20 @@ using UnityEngine;
 public class PlayerAim : MonoBehaviour
 {
 	private PauseGame pauseGame;
+	public GameObject activeCam;
     private void Start()
     {
 		pauseGame = FindObjectOfType<PauseGame>();
+		activeCam = Camera.main.gameObject;
 
 	}
     void Update()
 	{
 		if (pauseGame.isPaused) return;
 		Vector3 mousePos = Input.mousePosition;
+		Vector3 objectPos = activeCam.GetComponent<Camera>().WorldToScreenPoint(transform.position);
 
-		Vector3 objectPos = Camera.main.WorldToScreenPoint(transform.position);
+		
 		mousePos.x = mousePos.x - objectPos.x;
 		mousePos.y = mousePos.y - objectPos.y;
 

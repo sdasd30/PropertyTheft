@@ -502,6 +502,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1611503105632125317, guid: fbb7fdcd89dbf4d478fd7fdc969067c4, type: 3}
   m_PrefabInstance: {fileID: 72170175}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &72170177 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1611503105632125321, guid: fbb7fdcd89dbf4d478fd7fdc969067c4, type: 3}
+  m_PrefabInstance: {fileID: 72170175}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &164795347
 GameObject:
   m_ObjectHideFlags: 0
@@ -4409,7 +4414,7 @@ MonoBehaviour:
   FanRangeText: {fileID: 1618100007}
   MoveSpeedText: {fileID: 1205016088}
   MoveFallAvoidanceText: {fileID: 1449267192}
-  player_game_object: {fileID: 0}
+  player_game_object: {fileID: 72170177}
   MaterialOutline: {fileID: 1693456684}
   BehaviorOutline: {fileID: 1421619587}
   MaterialContainer: {fileID: 954963362}
