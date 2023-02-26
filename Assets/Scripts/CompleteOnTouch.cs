@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CompleteOnTouch : MonoBehaviour
 {
@@ -23,6 +24,12 @@ public class CompleteOnTouch : MonoBehaviour
     {
         if (collision.GetComponent<PlayerMove>())
         {
+            Scene scene = SceneManager.GetActiveScene();
+            Debug.Log($"{scene.name}_complete successful");
+            PlayerPrefs.SetInt(scene.name + "_complete", 1);
+            FindObjectOfType<KeepTime>().UpdateBestTime();
+            FindObjectOfType<SwapCounter>().MakeSaveRequest();
+
             if (!open_world)
             {
                 if (FindObjectOfType<SceneProperties>().bypassVictoryScreen)

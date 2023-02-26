@@ -23,7 +23,6 @@ public class FinalTimes : MonoBehaviour
         if (myTime <= bestTime)
         {
             FindObjectOfType<FinalTimeText>().NewRecordText();
-            timer.UpdateBestTime();
         }
     }
 }

@@ -205,6 +205,8 @@ public class PlayerSwapProperty : MonoBehaviour
                 saved_hit = hit;
                 
                 hitAIHolder.MarkForSwap(swap_AI);
+                if (SwapEvent != null)
+                    SwapEvent(this, SwapStatus.StartSwap, hitObject);
             }
             else
             {
@@ -220,11 +222,15 @@ public class PlayerSwapProperty : MonoBehaviour
 
                     hitAIHolder.Set_Type(AIHolder_type, direction1, true, fan_range1, saved_speed);
                     AIHolder.Set_Type(AI_Holder_type_other, direction2, true, fan_range2, hitAIHolder.fan_speed);
+                    if (SwapEvent != null)
+                        SwapEvent(this, SwapStatus.EndSwap, hitObject);
                 }
                 else
                 {
                     hitAIHolder.Set_Type(AIHolder_type, direction1, false, fan_range1, saved_speed);
                     AIHolder.Set_Type(AI_Holder_type_other, direction2, false, fan_range2, hitAIHolder.fan_speed);
+                    if (SwapEvent != null)
+                        SwapEvent(this, SwapStatus.CancelSwap, hitObject);
                 }
 
                 swapObject = null;
@@ -232,34 +238,4 @@ public class PlayerSwapProperty : MonoBehaviour
             }
         }
     }
-
-    //private int calc_dir(int hit)
-    //{
-    //    //Vector3 ray_contact = hit.point;
-    //    //BoxCollider2D b_collider = hit.transform.gameObject.GetComponent<BoxCollider2D>();
-    //    //Vector3 dims = b_collider.bounds.size;
-    //    //float DistanceX = (dims.x) / 2;
-    //    //float DistanceY = (dims.y) / 2;
-    //    //int direction = 0;
-
-    //    //Debug.Log(hit.point.y);
-    //    //Debug.Log(hit.transform.gameObject.transform.position.y + DistanceY - 0.1f);
-    //    //if ((hit.point.x >= hit.transform.gameObject.transform.position.x + DistanceX - 0.1f) && (hit.point.y >= hit.transform.gameObject.transform.position.y - DistanceY - 0.1f) && (hit.point.y <= hit.transform.gameObject.transform.position.y + DistanceY - 0.1f))
-    //    //{
-    //    //    direction = 1;
-    //    //}
-    //    //else if (hit.point.x <= hit.transform.gameObject.transform.position.x + DistanceX - 0.1f)
-    //    //{
-    //    //    direction = 3;
-    //    //}
-    //    //else if (hit.point.y >= hit.transform.gameObject.transform.position.y + DistanceY - 0.1f)
-    //    //{
-    //    //    direction = 4;
-    //    //}
-    //    //else if (hit.point.y <= hit.transform.gameObject.transform.position.y - DistanceY - 0.1f)
-    //    //{
-    //    //    direction = 2;
-    //    //}
-    //    //return direction;
-    //}
 }

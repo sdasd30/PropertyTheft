@@ -26,9 +26,25 @@ public class SwapCounter : MonoBehaviour
 
     private void UpdateCounter(PlayerSwapProperty psp, SwapStatus sws, GameObject hit)
     {
+        Debug.Log("Swap event");
         if (sws == SwapStatus.EndSwap)
         {
+            Debug.Log("Increment Counter");
             swapCount += 1;
+        }
+    }
+
+    public void MakeSaveRequest()
+    {
+        string scene = $"w{sceneProperties.worldNum}_s{sceneProperties.stageNum}";
+        if (swapCount <= parSwaps)
+        {
+            PlayerPrefs.SetInt($"{scene}_swaps", 1);
+            Debug.Log($"{scene}_swaps successful");
+        }
+        else
+        {
+            Debug.Log($"{scene}_swaps rejected; poor swap score");
         }
     }
 }

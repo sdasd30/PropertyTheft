@@ -15,7 +15,6 @@ public class GameSceneManager : MonoBehaviour
     public void LoadNextScene(int world = -1, int stage = -1)
     {
         Time.timeScale = 1.0f;
-        Scene scene = SceneManager.GetActiveScene();
         if (world == -1)
         {
             SceneProperties sp = GetComponent<SceneProperties>();
