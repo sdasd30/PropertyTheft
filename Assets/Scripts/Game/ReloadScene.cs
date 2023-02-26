@@ -15,7 +15,10 @@ public class ReloadScene : MonoBehaviour
     public GameObject CameraContainer;
     public GameObject player_cam;
     public bool reloaded;
-
+    public GameObject cur_cam;
+    private float original_zoom;
+    private float target_zoom;
+    private bool setting_cam;
     void Start()
     {
         level = -1;
@@ -90,6 +93,7 @@ public class ReloadScene : MonoBehaviour
         if (level == -1)
         {
             player_cam.SetActive(true);
+            
             WeaponHandler.GetComponent<PlayerAim>().activeCam = player_cam;
             
         }
