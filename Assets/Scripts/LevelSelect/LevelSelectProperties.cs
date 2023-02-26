@@ -5,7 +5,7 @@ using UnityEngine;
 public class LevelSelectProperties : MonoBehaviour
 {
     public bool alwaysOpen = false;
-    public bool selectable = false;
+    [HideInInspector] public bool selectable = false;
     public string stageName = "unnamed stage";
     public int loadWorld = -1;
     public int loadStage = -1;

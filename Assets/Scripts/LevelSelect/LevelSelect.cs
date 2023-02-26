@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class LevelSelect : MonoBehaviour
 {
     LevelSelectProperties levelProperties;
+    GameObject textDisplay;
     public bool active = true;
     bool hasPlayer;
     private void OnTriggerEnter2D(Collider2D collision)
@@ -24,6 +25,8 @@ public class LevelSelect : MonoBehaviour
 
     private void Start()
     {
+        textDisplay = transform.GetChild(0).gameObject;
+        //textDisplay.SetActive(true);
         levelProperties = GetComponent<LevelSelectProperties>();
         active = true;
         GetComponent<SpriteRenderer>().color = Color.red;
@@ -46,6 +49,7 @@ public class LevelSelect : MonoBehaviour
 
     private void Update()
     {
+        textDisplay.SetActive(hasPlayer);
         if (!active)
         {
             return;
@@ -53,7 +57,7 @@ public class LevelSelect : MonoBehaviour
         if (hasPlayer)
         {
             Debug.Log("Has Player");    
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
 
                 int world = levelProperties.loadWorld;
