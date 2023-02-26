@@ -29,6 +29,7 @@ public class CompleteOnTouch : MonoBehaviour
             PlayerPrefs.SetInt(scene.name + "_complete", 1);
             FindObjectOfType<KeepTime>().UpdateBestTime();
             FindObjectOfType<SwapCounter>().MakeSaveRequest();
+
             if (!open_world)
             {
                 if (FindObjectOfType<SceneProperties>().bypassVictoryScreen)

@@ -9,6 +9,8 @@ public class LevelSelectProperties : MonoBehaviour
     public string stageName = "unnamed stage";
     public int loadWorld = -1;
     public int loadStage = -1;
+    public string overrideWorld = "none";
+    public string overrideStage = "none";
     public int progress = 000;
 
     void Awake()

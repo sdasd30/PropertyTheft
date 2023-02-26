@@ -3469,7 +3469,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7580539333950536, guid: 7f74bae1351a0aa4cafff995e15b9496, type: 3}
       propertyPath: stageNum
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7580539333950536, guid: 7f74bae1351a0aa4cafff995e15b9496, type: 3}
       propertyPath: worldNum
@@ -5219,11 +5219,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9075408907781053476, guid: 79c18c02a28851f4b899167d25ce4fa1, type: 3}
       propertyPath: OverrideStage
-      value: 3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 9075408907781053476, guid: 79c18c02a28851f4b899167d25ce4fa1, type: 3}
       propertyPath: OverrideWorld
-      value: 1
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79c18c02a28851f4b899167d25ce4fa1, type: 3}
