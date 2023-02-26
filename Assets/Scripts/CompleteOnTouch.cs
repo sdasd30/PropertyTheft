@@ -34,7 +34,7 @@ public class CompleteOnTouch : MonoBehaviour
             }
             else
             {
-                Debug.Log("here");
+               
                 Scene.GetComponent<ReloadScene>().checkpoint_pos = transform.position; //Sets the checkpoint position to the flags position
                 if (level_start) //if the flag is at the start of the level, set the variables inside the scene to change the camera accordingly.
                 {
@@ -42,7 +42,7 @@ public class CompleteOnTouch : MonoBehaviour
                     Scene.GetComponent<ReloadScene>().SetCamera();
                 } else
                 {
-                    Debug.Log("here2");
+                   
                     Scene.GetComponent<ReloadScene>().level = -1; //The camera be the general camera following the player instead.
                     Scene.GetComponent<ReloadScene>().SetCamera();
                 }

@@ -2,10 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class ReloadScene : MonoBehaviour
 {
     // Start is called before the first frame update
+
+
+
+
+    private bool to_reset;
     public bool open_world;
     public GameObject checkpoints;
     public Vector3 checkpoint_pos;
@@ -20,12 +26,15 @@ public class ReloadScene : MonoBehaviour
     private float target_zoom;
     private bool setting_cam;
     void Start()
-    {
+    {   
+        
         level = -1;
+        to_reset = false;
         //checkpoint_pos = player_game_object.transform.position;
         //player_game_object.transform.position = checkpoint_pos;
         if (PlayerPrefs.HasKey("saved_x"))
         {
+            Debug.Log("Here2");
             player_game_object.transform.position = new Vector3(PlayerPrefs.GetFloat("saved_x"), PlayerPrefs.GetFloat("saved_y"));
             level = PlayerPrefs.GetInt("Cam");
             SetCamera();
@@ -43,8 +52,13 @@ public class ReloadScene : MonoBehaviour
             SceneReload();
             
         }
+        if (Input.GetAxisRaw("Reset") > .5f)
+        {
+            
+            to_reset = true;
 
-
+        }
+        
     }
 
     
@@ -56,16 +70,20 @@ public class ReloadScene : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name); // loads current scene
         } else
         {
-            Debug.Log("here3");
-            Debug.Log(checkpoint_pos.x);
-            Debug.Log(checkpoint_pos.y);
-            //DontDestroyOnLoad(player_game_object);
+            
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             //player_game_object.transform.position = checkpoint_pos; //Sets the player's position to the checkpoints position.
-            //SetCamera();
-            PlayerPrefs.SetFloat("saved_x", checkpoint_pos.x);
-            PlayerPrefs.SetFloat("saved_y", checkpoint_pos.y);
-            PlayerPrefs.SetInt("Cam", level);
+           if (!to_reset)
+            {
+                PlayerPrefs.SetFloat("saved_x", checkpoint_pos.x);
+                PlayerPrefs.SetFloat("saved_y", checkpoint_pos.y);
+                PlayerPrefs.SetInt("Cam", level);
+            } else
+            {
+                PlayerPrefs.DeleteAll();
+            }
+
+            
 
         }
         
@@ -79,23 +97,25 @@ public class ReloadScene : MonoBehaviour
         {
             if (index == level)
             {
-                camera.gameObject.SetActive(true);
-                WeaponHandler.GetComponent<PlayerAim>().activeCam = camera.gameObject;
+                //camera.gameObject.SetActive(true);
 
-
+                //WeaponHandler.GetComponent<PlayerAim>().activeCam = camera.gameObject;
+                camera.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 1;
             } else
             {
-                camera.gameObject.SetActive(false);
+                //camera.gameObject.SetActive(false);
+                camera.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 0;
             }
             index += 1;
         }
-        player_cam.SetActive(false);
+        player_cam.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 0;
         if (level == -1)
         {
-            player_cam.SetActive(true);
-            
-            WeaponHandler.GetComponent<PlayerAim>().activeCam = player_cam;
-            
+            //player_cam.SetActive(true);
+
+            //WeaponHandler.GetComponent<PlayerAim>().activeCam = player_cam;
+            player_cam.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 1;
+
         }
         
 

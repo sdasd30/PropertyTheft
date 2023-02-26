@@ -15,7 +15,7 @@ public class PlayerAim : MonoBehaviour
     private void Start()
     {
 		pauseGame = FindObjectOfType<PauseGame>();
-		activeCam = Camera.main.gameObject;
+		//activeCam = Camera.main.gameObject;
 
 	}
     void Update()
