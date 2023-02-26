@@ -32,6 +32,17 @@ public class KeepTime : MonoBehaviour
     public void UpdateBestTime()
     {
         string scenename = SceneManager.GetActiveScene().name;
-        PlayerPrefs.SetFloat(scenename, elapsedTime);
+        if (elapsedTime <= GetBestTime())
+        {
+            
+            PlayerPrefs.SetFloat(scenename, elapsedTime);
+            scenename = scenename + "_time";
+            PlayerPrefs.SetInt(scenename, 1);
+            Debug.Log($"Stage {scenename} on time");
+        }
+        else
+        {
+            Debug.Log($"Stage {scenename} not on time");
+        }
     }
 }

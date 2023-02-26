@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4771489137912707198}
   - component: {fileID: 2159032443271027767}
   - component: {fileID: 3912164877680356577}
+  - component: {fileID: 8975792620063270848}
   m_Layer: 0
   m_Name: Scene Properties
   m_TagString: Untagged
@@ -129,6 +130,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81d9fbf822cb22247a9dcca9db5e4560, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  open_world: 0
+  checkpoints: {fileID: 0}
+  checkpoint_pos: {x: 0, y: 0, z: 0}
+  level: 0
+  player_game_object: {fileID: 0}
+  WeaponHandler: {fileID: 0}
+  CameraContainer: {fileID: 0}
+  player_cam: {fileID: 0}
+  reloaded: 0
 --- !u!114 &-7580539333950536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,6 +155,7 @@ MonoBehaviour:
   worldNum: -1
   stageNum: -1
   worldClimax: 0
+  bypassVictoryScreen: 0
 --- !u!114 &2389425287095253077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,5 +204,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3def95332882e754fb87c92df718ff31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elapsedTime: 0
+--- !u!114 &8975792620063270848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3477705470387882603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbc35e8986a057642a0c23085ca9e6f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
