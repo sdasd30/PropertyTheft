@@ -33,7 +33,7 @@ public class Weight : MonoBehaviour
     void Update()
     {
         //Recalculate combined weight of object
-        RaycastHit2D stacked = Physics2D.BoxCast(
+        RaycastHit2D[] stacked = Physics2D.BoxCastAll(
             mCollider.bounds.center,
             mCollider.bounds.size,
             0f,
@@ -42,19 +42,24 @@ public class Weight : MonoBehaviour
             detectLayers);
         
         combinedWeight = myWeight;
-        if (!stacked)
+        if (stacked.Length == 0)
         {
             if (DEBUG_LOG)
                 Debug.Log(combinedWeight);
             return;
         }
-        GameObject stackObject = stacked.transform.gameObject;
-        Weight stackWeight = stackObject.GetComponent<Weight>();
-        if (stackWeight)
+        //GameObject stackObject = stacked.transform.gameObject;
+        //Weight stackWeight = stackObject.GetComponent<Weight>();
+        foreach(RaycastHit2D hitobj in stacked)
         {
-            combinedWeight += stackWeight.ObjectWeight;
-            if (DEBUG_LOG)
-                Debug.Log(combinedWeight);
+            GameObject stackObject = hitobj.transform.gameObject;
+            Weight stackWeight = stackObject.GetComponent<Weight>();
+            if (stackWeight)
+            {                
+                combinedWeight += stackWeight.ObjectWeight;
+                if (DEBUG_LOG)
+                    Debug.Log(combinedWeight);
+            }
         }
         if (combinedWeight > destructionThreshold)
         {
