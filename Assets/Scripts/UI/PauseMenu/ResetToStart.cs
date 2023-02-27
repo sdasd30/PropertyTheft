@@ -8,6 +8,6 @@ public class ResetToStart : MonoBehaviour
     public void LetsGo()
     {
         Time.timeScale = 1.0f;
-        SceneManager.LoadScene("w0_s1", LoadSceneMode.Single);
+        SceneManager.LoadScene("LevelSelect", LoadSceneMode.Single);
     }
 }

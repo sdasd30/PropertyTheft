@@ -13,7 +13,7 @@ public class ShortName : MonoBehaviour
     {
         lsp = GetComponentInParent<LevelSelectProperties>();
         world = lsp.loadWorld;
-        stage = lsp.loadStage - 1;
+        stage = lsp.loadStage;
         GetComponent<TextMeshPro>().text = $"{world}{stage}";
     }
 
