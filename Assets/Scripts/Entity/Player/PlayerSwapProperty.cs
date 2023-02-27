@@ -71,10 +71,15 @@ public class PlayerSwapProperty : MonoBehaviour
   
                     Vector3 hitpoint;
 
-                    if (hit.collider.transform.gameObject.GetComponent<Cutscene_AI>())
+                    if (hit.collider != null)
                     {
-                        GameObject player_game_object = transform.parent.gameObject;
+                        if (hit.collider.transform.gameObject.GetComponent<Cutscene_AI>())
+                        {
+                            Debug.Log("HERES");
+                            Scene.GetComponent<ReloadScene>().Cutscene_Swap();
+                        }
                     }
+ 
 
                     if (hit.collider != null)
                     {

@@ -21,8 +21,14 @@ public class ReloadScene : MonoBehaviour
     public GameObject WeaponHandler;
     public GameObject CameraContainer;
     public GameObject player_cam;
+    public GameObject level_select_cam;
     public bool reloaded;
     public GameObject cur_cam;
+    public bool is_zoomed_out;
+    private int saved_level;
+    private float cur_time;
+    public bool is_ready;
+
     private float original_zoom;
     private float target_zoom;
     private bool setting_cam;
@@ -31,7 +37,9 @@ public class ReloadScene : MonoBehaviour
 
     void Start()
     {
-
+        is_ready = false;
+        cur_time = Time.time;
+        is_zoomed_out = false;
         Cutscene_Blue.SetActive(false);
         Cutscene_Red.SetActive(false);
         level = -1;
@@ -40,13 +48,14 @@ public class ReloadScene : MonoBehaviour
         //player_game_object.transform.position = checkpoint_pos;
         if (PlayerPrefs.HasKey("saved_x"))
         {
-            Debug.Log("Here2");
-            player_game_object.transform.position = new Vector3(PlayerPrefs.GetFloat("saved_x"), PlayerPrefs.GetFloat("saved_y"));
+            //Debug.Log("Here2");
             level = PlayerPrefs.GetInt("Cam");
             SetCamera();
+
+            player_game_object.transform.position = new Vector3(PlayerPrefs.GetFloat("saved_x"), PlayerPrefs.GetFloat("saved_y"));
+            is_ready = true;
         }
 
-        
         reloaded = false;
     }
 
@@ -64,7 +73,28 @@ public class ReloadScene : MonoBehaviour
             to_reset = true;
 
         }
-        
+
+        if (Input.GetAxisRaw("zoomout") > .5f && Time.time > cur_time + 2f)
+        {
+            cur_time = Time.time;
+            if (!is_zoomed_out)
+            {
+                saved_level = level;
+                level = -2;
+                SetCamera();
+                is_zoomed_out = true;
+
+            } else
+            {
+                level = saved_level;
+                SetCamera();
+                is_zoomed_out = false;
+
+            }
+            
+        }
+
+
     }
 
     
@@ -103,9 +133,7 @@ public class ReloadScene : MonoBehaviour
         {
             if (index == level)
             {
-                //camera.gameObject.SetActive(true);
 
-                //WeaponHandler.GetComponent<PlayerAim>().activeCam = camera.gameObject;
                 camera.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 1;
             } else
             {
@@ -115,6 +143,7 @@ public class ReloadScene : MonoBehaviour
             index += 1;
         }
         player_cam.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 0;
+        level_select_cam.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 0;
         if (level == -1)
         {
             //player_cam.SetActive(true);
@@ -123,6 +152,10 @@ public class ReloadScene : MonoBehaviour
             player_cam.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 1;
 
         }
+        if (level == -2)
+        {
+            level_select_cam.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 1;
+        }
         
 
     }
@@ -130,12 +163,13 @@ public class ReloadScene : MonoBehaviour
     {
         player_game_object.SetActive(false);
         BlueAI.SetActive(false);
-        Cutscene_Red.SetActive(true);
-        Cutscene_Blue.SetActive(true);
+        //Cutscene_Red.SetActive(true);
+        //Cutscene_Blue.SetActive(true);
     }
     public void Cutscene_Swap()
     {
-
+        Cutscene_Red.SetActive(false);
+        Cutscene_Blue.SetActive(false);
     }
 
     
