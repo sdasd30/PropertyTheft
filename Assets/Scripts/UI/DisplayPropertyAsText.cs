@@ -56,13 +56,11 @@ public class DisplayPropertyAsText : MonoBehaviour
     private void OnMouseOver()
     {
         hover = true;
-        Debug.Log("Mouse ON!");
     }
 
     private void OnMouseExit()
     {
         hover = false;
-        Debug.Log("Mouse OFF!");
     }
 
     private void ForceDisplay(PlayerSwapProperty psp, SwapStatus sws, GameObject hit)
