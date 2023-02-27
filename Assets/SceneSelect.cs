@@ -59,8 +59,10 @@ public class SceneSelect : MonoBehaviour
                 y = 20.52f;
             } else if (index == 3)
             {
-                x = 26.62f;
-                y = 16.54f;
+                //x = 26.62f;
+                //y = 16.54f;
+                x = 28.62f;
+                y = 17.54f;
             }
             else if (index == 4)
             {
@@ -90,7 +92,8 @@ public class SceneSelect : MonoBehaviour
             PlayerPrefs.SetFloat("saved_x", x);
             PlayerPrefs.SetFloat("saved_y", y);
             PlayerPrefs.SetInt("Cam", -2);
-            Scene.GetComponent<ReloadScene>().SetCamera();
+            //Scene.GetComponent<ReloadScene>().level = index;
+            //Scene.GetComponent<ReloadScene>().SetCamera();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
