@@ -17,6 +17,7 @@ public class ReloadScene : MonoBehaviour
     public Vector3 checkpoint_pos;
     public int level;
     public GameObject player_game_object;
+    public GameObject BlueAI;
     public GameObject WeaponHandler;
     public GameObject CameraContainer;
     public GameObject player_cam;
@@ -25,9 +26,14 @@ public class ReloadScene : MonoBehaviour
     private float original_zoom;
     private float target_zoom;
     private bool setting_cam;
+    public GameObject Cutscene_Red;
+    public GameObject Cutscene_Blue;
+
     void Start()
-    {   
-        
+    {
+
+        Cutscene_Blue.SetActive(false);
+        Cutscene_Red.SetActive(false);
         level = -1;
         to_reset = false;
         //checkpoint_pos = player_game_object.transform.position;
@@ -90,7 +96,7 @@ public class ReloadScene : MonoBehaviour
     }
 
 
-        public void SetCamera()
+    public void SetCamera()
     {
         int index = 0;
         foreach(Transform camera in CameraContainer.transform)
@@ -119,6 +125,13 @@ public class ReloadScene : MonoBehaviour
         }
         
 
+    }
+    public void HidePlayer()
+    {
+        player_game_object.SetActive(false);
+        BlueAI.SetActive(false);
+        Cutscene_Red.SetActive(true);
+        Cutscene_Blue.SetActive(true);
     }
 
     

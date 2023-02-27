@@ -43,6 +43,19 @@ public class Basic_AI : MonoBehaviour
 
         //is_colliding_with_level = false;
         //fan_range = 5;
+        if (other_player)
+        {
+            if (PlayerPrefs.HasKey("OtherPlayer"))
+            {
+                if (PlayerPrefs.GetInt("OtherPlayer") == 1)
+                {
+                    transform.gameObject.SetActive(true);
+                }
+            } else
+            {
+                transform.gameObject.SetActive(false);
+            }
+        }
         AI_1_fan_dir_hit = 0;
         ray = new Ray(transform.position, transform.forward);
         rb = GetComponent<Rigidbody2D>();
