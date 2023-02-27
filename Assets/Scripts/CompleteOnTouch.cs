@@ -26,7 +26,7 @@ public class CompleteOnTouch : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("HERES");
+        
             cur_time = Time.time;
             if (collision.GetComponent<PlayerMove>() || collision.GetComponent<PlayerAIAnimation>())
             {

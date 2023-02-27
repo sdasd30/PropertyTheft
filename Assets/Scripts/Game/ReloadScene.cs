@@ -50,7 +50,9 @@ public class ReloadScene : MonoBehaviour
         {
             //Debug.Log("Here2");
             level = PlayerPrefs.GetInt("Cam");
+            Debug.Log("StartSetCamera");
             SetCamera();
+            Debug.Log("StartSetCameraFinished");
 
             player_game_object.transform.position = new Vector3(PlayerPrefs.GetFloat("saved_x"), PlayerPrefs.GetFloat("saved_y"));
             is_ready = true;
@@ -129,11 +131,23 @@ public class ReloadScene : MonoBehaviour
     public void SetCamera()
     {
         int index = 0;
-        foreach(Transform camera in CameraContainer.transform)
+        player_cam.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 0;
+        level_select_cam.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 0;
+        if (level == -1)
+        {
+            player_cam.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 1;
+
+        }
+        if (level == -2)
+        {
+            level_select_cam.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 1;
+        }
+        foreach (Transform camera in CameraContainer.transform)
         {
             if (index == level)
             {
 
+                Debug.Log("set camera");
                 camera.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 1;
             } else
             {
@@ -142,20 +156,7 @@ public class ReloadScene : MonoBehaviour
             }
             index += 1;
         }
-        player_cam.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 0;
-        level_select_cam.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 0;
-        if (level == -1)
-        {
-            //player_cam.SetActive(true);
 
-            //WeaponHandler.GetComponent<PlayerAim>().activeCam = player_cam;
-            player_cam.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 1;
-
-        }
-        if (level == -2)
-        {
-            level_select_cam.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 1;
-        }
         
 
     }
