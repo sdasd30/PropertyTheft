@@ -24,6 +24,7 @@ public class PlayerSwapProperty : MonoBehaviour
     private GameObject gunObject;
     private SpriteRenderer gunSprite;
     public GameObject swapObject;
+    public GameObject Scene;
     [SerializeField] private TrailRenderer BulletTrail;
     [SerializeField] private Sprite inactiveGunSpr;
     [SerializeField] private Sprite activeGunSpr;
@@ -69,6 +70,12 @@ public class PlayerSwapProperty : MonoBehaviour
                     hit = Physics2D.Raycast(transform.position, direction, Mathf.Infinity, layer);
   
                     Vector3 hitpoint;
+
+                    if (hit.collider.transform.gameObject.GetComponent<Cutscene_AI>())
+                    {
+                        GameObject player_game_object = transform.parent.gameObject;
+                    }
+
                     if (hit.collider != null)
                     {
                         Debug.DrawLine(transform.position, hit.point, Color.red, 2.0f, false);

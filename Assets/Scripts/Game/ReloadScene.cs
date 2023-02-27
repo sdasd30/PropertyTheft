@@ -133,6 +133,10 @@ public class ReloadScene : MonoBehaviour
         Cutscene_Red.SetActive(true);
         Cutscene_Blue.SetActive(true);
     }
+    public void Cutscene_Swap()
+    {
+
+    }
 
     
 }
