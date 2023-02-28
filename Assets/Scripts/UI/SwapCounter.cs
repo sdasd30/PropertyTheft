@@ -26,7 +26,7 @@ public class SwapCounter : MonoBehaviour
 
     private void UpdateCounter(PlayerSwapProperty psp, SwapStatus sws, GameObject hit)
     {
-        Debug.Log("Swap event");
+        //Debug.Log("Swap event");
         if (sws == SwapStatus.EndSwap)
         {
             Debug.Log("Increment Counter");
@@ -40,11 +40,11 @@ public class SwapCounter : MonoBehaviour
         if (swapCount <= parSwaps)
         {
             PlayerPrefs.SetInt($"{scene}_swaps", 1);
-            Debug.Log($"{scene}_swaps successful");
+            //Debug.Log($"{scene}_swaps successful");
         }
         else
         {
-            Debug.Log($"{scene}_swaps rejected; poor swap score");
+            //Debug.Log($"{scene}_swaps rejected; poor swap score");
         }
     }
 }

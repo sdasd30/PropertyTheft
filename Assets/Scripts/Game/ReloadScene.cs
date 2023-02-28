@@ -54,6 +54,8 @@ public class ReloadScene : MonoBehaviour
             SetCamera();
             Debug.Log("StartSetCameraFinished");
 
+            //level = 6;
+            //SetCamera();
             player_game_object.transform.position = new Vector3(PlayerPrefs.GetFloat("saved_x"), PlayerPrefs.GetFloat("saved_y"));
             is_ready = true;
         }
@@ -76,7 +78,7 @@ public class ReloadScene : MonoBehaviour
 
         }
 
-        if (Input.GetAxisRaw("zoomout") > .5f && Time.time > cur_time + 2f)
+        if (Input.GetAxisRaw("zoomout") > .2f && Time.time > cur_time + 2f)
         {
             cur_time = Time.time;
             if (!is_zoomed_out)
@@ -130,32 +132,63 @@ public class ReloadScene : MonoBehaviour
 
     public void SetCamera()
     {
+        Debug.Log(level);
         int index = 0;
-        player_cam.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 0;
-        level_select_cam.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 0;
         if (level == -1)
         {
             player_cam.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 1;
-
-        }
-        if (level == -2)
-        {
-            level_select_cam.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 1;
-        }
-        foreach (Transform camera in CameraContainer.transform)
-        {
-            if (index == level)
+            foreach (Transform camera in CameraContainer.transform)
             {
 
-                Debug.Log("set camera");
-                camera.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 1;
-            } else
-            {
-                //camera.gameObject.SetActive(false);
                 camera.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 0;
+
             }
-            index += 1;
+            level_select_cam.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 0;
         }
+        else if (level == -2)
+        {
+
+            level_select_cam.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 1;
+            foreach (Transform camera in CameraContainer.transform)
+            {
+
+                camera.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 0;
+
+            }
+            player_cam.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 0;
+
+        } else
+        {
+            foreach (Transform camera in CameraContainer.transform)
+            {
+                if (index == level)
+                {
+
+                    Debug.Log("set camera");
+                    //Transform the_camera = camera;
+                    camera.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 1;
+                }
+                else
+                {
+                    //camera.gameObject.SetActive(false);
+                    camera.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 0;
+                }
+                index += 1;
+            }
+
+            index = 0;
+            foreach (Transform camera in CameraContainer.transform)
+            {
+                if (index != level)
+                {
+
+                    camera.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 0;
+                }
+            }
+            level_select_cam.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 0;
+            player_cam.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 0;
+        }
+
 
         
 
