@@ -38,7 +38,10 @@ public class ReloadScene : MonoBehaviour
 
     void Start()
     {
-        player_game_object.transform.position = new Vector3(0, 0, 0);
+        if (open_world)
+        {
+            player_game_object.transform.position = new Vector3(0, 0, 0);
+        }
         is_ready = false;
         cur_time = Time.time;
         is_zoomed_out = false;
