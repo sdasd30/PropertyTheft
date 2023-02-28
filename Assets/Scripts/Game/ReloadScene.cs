@@ -27,6 +27,7 @@ public class ReloadScene : MonoBehaviour
     public bool is_zoomed_out;
     private int saved_level;
     private float cur_time;
+    private float start_time;
     public bool is_ready;
 
     private float original_zoom;
@@ -37,6 +38,7 @@ public class ReloadScene : MonoBehaviour
 
     void Start()
     {
+        player_game_object.transform.position = new Vector3(0, 0, 0);
         is_ready = false;
         cur_time = Time.time;
         is_zoomed_out = false;
@@ -53,9 +55,16 @@ public class ReloadScene : MonoBehaviour
             Debug.Log("StartSetCamera");
             SetCamera();
             Debug.Log("StartSetCameraFinished");
-
-            player_game_object.transform.position = new Vector3(PlayerPrefs.GetFloat("saved_x"), PlayerPrefs.GetFloat("saved_y"));
+            StartCoroutine(Wait());
+            //level = 6;
+            //SetCamera();
+            //player_game_object.transform.position = new Vector3(PlayerPrefs.GetFloat("saved_x"), PlayerPrefs.GetFloat("saved_y"));
             is_ready = true;
+        } else
+        {
+            player_game_object.transform.position = new Vector3(18.7f,
+           54.44f, 0f);
+            SetCamera();
         }
 
         reloaded = false;
@@ -76,7 +85,7 @@ public class ReloadScene : MonoBehaviour
 
         }
 
-        if (Input.GetAxisRaw("zoomout") > .5f && Time.time > cur_time + 2f)
+        if (Input.GetAxisRaw("zoomout") > .1f && Time.time > cur_time + 2f)
         {
             cur_time = Time.time;
             if (!is_zoomed_out)
@@ -98,8 +107,18 @@ public class ReloadScene : MonoBehaviour
 
 
     }
+    IEnumerator Wait()
+    {
+        //Print the time of when the function is first called.
 
-    
+        //yield on a new YieldInstruction that waits for 5 seconds.
+        yield return new WaitForSeconds(.01f);
+        
+        player_game_object.transform.position = new Vector3(PlayerPrefs.GetFloat("saved_x"), PlayerPrefs.GetFloat("saved_y"));
+
+        //After we have waited 5 seconds print the time again.
+    }
+
     public void SceneReload()
     {
         FindObjectOfType<PauseGame>().ResumeGame();
@@ -130,6 +149,8 @@ public class ReloadScene : MonoBehaviour
 
     public void SetCamera()
     {
+        Debug.Log("level");
+        Debug.Log(level);
         int index = 0;
         player_cam.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 0;
         level_select_cam.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 0;
@@ -147,7 +168,7 @@ public class ReloadScene : MonoBehaviour
             if (index == level)
             {
 
-                Debug.Log("set camera");
+               
                 camera.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 1;
             } else
             {
