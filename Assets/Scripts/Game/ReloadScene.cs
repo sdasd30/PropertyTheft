@@ -60,6 +60,11 @@ public class ReloadScene : MonoBehaviour
             //SetCamera();
             //player_game_object.transform.position = new Vector3(PlayerPrefs.GetFloat("saved_x"), PlayerPrefs.GetFloat("saved_y"));
             is_ready = true;
+        } else
+        {
+            player_game_object.transform.position = new Vector3(18.7f,
+           54.44f, 0f);
+            SetCamera();
         }
 
         reloaded = false;
