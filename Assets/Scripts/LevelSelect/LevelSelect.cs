@@ -60,7 +60,7 @@ public class LevelSelect : MonoBehaviour
                 int world = levelProperties.loadWorld;
                 int stage = levelProperties.loadStage;
                 string sceneName = $"w{world}_s{stage}";
-
+                if (levelProperties.loadOverride != "none") sceneName = levelProperties.loadOverride;
                 SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
             }
         }

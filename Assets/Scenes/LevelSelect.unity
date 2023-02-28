@@ -202,6 +202,80 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
   m_PrefabInstance: {fileID: 23293894}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &157571007
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1951702580}
+    m_Modifications:
+    - target: {fileID: 3949727661603122934, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_Name
+      value: w1s10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122936, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: loadStage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122936, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: loadWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122936, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: stageName
+      value: Steel Stairs
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13.805191
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.9670665
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.035702113
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+--- !u!4 &157571008 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+  m_PrefabInstance: {fileID: 157571007}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &336917241
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -558,6 +632,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: w2s7
       objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122934, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3949727661603122936, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
       propertyPath: loadStage
       value: 7
@@ -756,7 +834,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 666836878}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.8051906, y: 5, z: -0.035702113}
+  m_LocalPosition: {x: -2.805191, y: 5, z: -0.035702113}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1016,6 +1094,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: w2s4
       objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122934, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3949727661603122936, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
       propertyPath: loadStage
       value: 4
@@ -1026,7 +1108,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3949727661603122936, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
       propertyPath: stageName
-      value: Heavyweight
+      value: Balanced
       objectReference: {fileID: 0}
     - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
       propertyPath: m_RootOrder
@@ -1128,6 +1210,10 @@ PrefabInstance:
     - target: {fileID: 3949727661603122934, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
       propertyPath: m_Name
       value: w2s2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122934, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3949727661603122936, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
       propertyPath: loadStage
@@ -1356,6 +1442,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: w2s6
       objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122934, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3949727661603122936, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
       propertyPath: loadStage
       value: 6
@@ -1366,7 +1456,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3949727661603122936, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
       propertyPath: stageName
-      value: Blade of Grass
+      value: sus
       objectReference: {fileID: 0}
     - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
       propertyPath: m_RootOrder
@@ -1929,6 +2019,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: w2s3
       objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122934, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3949727661603122936, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
       propertyPath: loadStage
       value: 3
@@ -1939,7 +2033,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3949727661603122936, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
       propertyPath: stageName
-      value: Osmium Pillar
+      value: Walking Blocks
       objectReference: {fileID: 0}
     - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
       propertyPath: m_RootOrder
@@ -2003,6 +2097,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: w2s5
       objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122934, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3949727661603122936, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
       propertyPath: loadStage
       value: 5
@@ -2013,7 +2111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3949727661603122936, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
       propertyPath: stageName
-      value: Pushing W
+      value: Elevation
       objectReference: {fileID: 0}
     - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
       propertyPath: m_RootOrder
@@ -2152,16 +2250,32 @@ PrefabInstance:
       value: w2s1
       objectReference: {fileID: 0}
     - target: {fileID: 3949727661603122936, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: loadStage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122936, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
       propertyPath: loadWorld
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3949727661603122936, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
       propertyPath: stageName
-      value: Madman Ramblings
+      value: Brave New Gun
       objectReference: {fileID: 0}
     - target: {fileID: 3949727661603122936, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
       propertyPath: alwaysOpen
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122936, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: loadOverride
+      value: none
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122936, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: overrideStage
+      value: none
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122936, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: overrideWorld
+      value: none
       objectReference: {fileID: 0}
     - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
       propertyPath: m_RootOrder
@@ -2169,11 +2283,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.1948094
+      value: -4.194809
       objectReference: {fileID: 0}
     - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.9670665
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2472,6 +2586,8 @@ Transform:
   - {fileID: 1305827220}
   - {fileID: 1384847642}
   - {fileID: 1843030652}
+  - {fileID: 2086944152}
+  - {fileID: 157571008}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2804,6 +2920,80 @@ SpriteRenderer:
 Transform:
   m_CorrespondingSourceObject: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
   m_PrefabInstance: {fileID: 1991072832}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2086944151
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1951702580}
+    m_Modifications:
+    - target: {fileID: 3949727661603122934, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_Name
+      value: w1s9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122936, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: loadStage
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122936, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: loadWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122936, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: stageName
+      value: Steel Stairs
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.805191
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.9670665
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.035702113
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+--- !u!4 &2086944152 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3949727661603122939, guid: 519522fc28c0fa44c89f77345cfe3517, type: 3}
+  m_PrefabInstance: {fileID: 2086944151}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2137263217
 PrefabInstance:
