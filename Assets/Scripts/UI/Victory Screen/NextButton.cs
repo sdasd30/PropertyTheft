@@ -10,4 +10,12 @@ public class NextButton : MonoBehaviour
     {
         FindObjectOfType<GameSceneManager>().LoadNextScene(OverrideWorld, OverrideStage);
     }
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            FindObjectOfType<GameSceneManager>().LoadNextScene(OverrideWorld, OverrideStage);
+        }
+    }
 }
