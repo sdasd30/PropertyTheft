@@ -49,12 +49,14 @@ public class PlayerSwapProperty : MonoBehaviour
         swapObject = null;
         swap_AI = false;
         gunSprite.color = new Color(255, 0, 0);
-        
+
     }
 
     void Update()
     {
         if (pauseGame.isPaused) return;
+
+
         if (!disableSwaps && Input.GetAxisRaw("Fire1") > .5 || Input.GetAxisRaw("Fire2") > .5)
         {
             if (!firing)
@@ -68,7 +70,7 @@ public class PlayerSwapProperty : MonoBehaviour
                                                           mousePoint.y - transform.position.y, 0.0f));
 
                     hit = Physics2D.Raycast(transform.position, direction, Mathf.Infinity, layer);
-  
+
                     Vector3 hitpoint;
 
                     if (hit.collider != null)
@@ -79,13 +81,13 @@ public class PlayerSwapProperty : MonoBehaviour
                             Scene.GetComponent<ReloadScene>().Cutscene_Swap();
                         }
                     }
- 
+
 
                     if (hit.collider != null)
                     {
                         Debug.DrawLine(transform.position, hit.point, Color.red, 2.0f, false);
                         hitpoint = hit.point;
-                    
+
                         if (!swap_AI)
                         {
                             AttemptSwap(hit);
@@ -103,7 +105,8 @@ public class PlayerSwapProperty : MonoBehaviour
                     TrailRenderer trail = Instantiate(BulletTrail, gunObject.transform.position, Quaternion.identity);
                     StartCoroutine(SpawnTrail(trail, hitpoint));
 
-                } else if (Input.GetAxisRaw("Fire2") > .5)
+                }
+                else if (Input.GetAxisRaw("Fire2") > .5)
                 {
 
                     if (!swap_AI)
@@ -123,7 +126,7 @@ public class PlayerSwapProperty : MonoBehaviour
                         {
                             Basic_AI AIHolder = swapObject.GetComponent<Basic_AI>();
                             int AIHolder_type = AIHolder.AI_type;
-                            AIHolder.Set_Type(AIHolder_type, saved_dir, false,  saved_range, saved_speed);
+                            AIHolder.Set_Type(AIHolder_type, saved_dir, false, saved_range, saved_speed);
                             swapObject = null;
                         }
                         swap_AI = false;
@@ -131,7 +134,7 @@ public class PlayerSwapProperty : MonoBehaviour
                     }
                 }
             }
-            
+
             firing = true;
 
         }
@@ -139,6 +142,7 @@ public class PlayerSwapProperty : MonoBehaviour
         {
             firing = false;
         }
+
     }
 
     private void AttemptSwap(RaycastHit2D hit)
@@ -148,7 +152,7 @@ public class PlayerSwapProperty : MonoBehaviour
 
         if (hitHolder)
         {
-            
+
             if (!swapObject)
             {
                 //There is currently no object selected for swap. Add this as a swap object.
@@ -215,7 +219,7 @@ public class PlayerSwapProperty : MonoBehaviour
                 saved_range = hitObject.GetComponent<Basic_AI>().fan_range;
                 saved_speed = hitObject.GetComponent<Basic_AI>().fan_speed;
                 saved_hit = hit;
-                
+
                 hitAIHolder.MarkForSwap(swap_AI);
                 if (SwapEvent != null)
                     SwapEvent(this, SwapStatus.StartSwap, hitObject);
@@ -230,7 +234,8 @@ public class PlayerSwapProperty : MonoBehaviour
                 int direction2 = hitAIHolder.fan_direction;
                 int fan_range1 = AIHolder.fan_range;
                 int fan_range2 = hitAIHolder.fan_range;
-                if (!GameObject.ReferenceEquals(hit.transform.gameObject, saved_hit.transform.gameObject)) {
+                if (!GameObject.ReferenceEquals(hit.transform.gameObject, saved_hit.transform.gameObject))
+                {
 
                     hitAIHolder.Set_Type(AIHolder_type, direction1, true, fan_range1, saved_speed);
                     AIHolder.Set_Type(AI_Holder_type_other, direction2, true, fan_range2, hitAIHolder.fan_speed);
