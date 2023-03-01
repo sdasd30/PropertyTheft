@@ -55,90 +55,94 @@ public class PlayerSwapProperty : MonoBehaviour
     void Update()
     {
         if (pauseGame.isPaused) return;
-        if (!disableSwaps && Input.GetAxisRaw("Fire1") > .5 || Input.GetAxisRaw("Fire2") > .5)
-        {
-            if (!firing)
+
+      
+            if (!disableSwaps && Input.GetAxisRaw("Fire1") > .5 || Input.GetAxisRaw("Fire2") > .5)
             {
-                if (Input.GetAxisRaw("Fire1") > .5)
+                if (!firing)
                 {
-                    Vector3 mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                    mousePoint.z = 0.0f;
-                    RaycastHit2D hit;
-                    Vector3 direction = Vector3.Normalize(new Vector3(mousePoint.x - transform.position.x,
-                                                          mousePoint.y - transform.position.y, 0.0f));
-
-                    hit = Physics2D.Raycast(transform.position, direction, Mathf.Infinity, layer);
-  
-                    Vector3 hitpoint;
-
-                    if (hit.collider != null)
+                    if (Input.GetAxisRaw("Fire1") > .5)
                     {
-                        if (hit.collider.transform.gameObject.GetComponent<Cutscene_AI>())
+                        Vector3 mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                        mousePoint.z = 0.0f;
+                        RaycastHit2D hit;
+                        Vector3 direction = Vector3.Normalize(new Vector3(mousePoint.x - transform.position.x,
+                                                              mousePoint.y - transform.position.y, 0.0f));
+
+                        hit = Physics2D.Raycast(transform.position, direction, Mathf.Infinity, layer);
+
+                        Vector3 hitpoint;
+
+                        if (hit.collider != null)
                         {
-                            Debug.Log("HERES");
-                            Scene.GetComponent<ReloadScene>().Cutscene_Swap();
+                            if (hit.collider.transform.gameObject.GetComponent<Cutscene_AI>())
+                            {
+                                Debug.Log("HERES");
+                                Scene.GetComponent<ReloadScene>().Cutscene_Swap();
+                            }
                         }
-                    }
- 
 
-                    if (hit.collider != null)
-                    {
-                        Debug.DrawLine(transform.position, hit.point, Color.red, 2.0f, false);
-                        hitpoint = hit.point;
-                    
-                        if (!swap_AI)
+
+                        if (hit.collider != null)
                         {
-                            AttemptSwap(hit);
+                            Debug.DrawLine(transform.position, hit.point, Color.red, 2.0f, false);
+                            hitpoint = hit.point;
+
+                            if (!swap_AI)
+                            {
+                                AttemptSwap(hit);
+                            }
+                            else
+                            {
+                                AttemptSwapAI(hit);
+                            }
                         }
                         else
                         {
-                            AttemptSwapAI(hit);
+                            Debug.DrawLine(transform.position, direction * 100, Color.green, 2.0f, false);
+                            hitpoint = direction * 100;
                         }
-                    }
-                    else
-                    {
-                        Debug.DrawLine(transform.position, direction * 100, Color.green, 2.0f, false);
-                        hitpoint = direction * 100;
-                    }
-                    TrailRenderer trail = Instantiate(BulletTrail, gunObject.transform.position, Quaternion.identity);
-                    StartCoroutine(SpawnTrail(trail, hitpoint));
+                        TrailRenderer trail = Instantiate(BulletTrail, gunObject.transform.position, Quaternion.identity);
+                        StartCoroutine(SpawnTrail(trail, hitpoint));
 
-                } else if (Input.GetAxisRaw("Fire2") > .5)
-                {
-
-                    if (!swap_AI)
-                    {
-                        if (swapObject)
-                        {
-                            MaterialHolder hitHolder = swapObject.GetComponent<MaterialHolder>();
-                            hitHolder.DemarkForSwap();
-                            swapObject = null;
-                        }
-                        swap_AI = true;
-                        gunSprite.color = new Color(0, 0, 255);
                     }
-                    else
+                    else if (Input.GetAxisRaw("Fire2") > .5)
                     {
-                        if (swapObject)
+
+                        if (!swap_AI)
                         {
-                            Basic_AI AIHolder = swapObject.GetComponent<Basic_AI>();
-                            int AIHolder_type = AIHolder.AI_type;
-                            AIHolder.Set_Type(AIHolder_type, saved_dir, false,  saved_range, saved_speed);
-                            swapObject = null;
+                            if (swapObject)
+                            {
+                                MaterialHolder hitHolder = swapObject.GetComponent<MaterialHolder>();
+                                hitHolder.DemarkForSwap();
+                                swapObject = null;
+                            }
+                            swap_AI = true;
+                            gunSprite.color = new Color(0, 0, 255);
                         }
-                        swap_AI = false;
-                        gunSprite.color = new Color(255, 0, 0);
+                        else
+                        {
+                            if (swapObject)
+                            {
+                                Basic_AI AIHolder = swapObject.GetComponent<Basic_AI>();
+                                int AIHolder_type = AIHolder.AI_type;
+                                AIHolder.Set_Type(AIHolder_type, saved_dir, false, saved_range, saved_speed);
+                                swapObject = null;
+                            }
+                            swap_AI = false;
+                            gunSprite.color = new Color(255, 0, 0);
+                        }
                     }
                 }
-            }
-            
-            firing = true;
 
-        }
-        else
-        {
-            firing = false;
-        }
+                firing = true;
+
+            }
+            else
+            {
+                firing = false;
+            }
+    
     }
 
     private void AttemptSwap(RaycastHit2D hit)

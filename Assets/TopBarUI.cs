@@ -160,11 +160,11 @@ public class TopBarUI : MonoBehaviour
                             FanDirectionText.text = "UP";
                         }
 
-                        if (object_AI.fan_speed <= 30)
+                        if (object_AI.fan_speed <= 60)
                         {
                             FanForceText.text = "3 lb";
                         }
-                        else if (object_AI.fan_speed >= 120)
+                        else if (object_AI.fan_speed > 60)
                         {
                             FanForceText.text = "10 lb";
                         }
