@@ -11,6 +11,10 @@ public class GameSceneManager : MonoBehaviour
         {
             LoadNextScene();
         }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            SceneManager.LoadScene("LevelSelect", LoadSceneMode.Single);
+        }
     }
     public void LoadNextScene(int world = -1, int stage = -1)
     {
