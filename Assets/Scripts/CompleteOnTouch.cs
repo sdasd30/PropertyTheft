@@ -52,17 +52,29 @@ public class CompleteOnTouch : MonoBehaviour
             }
             else
             {
-                if (level == 18)
-                {
+                if (level == 18 && !level_start)
+                {   
                     PlayerPrefs.SetInt("Retrieved_Gun", 1);
                     Scene.GetComponent<ReloadScene>().WeaponHandler.SetActive(true);
+                }
+                if (level == 17 && level_start && !PlayerPrefs.HasKey("Investigation"))
+                {
+                    PlayerPrefs.SetInt("Investigation", 1);
+                    FindObjectOfType<Cutscene1Controller>().PlayCutscene1();
+                }
+                if (level == 7 && last_level_end && !PlayerPrefs.HasKey("Betrayal"))
+                {
+                    PlayerPrefs.SetInt("Betrayal", 1);
+                    FindObjectOfType<Cutscene1Controller>().PlayCutscene2();
                 }
                 if (!Scene.GetComponent<ReloadScene>().is_zoomed_out)
                 {
                     if (last_level_end)
                     {
-                        PlayerPrefs.SetInt("OtherPlayer", 0);
-                        Scene.GetComponent<ReloadScene>().HidePlayer();
+                        //PlayerPrefs.SetInt("OtherPlayer", 0);
+                        //Scene.GetComponent<ReloadScene>().HidePlayer();
+
+                        //CUTSCENE GOES HERE.
                         //PlayerPrefs.SetInt("OtherPlayer", 0);
                     }
                     else if (!last_level_start)
@@ -83,14 +95,14 @@ public class CompleteOnTouch : MonoBehaviour
                         if (level_start) //if the flag is at the start of the level, set the variables inside the scene to change the camera accordingly.
                         {
                             Scene.GetComponent<ReloadScene>().level = level;
-
                             Scene.GetComponent<ReloadScene>().SetCamera();
-
+                            
 
                         }
                         else
                         {
 
+                            Scene.GetComponent<ReloadScene>().end_of_level = level;
                             Scene.GetComponent<ReloadScene>().level = -1; //The camera be the general camera following the player instead.
                             Scene.GetComponent<ReloadScene>().SetCamera();
 

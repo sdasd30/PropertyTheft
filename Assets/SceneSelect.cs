@@ -8,10 +8,15 @@ public class SceneSelect : MonoBehaviour
     // Start is called before the first frame update
     public GameObject Scene;
     public bool active;
+    public GameObject playermapicon;
+    
     void Start()
     {
         GetComponent<SpriteRenderer>().color = new Color(0, 176, 255, 0);
         transform.GetChild(0).gameObject.SetActive(false);
+        PlayerMapIcon playericon = FindObjectOfType<PlayerMapIcon>();
+        playermapicon = playericon.gameObject;
+        
         //transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMesh>().color = new Color(0, 255, 0, 255);
     }
 
@@ -106,8 +111,8 @@ public class SceneSelect : MonoBehaviour
             {
                 //x = -16.09f;
                 //y = -32.27f;
-                x = -10.53f;
-                y = -13.52f;
+                x = -17.4754f;
+                y = -30.33489f;
 
             }
             else if (index == 9)
@@ -147,8 +152,8 @@ public class SceneSelect : MonoBehaviour
             }
             else if (index == 16)
             {
-                x = -76.34f;
-                y = 152.39f;
+                x = -64.18f;
+                y = 140.47f;
             }
             else if (index == 17)
             {
