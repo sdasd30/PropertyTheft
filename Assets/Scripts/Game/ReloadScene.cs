@@ -140,6 +140,7 @@ public class ReloadScene : MonoBehaviour
 
             if (Input.GetAxisRaw("zoomout") > .1f && Time.time > cur_time + 1f)
             {
+                Debug.Log("zoomed out");
                 cur_time = Time.time;
                 if (!is_zoomed_out)
                 {

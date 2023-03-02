@@ -57,8 +57,10 @@ public class SceneSelect : MonoBehaviour
             {
                 //x = 37.56f;
                 //y = 42.49f;
-                x = -2.37f;
-                y = 27.33f;
+                //x = -2.37f;
+                //y = 27.33f;
+                x = -47.36f;
+                y = 27.46f;
             }
             else if (index == 2)
             {
