@@ -15,7 +15,7 @@ public class CompleteOnTouch : MonoBehaviour
     public bool last_level_end;
     public float cur_time;
     public bool last_level_checkpoint;
-
+    
     void Start()
     {
         cur_time = Time.time;
@@ -25,39 +25,39 @@ public class CompleteOnTouch : MonoBehaviour
             ReloadScene the_script = FindObjectOfType<ReloadScene>();
             Scene = the_script.gameObject;
         }
-
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //Debug.Log("entered");
-        cur_time = Time.time;
-        if (collision.GetComponent<PlayerMove>() || collision.GetComponent<PlayerAIAnimation>())
-        {
-            Scene scene = SceneManager.GetActiveScene();
-            //Debug.Log($"{scene.name}_complete successful");
-            PlayerPrefs.SetInt(scene.name + "_complete", 1);
-            FindObjectOfType<KeepTime>().UpdateBestTime();
-            FindObjectOfType<SwapCounter>().MakeSaveRequest();
-
-
-            if (!open_world)
+            //Debug.Log("entered");
+            cur_time = Time.time;
+            if (collision.GetComponent<PlayerMove>() || collision.GetComponent<PlayerAIAnimation>())
             {
-                if (FindObjectOfType<SceneProperties>().bypassVictoryScreen)
+                Scene scene = SceneManager.GetActiveScene();
+                //Debug.Log($"{scene.name}_complete successful");
+                PlayerPrefs.SetInt(scene.name + "_complete", 1);
+                FindObjectOfType<KeepTime>().UpdateBestTime();
+                FindObjectOfType<SwapCounter>().MakeSaveRequest();
+
+
+                if (!open_world)
                 {
-                    FindObjectOfType<GameSceneManager>().LoadNextScene(nextWorld, nextScene);
-                    return;
+                    if (FindObjectOfType<SceneProperties>().bypassVictoryScreen)
+                    {
+                        FindObjectOfType<GameSceneManager>().LoadNextScene(nextWorld, nextScene);
+                        return;
+                    }
+                    FindObjectOfType<VictoryScreenDriver>().ShowScreen();
                 }
-                FindObjectOfType<VictoryScreenDriver>().ShowScreen();
-            }
-            else
-            {
+                else
+                {   
                 if (level == 18)
                 {
                     PlayerPrefs.SetInt("Retrieved_Gun", 1);
                     Scene.GetComponent<ReloadScene>().WeaponHandler.SetActive(true);
                 }
-                if (!Scene.GetComponent<ReloadScene>().is_zoomed_out)
+                    if (!Scene.GetComponent<ReloadScene>().is_zoomed_out)
                 {
                     if (last_level_end)
                     {
@@ -114,7 +114,7 @@ public class CompleteOnTouch : MonoBehaviour
                 }
             }
 
-
+            
         }
     }
 
