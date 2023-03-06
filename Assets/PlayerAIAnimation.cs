@@ -38,17 +38,17 @@ public class PlayerAIAnimation : MonoBehaviour
             //flip sprite if left or right facing
             if (rb.velocity.x > 0)
             {
-                mAnimator.Play("playerWalk");
+                mAnimator.Play("playerBlueWalk");
                 mSprite.flipX = false;
             }
             else if (rb.velocity.x < 0)
             {
-                mAnimator.Play("playerWalk");
+                mAnimator.Play("playerBlueWalk");
                 mSprite.flipX = false;
             }
             else //dirX == 0
             {
-                mAnimator.Play("playerIdle");
+                mAnimator.Play("playerBlueIdle");
             }
         }
         else
