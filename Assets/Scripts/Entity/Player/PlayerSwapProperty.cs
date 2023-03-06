@@ -125,7 +125,7 @@ public class PlayerSwapProperty : MonoBehaviour
                         StartCoroutine(SpawnTrail(trail, hitpoint));
 
                     }
-                    else if (Input.GetAxisRaw("Fire2") > .5 && PlayerPrefs.HasKey("SetBehavior"))
+                    else if (Input.GetAxisRaw("Fire2") > .5 && (PlayerPrefs.HasKey("SetBehavior") || !reloader.open_world))
                     {
 
                         if (!swap_AI)
