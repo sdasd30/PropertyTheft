@@ -30,9 +30,11 @@ public class PlayerMove : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        float dirX = Input.GetAxisRaw("Horizontal");
-        float dirY = Input.GetAxisRaw("Vertical");
+    {   
+
+
+            float dirX = Input.GetAxisRaw("Horizontal");
+            float dirY = Input.GetAxisRaw("Vertical");
 
         mRigidBody.velocity = new Vector3(horitzontalMoveMultiplier * dirX, mRigidBody.velocity.y, 0);
         bool grounded = IsGrounded();

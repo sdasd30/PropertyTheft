@@ -7,10 +7,6 @@ using Cinemachine;
 public class ReloadScene : MonoBehaviour
 {
     // Start is called before the first frame update
-
-
-
-
     private bool to_reset;
     public bool open_world;
     public GameObject checkpoints;
@@ -267,7 +263,8 @@ public class ReloadScene : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             //player_game_object.transform.position = checkpoint_pos; //Sets the player's position to the checkpoints position.
             if (!to_reset)
-            {
+            {   
+
                 PlayerPrefs.SetFloat("saved_x", checkpoint_pos.x);
                 PlayerPrefs.SetFloat("saved_y", checkpoint_pos.y);
                 PlayerPrefs.SetInt("Cam", level);
