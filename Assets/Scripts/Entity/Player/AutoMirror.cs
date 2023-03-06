@@ -15,11 +15,13 @@ public class AutoMirror : MonoBehaviour
     void Start()
     {
         thisObject = GetComponent<SpriteRenderer>();
+
         if (transform.parent != null) hasParent = true;
     }
     // Update is called once per frame
     void Update()
     {
+
         if (hasParent)
         {
             if (transform.parent.rotation.z < -.707 || transform.parent.rotation.z > .707)

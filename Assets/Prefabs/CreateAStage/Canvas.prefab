@@ -156,13 +156,21 @@ MonoBehaviour:
   WeaponHandler: {fileID: 0}
   CameraContainer: {fileID: 0}
   player_cam: {fileID: 0}
-  level_select_cam: {fileID: 0}
+  w0_select_cam: {fileID: 0}
+  w1_select_cam: {fileID: 0}
+  w2_select_cam: {fileID: 0}
   reloaded: 0
   cur_cam: {fileID: 0}
   is_zoomed_out: 0
+  saved_level: 0
   is_ready: 0
+  end_of_level: 0
+  is_end_of_level: 0
   Cutscene_Red: {fileID: 0}
   Cutscene_Blue: {fileID: 0}
+  Blocker: {fileID: 0}
+  playermapicon: {fileID: 0}
+  HoverContainer: {fileID: 0}
 --- !u!1 &556473681961811085
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,7 +477,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0010834, y: 43}
+  m_AnchoredPosition: {x: -0.0010834, y: -0.00021362}
   m_SizeDelta: {x: 396.37, y: 289.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1450962570871385843
@@ -2172,13 +2180,21 @@ MonoBehaviour:
   WeaponHandler: {fileID: 0}
   CameraContainer: {fileID: 0}
   player_cam: {fileID: 0}
-  level_select_cam: {fileID: 0}
+  w0_select_cam: {fileID: 0}
+  w1_select_cam: {fileID: 0}
+  w2_select_cam: {fileID: 0}
   reloaded: 0
   cur_cam: {fileID: 0}
   is_zoomed_out: 0
+  saved_level: 0
   is_ready: 0
+  end_of_level: 0
+  is_end_of_level: 0
   Cutscene_Red: {fileID: 0}
   Cutscene_Blue: {fileID: 0}
+  Blocker: {fileID: 0}
+  playermapicon: {fileID: 0}
+  HoverContainer: {fileID: 0}
 --- !u!1 &7392617476043330007
 GameObject:
   m_ObjectHideFlags: 0
