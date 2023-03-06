@@ -70,6 +70,7 @@ public class Cutscene1Controller : MonoBehaviour
         yield return new WaitForSeconds(20f);
 
         gameObject.GetComponent<RawImage>().enabled = false;
+        Debug.Log("SECONDCUTSCENE END");
         player_game_object.transform.position = new Vector3(-17.4754f, -30.33489f, 0);
 
         Scene.GetComponent<ReloadScene>().is_ready = true;
