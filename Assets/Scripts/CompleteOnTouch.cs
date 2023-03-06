@@ -15,7 +15,7 @@ public class CompleteOnTouch : MonoBehaviour
     public bool last_level_end;
     public float cur_time;
     public bool last_level_checkpoint;
-    
+
     void Start()
     {
         cur_time = Time.time;
@@ -25,44 +25,61 @@ public class CompleteOnTouch : MonoBehaviour
             ReloadScene the_script = FindObjectOfType<ReloadScene>();
             Scene = the_script.gameObject;
         }
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-            //Debug.Log("entered");
-            cur_time = Time.time;
-            if (collision.GetComponent<PlayerMove>() || collision.GetComponent<PlayerAIAnimation>())
+        //Debug.Log("entered");
+        cur_time = Time.time;
+        if (collision.GetComponent<PlayerMove>() || collision.GetComponent<PlayerAIAnimation>())
+        {
+            Scene scene = SceneManager.GetActiveScene();
+            //Debug.Log($"{scene.name}_complete successful");
+            PlayerPrefs.SetInt(scene.name + "_complete", 1);
+            FindObjectOfType<KeepTime>().UpdateBestTime();
+            FindObjectOfType<SwapCounter>().MakeSaveRequest();
+
+            if (!open_world)
             {
-                Scene scene = SceneManager.GetActiveScene();
-                //Debug.Log($"{scene.name}_complete successful");
-                PlayerPrefs.SetInt(scene.name + "_complete", 1);
-                FindObjectOfType<KeepTime>().UpdateBestTime();
-                FindObjectOfType<SwapCounter>().MakeSaveRequest();
-
-
-                if (!open_world)
+                if (FindObjectOfType<SceneProperties>().bypassVictoryScreen)
                 {
-                    if (FindObjectOfType<SceneProperties>().bypassVictoryScreen)
-                    {
-                        FindObjectOfType<GameSceneManager>().LoadNextScene(nextWorld, nextScene);
-                        return;
-                    }
-                    FindObjectOfType<VictoryScreenDriver>().ShowScreen();
+                    FindObjectOfType<GameSceneManager>().LoadNextScene(nextWorld, nextScene);
+                    return;
                 }
-                else
+                FindObjectOfType<VictoryScreenDriver>().ShowScreen();
+            }
+            else
+            {
+                if (level == 18 && !level_start)
                 {   
-                if (level == 18)
-                {
                     PlayerPrefs.SetInt("Retrieved_Gun", 1);
                     Scene.GetComponent<ReloadScene>().WeaponHandler.SetActive(true);
                 }
-                    if (!Scene.GetComponent<ReloadScene>().is_zoomed_out)
+                if (level == 17 && level_start && !PlayerPrefs.HasKey("Investigation"))
+                {
+                    PlayerPrefs.SetInt("Investigation", 1);
+                    FindObjectOfType<Cutscene1Controller>().PlayCutscene1();
+                }
+                if (level == 7 && last_level_end && !PlayerPrefs.HasKey("Betrayal"))
+                {
+                    PlayerPrefs.SetInt("Betrayal", 1);
+                    FindObjectOfType<Cutscene1Controller>().PlayCutscene2();
+                }
+
+                if (level == 1 && !PlayerPrefs.HasKey("SetBehavior"))
+                {
+                    PlayerPrefs.SetInt("SetBehavior", 1);
+                  
+                }
+                if (!Scene.GetComponent<ReloadScene>().is_zoomed_out)
                 {
                     if (last_level_end)
                     {
-                        PlayerPrefs.SetInt("OtherPlayer", 0);
-                        Scene.GetComponent<ReloadScene>().HidePlayer();
+                        //PlayerPrefs.SetInt("OtherPlayer", 0);
+                        //Scene.GetComponent<ReloadScene>().HidePlayer();
+
+                        //CUTSCENE GOES HERE.
                         //PlayerPrefs.SetInt("OtherPlayer", 0);
                     }
                     else if (!last_level_start)
@@ -83,14 +100,14 @@ public class CompleteOnTouch : MonoBehaviour
                         if (level_start) //if the flag is at the start of the level, set the variables inside the scene to change the camera accordingly.
                         {
                             Scene.GetComponent<ReloadScene>().level = level;
-
                             Scene.GetComponent<ReloadScene>().SetCamera();
-
+                            
 
                         }
                         else
                         {
 
+                            Scene.GetComponent<ReloadScene>().end_of_level = level;
                             Scene.GetComponent<ReloadScene>().level = -1; //The camera be the general camera following the player instead.
                             Scene.GetComponent<ReloadScene>().SetCamera();
 
@@ -114,7 +131,7 @@ public class CompleteOnTouch : MonoBehaviour
                 }
             }
 
-            
+
         }
     }
 

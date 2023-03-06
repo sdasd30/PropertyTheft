@@ -8,10 +8,15 @@ public class SceneSelect : MonoBehaviour
     // Start is called before the first frame update
     public GameObject Scene;
     public bool active;
+    public GameObject playermapicon;
+    
     void Start()
     {
         GetComponent<SpriteRenderer>().color = new Color(0, 176, 255, 0);
         transform.GetChild(0).gameObject.SetActive(false);
+        PlayerMapIcon playericon = FindObjectOfType<PlayerMapIcon>();
+        playermapicon = playericon.gameObject;
+        
         //transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMesh>().color = new Color(0, 255, 0, 255);
     }
 
@@ -52,19 +57,24 @@ public class SceneSelect : MonoBehaviour
                 //y = 54.44f;
                 x = -9.51f;
                 y = 33.34f;
-            } else if (index == 1)
+            }
+            else if (index == 1)
             {
                 //x = 37.56f;
                 //y = 42.49f;
-                x = -2.37f;
-                y = 27.33f;
-            } else if (index == 2)
+                //x = -2.37f;
+                //y = 27.33f;
+                x = -47.36f;
+                y = 27.46f;
+            }
+            else if (index == 2)
             {
                 //x = 53.6f;
                 //y = 20.52f;
                 x = 10.74f;
                 y = 15.45f;
-            } else if (index == 3)
+            }
+            else if (index == 3)
             {
                 //x = 26.62f;
                 //y = 16.54f;
@@ -101,8 +111,8 @@ public class SceneSelect : MonoBehaviour
             {
                 //x = -16.09f;
                 //y = -32.27f;
-                x = -10.53f;
-                y = -13.52f;
+                x = -17.4754f;
+                y = -30.33489f;
 
             }
             else if (index == 9)
@@ -142,8 +152,8 @@ public class SceneSelect : MonoBehaviour
             }
             else if (index == 16)
             {
-                x = -76.34f;
-                y = 152.39f;
+                x = -64.18f;
+                y = 140.47f;
             }
             else if (index == 17)
             {
@@ -207,7 +217,7 @@ public class SceneSelect : MonoBehaviour
             }
             PlayerPrefs.SetFloat("saved_x", x);
             PlayerPrefs.SetFloat("saved_y", y);
-            
+
             int saved_level = Scene.GetComponent<ReloadScene>().saved_level;
             int cur_world = -4;
             if ((saved_level >= 11 && saved_level <= 17) && saved_level != 10)

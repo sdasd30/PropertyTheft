@@ -49,14 +49,23 @@ public class PlayerSwapProperty : MonoBehaviour
         swapObject = null;
         swap_AI = false;
         gunSprite.color = new Color(255, 0, 0);
-        
+
     }
 
     void Update()
     {
-        if (pauseGame.isPaused) return;
+        if (PlayerPrefs.HasKey("Retrieved_Gun"))
+        {
+            if (pauseGame.isPaused) return;
+            if (swap_AI)
+            {
+                gunSprite.color = new Color(0, 0, 255, 255);
+            }
+            else
+            {
+                gunSprite.color = new Color(255, 0, 0, 255);
+            }
 
-      
             if (!disableSwaps && Input.GetAxisRaw("Fire1") > .5 || Input.GetAxisRaw("Fire2") > .5)
             {
                 if (!firing)
@@ -103,10 +112,18 @@ public class PlayerSwapProperty : MonoBehaviour
                             hitpoint = direction * 100;
                         }
                         TrailRenderer trail = Instantiate(BulletTrail, gunObject.transform.position, Quaternion.identity);
+                        //if (swap_AI)
+                        //{
+                        //    trail.material.color = new Color(0, 0, 255, 255);
+                        //}
+                        //else
+                        //{
+                        //    trail.material.color = new Color(255, 0, 0, 255);
+                        //}
                         StartCoroutine(SpawnTrail(trail, hitpoint));
 
                     }
-                    else if (Input.GetAxisRaw("Fire2") > .5)
+                    else if (Input.GetAxisRaw("Fire2") > .5 && PlayerPrefs.HasKey("SetBehavior"))
                     {
 
                         if (!swap_AI)
@@ -118,7 +135,7 @@ public class PlayerSwapProperty : MonoBehaviour
                                 swapObject = null;
                             }
                             swap_AI = true;
-                            gunSprite.color = new Color(0, 0, 255);
+                            gunSprite.color = new Color(0, 0, 255, 255);
                         }
                         else
                         {
@@ -130,7 +147,7 @@ public class PlayerSwapProperty : MonoBehaviour
                                 swapObject = null;
                             }
                             swap_AI = false;
-                            gunSprite.color = new Color(255, 0, 0);
+                            gunSprite.color = new Color(255, 0, 0, 255);
                         }
                     }
                 }
@@ -142,7 +159,14 @@ public class PlayerSwapProperty : MonoBehaviour
             {
                 firing = false;
             }
-    
+        } else
+        {
+            gunSprite.color = new Color(0, 0, 0, 0);
+
+
+        }
+        
+
     }
 
     private void AttemptSwap(RaycastHit2D hit)
@@ -152,7 +176,7 @@ public class PlayerSwapProperty : MonoBehaviour
 
         if (hitHolder)
         {
-            
+
             if (!swapObject)
             {
                 //There is currently no object selected for swap. Add this as a swap object.
@@ -219,7 +243,7 @@ public class PlayerSwapProperty : MonoBehaviour
                 saved_range = hitObject.GetComponent<Basic_AI>().fan_range;
                 saved_speed = hitObject.GetComponent<Basic_AI>().fan_speed;
                 saved_hit = hit;
-                
+
                 hitAIHolder.MarkForSwap(swap_AI);
                 if (SwapEvent != null)
                     SwapEvent(this, SwapStatus.StartSwap, hitObject);
@@ -234,7 +258,8 @@ public class PlayerSwapProperty : MonoBehaviour
                 int direction2 = hitAIHolder.fan_direction;
                 int fan_range1 = AIHolder.fan_range;
                 int fan_range2 = hitAIHolder.fan_range;
-                if (!GameObject.ReferenceEquals(hit.transform.gameObject, saved_hit.transform.gameObject)) {
+                if (!GameObject.ReferenceEquals(hit.transform.gameObject, saved_hit.transform.gameObject))
+                {
 
                     hitAIHolder.Set_Type(AIHolder_type, direction1, true, fan_range1, saved_speed);
                     AIHolder.Set_Type(AI_Holder_type_other, direction2, true, fan_range2, hitAIHolder.fan_speed);
