@@ -9,14 +9,18 @@ public class SceneSelect : MonoBehaviour
     public GameObject Scene;
     public bool active;
     public GameObject playermapicon;
-    
+    public GameObject maptutorialimg;
+
     void Start()
     {
         GetComponent<SpriteRenderer>().color = new Color(0, 176, 255, 0);
         transform.GetChild(0).gameObject.SetActive(false);
         PlayerMapIcon playericon = FindObjectOfType<PlayerMapIcon>();
         playermapicon = playericon.gameObject;
-        
+
+        mapTutorialImgScript mapTutorialImg = FindObjectOfType<mapTutorialImgScript>();
+        maptutorialimg = mapTutorialImg.gameObject;
+
         //transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMesh>().color = new Color(0, 255, 0, 255);
     }
 
@@ -25,6 +29,16 @@ public class SceneSelect : MonoBehaviour
     {
         //this.transform.gameObject.SetActive(false);
         active = Scene.GetComponent<ReloadScene>().is_zoomed_out;
+        if (active)
+        {
+            FindObjectOfType<PlayerMove>().playerMovementEnabled = false;
+            Debug.Log("making the classic player movement stuff");
+            Debug.Log(FindObjectOfType<PlayerMove>());
+        }
+        else
+        {
+            FindObjectOfType<PlayerMove>().playerMovementEnabled = true;
+        }
     }
 
     void OnMouseOver()

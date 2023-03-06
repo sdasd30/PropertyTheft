@@ -42,6 +42,7 @@ public class ReloadScene : MonoBehaviour
     public GameObject Cutscene_Blue;
     public GameObject Blocker;
     public GameObject playermapicon;
+    public GameObject maptutorialimg;
     public GameObject HoverContainer;
 
     void Start()
@@ -53,11 +54,16 @@ public class ReloadScene : MonoBehaviour
         }
         PlayerMapIcon playericon = FindObjectOfType<PlayerMapIcon>();
         playermapicon = playericon.gameObject;
+        mapTutorialImgScript mapTutorialImg = FindObjectOfType<mapTutorialImgScript>();
+        maptutorialimg = mapTutorialImg.gameObject;
         Blocker.SetActive(false);
         if (open_world)
         {
+            // this is here to avoid the player from touching a flag on the first frame spawning before running Wait?
             player_game_object.transform.position = new Vector3(0, 0, 0);
         }
+        
+        //trying to un-pause player movement while in the scene select
 
         is_ready = false;
         cur_time = Time.time;
@@ -102,6 +108,18 @@ public class ReloadScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (is_zoomed_out)
+        {
+            FindObjectOfType<PlayerMove>().playerMovementEnabled = false;
+            Debug.Log("making the classic player movement stuff");
+            Debug.Log(FindObjectOfType<PlayerMove>());
+        }
+        else
+        {
+            FindObjectOfType<PlayerMove>().playerMovementEnabled = true;
+        }
+
         if (is_ready)
         {
             if (Input.GetAxisRaw("Reload") > .5f && Time.time > cur_time + .5f)
@@ -175,6 +193,7 @@ public class ReloadScene : MonoBehaviour
                     
                     
                     playermapicon.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
+                    maptutorialimg.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
 
                     if ((saved_level >= 11 && saved_level <= 17) && saved_level != 10)
                     {
@@ -198,6 +217,7 @@ public class ReloadScene : MonoBehaviour
                 else
                 {
                     playermapicon.GetComponent<SpriteRenderer>().color = new Color(0,0,0,0);
+                    maptutorialimg.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
                     //Debug.Log("OUT OF ZOOM OUT");
                     if (is_end_of_level)
                     {

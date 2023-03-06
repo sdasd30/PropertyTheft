@@ -16,6 +16,8 @@ public class PlayerMove : MonoBehaviour
     public float horitzontalMoveMultiplier;
     public float jumpMultiplier;
     public float coyoteTime = 5/60;
+    //playerMovementEnabled is what SceneSelect and ReloadScene use to prevent & allow player movement
+    public bool playerMovementEnabled;
 
 
     private float canJump;
@@ -26,6 +28,7 @@ public class PlayerMove : MonoBehaviour
     {
         mRigidBody = GetComponent<Rigidbody2D>();
         mCollider = GetComponent<BoxCollider2D>();
+        playerMovementEnabled = true;
     }
 
     // Update is called once per frame
@@ -33,25 +36,28 @@ public class PlayerMove : MonoBehaviour
     {
         float dirX = Input.GetAxisRaw("Horizontal");
         float dirY = Input.GetAxisRaw("Vertical");
-
-        mRigidBody.velocity = new Vector3(horitzontalMoveMultiplier * dirX, mRigidBody.velocity.y, 0);
-        bool grounded = IsGrounded();
-        if (grounded)
+        if (playerMovementEnabled)
         {
-            canJump = coyoteTime;
-        }
-        else
-        {
-            canJump -= Time.deltaTime;
-        }
-        if (canJump > 0)
-        {
-            if (Input.GetButtonDown("Jump"))
+            mRigidBody.velocity = new Vector3(horitzontalMoveMultiplier * dirX, mRigidBody.velocity.y, 0);
+            bool grounded = IsGrounded();
+            if (grounded)
             {
-                canJump = 0f;
-                mRigidBody.velocity = new Vector3(mRigidBody.velocity.x, jumpMultiplier, 0);
+                canJump = coyoteTime;
+            }
+            else
+            {
+                canJump -= Time.deltaTime;
+            }
+            if (canJump > 0)
+            {
+                if (Input.GetButtonDown("Jump"))
+                {
+                    canJump = 0f;
+                    mRigidBody.velocity = new Vector3(mRigidBody.velocity.x, jumpMultiplier, 0);
+                }
             }
         }
+        
     }
 
     private bool IsGrounded()
