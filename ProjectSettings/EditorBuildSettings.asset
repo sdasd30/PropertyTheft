@@ -14,9 +14,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AI Levels/w2_s4.unity
     guid: e3dc7cb525420244d8712e77959b9078
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/AI Levels/w2_s3.unity
     guid: 549d9df42ce7cc2dfb42f29e2edcf3a0
@@ -95,9 +92,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelSelect.unity
     guid: a43f0c4c03b882744a0e4f06cb82778f
-  - enabled: 1
-    path: Assets/Scenes/AI Levels/w2_OPEN_2.unity
-    guid: 4040ee4b76f3dd94d9003425efe57e1e
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
@@ -119,4 +116,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/World1/w1_s10.unity
     guid: c2321a714458aa447a512e0e2b44ee09
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: c826e719e59be0f4986d018f2b97ab8d
+  - enabled: 1
+    path: Assets/Scenes/Victory.unity
+    guid: 92ade295b5bacb54c97263a8c0067206
   m_configObjects: {}

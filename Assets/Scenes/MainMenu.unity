@@ -569,9 +569,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Property THeft
+  m_text: 'Property THeft:
 
-    AMong us 2'
+    red man rising'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c4a876653ff11a6458f38f91f71abe64, type: 2}
   m_sharedMaterial: {fileID: 5333337409298087241, guid: c4a876653ff11a6458f38f91f71abe64, type: 2}
@@ -1415,7 +1415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf73233a6a8c92b4b9609e33d1c1d5db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LoadTarget: Oooooooo
+  LoadTarget: FULLY_OPEN
 --- !u!114 &1700041690
 MonoBehaviour:
   m_ObjectHideFlags: 0
