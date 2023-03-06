@@ -51,6 +51,8 @@ public class Cutscene1Controller : MonoBehaviour
         yield return new WaitForSeconds(16f);
 
         gameObject.GetComponent<RawImage>().enabled = false;
+
+        Debug.Log("transport player");
         player_game_object.transform.position = new Vector3(-46.15f, 134.52f, 0);
 
         Scene.GetComponent<ReloadScene>().is_ready = true;

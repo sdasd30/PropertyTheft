@@ -92,7 +92,7 @@ public class ReloadScene : MonoBehaviour
             PlayerPrefs.SetFloat("saved_y", playerSpawnY);
             StartCoroutine(Beginning_Cutscene());
             player_game_object.transform.position = new Vector3(playerSpawnX, playerSpawnY);
-            is_ready = true;
+            
 
         }
 
