@@ -96,7 +96,7 @@ EditorBuildSettings:
     path: Assets/Scenes/LevelSelect.unity
     guid: a43f0c4c03b882744a0e4f06cb82778f
   - enabled: 1
-    path: Assets/Scenes/AI Levels/w2_OPEN_2.unity
+    path: Assets/Scenes/AI Levels/FULLY_OPEN.unity
     guid: 4040ee4b76f3dd94d9003425efe57e1e
   - enabled: 0
     path: 
