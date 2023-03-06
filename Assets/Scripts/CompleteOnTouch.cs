@@ -70,6 +70,7 @@ public class CompleteOnTouch : MonoBehaviour
                 if (level == 18 && !level_start)
                 {   
                     PlayerPrefs.SetInt("Retrieved_Gun", 1);
+                    FindObjectOfType<TopBarUI>().SwappingContainer.SetActive(true);
                     Scene.GetComponent<ReloadScene>().WeaponHandler.SetActive(true);
                 }
                 if (level == 17 && level_start && !PlayerPrefs.HasKey("Investigation"))

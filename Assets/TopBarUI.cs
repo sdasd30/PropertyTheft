@@ -41,7 +41,7 @@ public class TopBarUI : MonoBehaviour
     void Start()
     {
         UI_Toggle = false;
-        UI_Toggle2 = false;
+        UI_Toggle2 = true;
         UI_Outline.SetActive(false);
         cooldown = .25f;
 
@@ -59,6 +59,10 @@ public class TopBarUI : MonoBehaviour
         SwappingContainer.SetActive(false);
         PlayerContainer.SetActive(false);
         SwappingModeText.SetActive(false);
+        if (PlayerPrefs.HasKey("Retrieved_Gun"))
+        {
+            SwappingContainer.SetActive(true);
+        }
 
 
     }
