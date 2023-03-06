@@ -48,7 +48,6 @@ public class SceneSelect : MonoBehaviour
         if (active)
         {
             int index = transform.GetSiblingIndex();
-            Debug.Log("scene select onmousedown index =");
             Debug.Log(index);
             float x = 0;
             float y = 0;
