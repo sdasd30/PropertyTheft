@@ -118,6 +118,7 @@ public class ReloadScene : MonoBehaviour
 
             }
             */
+
             if (is_zoomed_out && Time.time > cur_time + .5f)
             {
 
