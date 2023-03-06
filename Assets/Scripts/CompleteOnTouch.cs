@@ -14,45 +14,39 @@ public class CompleteOnTouch : MonoBehaviour
     public bool last_level_start;
     public bool last_level_end;
     public float cur_time;
+    public bool last_level_checkpoint;
+
     void Start()
     {
         cur_time = Time.time;
         if (open_world)
         {
-            Scene = transform.parent.parent.gameObject;
+            //Scene = transform.parent.parent.gameObject;
+            ReloadScene the_script = FindObjectOfType<ReloadScene>();
+            Scene = the_script.gameObject;
         }
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-            cur_time = Time.time;
-            if (collision.GetComponent<PlayerMove>() || collision.GetComponent<PlayerAIAnimation>())
-            {
-                Scene scene = SceneManager.GetActiveScene();
-                //Debug.Log($"{scene.name}_complete successful");
-                PlayerPrefs.SetInt(scene.name + "_complete", 1);
-                FindObjectOfType<KeepTime>().UpdateBestTime();
-                FindObjectOfType<SwapCounter>().MakeSaveRequest();
+        //Debug.Log("entered");
+        cur_time = Time.time;
+        if (collision.GetComponent<PlayerMove>() || collision.GetComponent<PlayerAIAnimation>())
+        {
+            Scene scene = SceneManager.GetActiveScene();
+            //Debug.Log($"{scene.name}_complete successful");
+            PlayerPrefs.SetInt(scene.name + "_complete", 1);
+            FindObjectOfType<KeepTime>().UpdateBestTime();
+            FindObjectOfType<SwapCounter>().MakeSaveRequest();
 
-<<<<<<< HEAD
             if (!open_world)
             {
                 if (FindObjectOfType<SceneProperties>().bypassVictoryScreen)
-=======
-
-                if (!open_world)
->>>>>>> parent of 053759e (Redone branch)
                 {
-                    if (FindObjectOfType<SceneProperties>().bypassVictoryScreen)
-                    {
-                        FindObjectOfType<GameSceneManager>().LoadNextScene(nextWorld, nextScene);
-                        return;
-                    }
-                    FindObjectOfType<VictoryScreenDriver>().ShowScreen();
+                    FindObjectOfType<GameSceneManager>().LoadNextScene(nextWorld, nextScene);
+                    return;
                 }
-<<<<<<< HEAD
                 FindObjectOfType<VictoryScreenDriver>().ShowScreen();
             }
             else
@@ -81,29 +75,27 @@ public class CompleteOnTouch : MonoBehaviour
 
                         //CUTSCENE GOES HERE.
                         //PlayerPrefs.SetInt("OtherPlayer", 0);
-=======
-                else
-                {
-                    if (last_level_end)
-                    {
-                        Scene.GetComponent<ReloadScene>().HidePlayer();
->>>>>>> parent of 053759e (Redone branch)
                     }
                     else if (!last_level_start)
                     {
+                        if (!last_level_checkpoint)
+                        {
+                            PlayerPrefs.SetInt("OtherPlayer", 0);
+                            Scene.GetComponent<ReloadScene>().HideBlue();
+                        }
+                        else
+                        {
+                            PlayerPrefs.SetInt("OtherPlayer", 1);
+                            Scene.GetComponent<ReloadScene>().ShowBlue();
+                        }
+
+
                         Scene.GetComponent<ReloadScene>().checkpoint_pos = transform.position; //Sets the checkpoint position to the flags position
                         if (level_start) //if the flag is at the start of the level, set the variables inside the scene to change the camera accordingly.
                         {
                             Scene.GetComponent<ReloadScene>().level = level;
-<<<<<<< HEAD
                             Scene.GetComponent<ReloadScene>().SetCamera();
                             
-=======
-                            if (Scene.GetComponent<ReloadScene>().is_ready)
-                            {
-                                Scene.GetComponent<ReloadScene>().SetCamera();
-                            }
->>>>>>> parent of 053759e (Redone branch)
 
                         }
                         else
@@ -111,19 +103,18 @@ public class CompleteOnTouch : MonoBehaviour
 
                             Scene.GetComponent<ReloadScene>().end_of_level = level;
                             Scene.GetComponent<ReloadScene>().level = -1; //The camera be the general camera following the player instead.
-                            if (Scene.GetComponent<ReloadScene>().is_ready)
-                            {
-                                Scene.GetComponent<ReloadScene>().SetCamera();
-                            }
+                            Scene.GetComponent<ReloadScene>().SetCamera();
+
                         }
                     }
                     else
                     {
                         //Scene.GetComponent<ReloadScene>().checkpoint_pos = new Vector3(-12.77f, -50.09f);
+                        Scene.GetComponent<ReloadScene>().ShowBlue();
                         PlayerPrefs.SetInt("OtherPlayer", 1);
                         PlayerPrefs.SetFloat("saved_x", -16.09f);
                         PlayerPrefs.SetFloat("saved_y", -38.11f);
-                        PlayerPrefs.SetInt("Cam", 10);
+                        PlayerPrefs.SetInt("Cam", 9);
                         if (Scene.GetComponent<ReloadScene>().is_ready)
                         {
                             Scene.GetComponent<ReloadScene>().SetCamera();
@@ -132,7 +123,9 @@ public class CompleteOnTouch : MonoBehaviour
 
                     }
                 }
-            
+            }
+
+
         }
     }
 
