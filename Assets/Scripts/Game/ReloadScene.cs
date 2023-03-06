@@ -102,12 +102,11 @@ public class ReloadScene : MonoBehaviour
                 SceneReload();
 
             }
-            //if (Input.GetAxisRaw("Reset") > .5f)
-            //{
 
-            //    to_reset = true;
+            if (Input.GetAxisRaw("Reset") > .5f)
+            {
 
-            //}
+            }
             if (is_zoomed_out && Time.time > cur_time + .5f)
             {
 
@@ -263,10 +262,7 @@ public class ReloadScene : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             //player_game_object.transform.position = checkpoint_pos; //Sets the player's position to the checkpoints position.
             if (!to_reset)
-            {   
-                Debug.Log("after !to_reset");
-                Debug.Log(checkpoint_pos.x);
-                Debug.Log(checkpoint_pos.y);
+            {
                 PlayerPrefs.SetFloat("saved_x", checkpoint_pos.x);
                 PlayerPrefs.SetFloat("saved_y", checkpoint_pos.y);
                 PlayerPrefs.SetInt("Cam", level);
