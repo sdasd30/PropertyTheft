@@ -31,6 +31,8 @@ public class ReloadScene : MonoBehaviour
     private float cur_time;
     private float start_time;
     public bool is_ready;
+    public int end_of_level;
+    public bool is_end_of_level;
 
     private float original_zoom;
     private float target_zoom;
@@ -38,32 +40,28 @@ public class ReloadScene : MonoBehaviour
     public GameObject Cutscene_Red;
     public GameObject Cutscene_Blue;
     public GameObject Blocker;
+    public GameObject playermapicon;
+    public GameObject HoverContainer;
 
     void Start()
-    {   
-        
+    {
+        PlayerMapIcon playericon = FindObjectOfType<PlayerMapIcon>();
+        playermapicon = playericon.gameObject;
         Blocker.SetActive(false);
         if (open_world)
         {
             player_game_object.transform.position = new Vector3(0, 0, 0);
         }
-        
+
         is_ready = false;
         cur_time = Time.time;
         is_zoomed_out = false;
         Cutscene_Blue.SetActive(false);
         Cutscene_Red.SetActive(false);
-        level = -1;
+        //level = -1;
+        
         to_reset = false;
-        //checkpoint_pos = player_game_object.transform.position;
-        //player_game_object.transform.position = checkpoint_pos;
-        //if (PlayerPrefs.HasKey("Retrieved_Gun"))
-        //{
-        //    WeaponHandler.SetActive(true);
-        //} else
-        //{
-        //    WeaponHandler.SetActive(false);
-        //}
+
         if (PlayerPrefs.HasKey("saved_x"))
         {
             //Debug.Log("Here2");
@@ -76,7 +74,8 @@ public class ReloadScene : MonoBehaviour
             //SetCamera();
             //player_game_object.transform.position = new Vector3(PlayerPrefs.GetFloat("saved_x"), PlayerPrefs.GetFloat("saved_y"));
             is_ready = true;
-        } else
+        }
+        else
         {
             //Debug.Log("begin");
             Blocker.SetActive(true);
@@ -85,7 +84,8 @@ public class ReloadScene : MonoBehaviour
             PlayerPrefs.SetFloat("saved_y", 155.0642f);
             StartCoroutine(Beginning_Cutscene());
             player_game_object.transform.position = new Vector3(-227.8829f, 148.47f);
-            
+            is_ready = true;
+
         }
 
         reloaded = false;
@@ -137,12 +137,34 @@ public class ReloadScene : MonoBehaviour
 
             }
 
-            if (Input.GetAxisRaw("zoomout") > .1f && Time.time > cur_time + 1f)
+            if (Input.GetAxisRaw("zoomout") > .1f && Time.time > cur_time + 1f && is_ready)
             {
+                Debug.Log("zoomed out");
+                Debug.Log(level);
+
+                
                 cur_time = Time.time;
                 if (!is_zoomed_out)
                 {
                     saved_level = level;
+                    is_end_of_level = false;
+                    if (saved_level == -1)
+                    {
+                        is_end_of_level = true;
+                        saved_level = end_of_level;
+                    }
+                    Debug.Log(saved_level);
+                    if (saved_level <= 9)
+                    {
+                        playermapicon.transform.position = HoverContainer.transform.GetChild(saved_level).transform.position;
+                    } else
+                    {
+                        playermapicon.transform.position = HoverContainer.transform.GetChild(saved_level - 1).transform.position;
+                    }
+                    
+                    
+                    playermapicon.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
+
                     if ((saved_level >= 11 && saved_level <= 17) && saved_level != 10)
                     {
                         level = -4;
@@ -154,15 +176,26 @@ public class ReloadScene : MonoBehaviour
                     else if ((saved_level > 0 && saved_level <= 8) || saved_level == 10)
                     {
                         level = -2;
-                    }
+                    } 
+
+                    Debug.Log(level);
                     SetCamera();
+                    //Scene.GetComponent<ReloadScene>().end_of_level = 0;
                     is_zoomed_out = true;
 
                 }
                 else
                 {
+                    playermapicon.GetComponent<SpriteRenderer>().color = new Color(0,0,0,0);
                     //Debug.Log("OUT OF ZOOM OUT");
-                    level = saved_level;
+                    if (is_end_of_level)
+                    {
+                        level = -1;
+                    } else
+                    {
+                        level = saved_level;
+                    }
+                    
                     SetCamera();
                     is_zoomed_out = false;
 
@@ -175,7 +208,7 @@ public class ReloadScene : MonoBehaviour
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(.01f);
-        
+
         player_game_object.transform.position = new Vector3(PlayerPrefs.GetFloat("saved_x"), PlayerPrefs.GetFloat("saved_y"));
 
 
@@ -188,25 +221,16 @@ public class ReloadScene : MonoBehaviour
 
         level = -4;
         SetCamera();
-        
+
 
         yield return new WaitForSeconds(2f);
         level = -3;
         SetCamera();
-       
+
 
         yield return new WaitForSeconds(2f);
         level = -2;
         SetCamera();
-        
-
-        //yield return new WaitForSeconds(2f);
-        //level = -3;
-        //SetCamera();
-
-        //yield return new WaitForSeconds(2f);
-        //level = -4;
-        //SetCamera();
 
         yield return new WaitForSeconds(2f);
         level = 11;
@@ -219,7 +243,7 @@ public class ReloadScene : MonoBehaviour
         is_ready = true;
 
 
-        //After we have waited 5 seconds print the time again.
+
     }
 
     public void SceneReload()
@@ -228,7 +252,8 @@ public class ReloadScene : MonoBehaviour
         if (!open_world)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name); // loads current scene
-        } else
+        }
+        else
         {
             if (level != 7)
             {
@@ -236,20 +261,21 @@ public class ReloadScene : MonoBehaviour
             }
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             //player_game_object.transform.position = checkpoint_pos; //Sets the player's position to the checkpoints position.
-           if (!to_reset)
+            if (!to_reset)
             {
                 PlayerPrefs.SetFloat("saved_x", checkpoint_pos.x);
                 PlayerPrefs.SetFloat("saved_y", checkpoint_pos.y);
                 PlayerPrefs.SetInt("Cam", level);
-            } else
+            }
+            else
             {
                 PlayerPrefs.DeleteAll();
             }
 
-            
+
 
         }
-        
+
     }
 
 
@@ -285,9 +311,10 @@ public class ReloadScene : MonoBehaviour
             if (index == level)
             {
 
-               
+
                 camera.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 1;
-            } else
+            }
+            else
             {
                 //camera.gameObject.SetActive(false);
                 camera.gameObject.GetComponent<CinemachineVirtualCamera>().Priority = 0;
@@ -295,7 +322,7 @@ public class ReloadScene : MonoBehaviour
             index += 1;
         }
 
-        
+
 
     }
     public void HidePlayer()
@@ -319,5 +346,5 @@ public class ReloadScene : MonoBehaviour
         Cutscene_Blue.SetActive(false);
     }
 
-    
+
 }
