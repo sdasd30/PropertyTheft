@@ -102,16 +102,16 @@ public class CompleteOnTouch : MonoBehaviour
                     }
                     else if (!last_level_start)
                     {
-                        if (!last_level_checkpoint)
-                        {
-                            PlayerPrefs.SetInt("OtherPlayer", 0);
-                            Scene.GetComponent<ReloadScene>().HideBlue();
-                        }
-                        else
-                        {
-                            PlayerPrefs.SetInt("OtherPlayer", 1);
-                            Scene.GetComponent<ReloadScene>().ShowBlue();
-                        }
+                        //if (!last_level_checkpoint)
+                        //{
+                        //    PlayerPrefs.SetInt("OtherPlayer", 0);
+                        //    Scene.GetComponent<ReloadScene>().HideBlue();
+                        //}
+                        //else
+                        //{
+                        //    PlayerPrefs.SetInt("OtherPlayer", 1);
+                        //    Scene.GetComponent<ReloadScene>().ShowBlue();
+                        //}
 
 
                         Scene.GetComponent<ReloadScene>().checkpoint_pos = transform.position; //Sets the checkpoint position to the flags position
@@ -119,7 +119,7 @@ public class CompleteOnTouch : MonoBehaviour
                         {
                             Scene.GetComponent<ReloadScene>().level = level;
                             Scene.GetComponent<ReloadScene>().SetCamera();
-                            
+
 
                         }
                         else
@@ -131,7 +131,7 @@ public class CompleteOnTouch : MonoBehaviour
 
                         }
                     }
-                    else
+                    else if (last_level_start)
                     {
                         //Starts the "Impostor" stage
                         collision.GetComponent<PlayerAnimation>().player_color = "red";
