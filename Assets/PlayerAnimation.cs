@@ -11,11 +11,8 @@ public class PlayerAnimation : MonoBehaviour
     SpriteRenderer mSprite;
     bool pStatus;
     // Start is called before the first frame update
-    public string player_color;
     void Start()
     {
-        //player should be blue by default?
-        player_color = "blue";
         mAnimator = GetComponent<Animator>();
         mSprite = GetComponent<SpriteRenderer>();
         pStatus = true; // true = New Character, false = Old Character
@@ -34,44 +31,21 @@ public class PlayerAnimation : MonoBehaviour
             //check if left or right facing
             float dirX = Input.GetAxisRaw("Horizontal");
             //flip sprite if left or right facing
-            if (player_color == "red")
+            if (dirX == 1)
             {
-                if (dirX == 1)
-                {
-                    mAnimator.Play("playerWalk");
-                    mSprite.flipX = false;
-                }
-                else if (dirX == -1)
-                {
-                    mAnimator.Play("playerWalk");
-                    mSprite.flipX = true;
-                }
-                else //dirX == 0
-                {
-                    mAnimator.Play("playerIdle");
-                }
+                mAnimator.Play("playerWalk");
+                mSprite.flipX = false;
             }
-            if (player_color == "blue")
+            else if (dirX == -1)
             {
-                if (dirX == 1)
-                {
-                    mAnimator.Play("playerBlueWalk");
-                    mSprite.flipX = false;
-                }
-                else if (dirX == -1)
-                {
-                    mAnimator.Play("playerBlueWalk");
-                    mSprite.flipX = true;
-                }
-                else //dirX == 0
-                {
-                    mAnimator.Play("playerBlueIdle");
-                }
+                mAnimator.Play("playerWalk");
+                mSprite.flipX = true;
             }
-
-
-        }
-        else
+            else //dirX == 0
+            {
+                mAnimator.Play("playerIdle");
+            }
+        } else
         {
             mAnimator.Play("oldPlayerIdle");
         }

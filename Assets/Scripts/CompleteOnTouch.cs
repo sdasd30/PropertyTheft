@@ -39,11 +39,6 @@ public class CompleteOnTouch : MonoBehaviour
             PlayerPrefs.SetInt(scene.name + "_complete", 1);
             FindObjectOfType<KeepTime>().UpdateBestTime();
             FindObjectOfType<SwapCounter>().MakeSaveRequest();
-            // if I am a player (not an AI)
-            if (collision.GetComponent<PlayerAnimation>())
-            {
-                collision.GetComponent<PlayerAnimation>().player_color = "blue";
-            }
 
             if (!open_world)
             {
@@ -71,10 +66,6 @@ public class CompleteOnTouch : MonoBehaviour
                     PlayerPrefs.SetInt("Betrayal", 1);
                     FindObjectOfType<Cutscene1Controller>().PlayCutscene2();
                 }
-                if(level == 7 && !last_level_end)
-                {
-                    collision.GetComponent<PlayerAnimation>().player_color = "red";
-                }
 
                 if (level == 1 && !PlayerPrefs.HasKey("SetBehavior"))
                 {
@@ -85,7 +76,11 @@ public class CompleteOnTouch : MonoBehaviour
                 {
                     if (last_level_end)
                     {
-                        //This is where the Ending Cutscene Happens
+                        //PlayerPrefs.SetInt("OtherPlayer", 0);
+                        //Scene.GetComponent<ReloadScene>().HidePlayer();
+
+                        //CUTSCENE GOES HERE.
+                        //PlayerPrefs.SetInt("OtherPlayer", 0);
                     }
                     else if (!last_level_start)
                     {
@@ -120,8 +115,6 @@ public class CompleteOnTouch : MonoBehaviour
                     }
                     else
                     {
-                        //Starts the "Impostor" stage
-                        collision.GetComponent<PlayerAnimation>().player_color = "red";
                         //Scene.GetComponent<ReloadScene>().checkpoint_pos = new Vector3(-12.77f, -50.09f);
                         Scene.GetComponent<ReloadScene>().ShowBlue();
                         PlayerPrefs.SetInt("OtherPlayer", 1);
