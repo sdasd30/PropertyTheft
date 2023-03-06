@@ -12,6 +12,7 @@ public class PlayerAIAnimation : MonoBehaviour
     bool pStatus;
     Rigidbody2D rb;
     BoxCollider2D b_collider;
+    [SerializeField] string playerAIColor;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,20 +37,43 @@ public class PlayerAIAnimation : MonoBehaviour
             //float dirX = Input.GetAxisRaw("Horizontal");
             
             //flip sprite if left or right facing
-            if (rb.velocity.x > 0)
+
+            if(playerAIColor == "blue")
             {
-                mAnimator.Play("playerBlueWalk");
-                mSprite.flipX = false;
-            }
-            else if (rb.velocity.x < 0)
+                if (rb.velocity.x > 0)
+                {
+                    mAnimator.Play("playerBlueWalk");
+                    mSprite.flipX = false;
+                }
+                else if (rb.velocity.x < 0)
+                {
+                    mAnimator.Play("playerBlueWalk");
+                    mSprite.flipX = false;
+                }
+                else //dirX == 0
+                {
+                    mAnimator.Play("playerBlueIdle");
+                }
+            } else if(playerAIColor == "green")
             {
-                mAnimator.Play("playerBlueWalk");
-                mSprite.flipX = false;
+                if (rb.velocity.x > 0)
+                {
+                    //Unimplemented
+                    mAnimator.Play("playerGreenWalk");
+                    mSprite.flipX = false;
+                }
+                else if (rb.velocity.x < 0)
+                {
+                    //Unimplemented
+                    mAnimator.Play("playerGreenWalk");
+                    mSprite.flipX = false;
+                }
+                else //dirX == 0
+                {
+                    mAnimator.Play("playerGreenIdle");
+                }
             }
-            else //dirX == 0
-            {
-                mAnimator.Play("playerBlueIdle");
-            }
+            
         }
         else
         {
