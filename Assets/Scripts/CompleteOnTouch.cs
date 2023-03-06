@@ -66,6 +66,12 @@ public class CompleteOnTouch : MonoBehaviour
                     PlayerPrefs.SetInt("Betrayal", 1);
                     FindObjectOfType<Cutscene1Controller>().PlayCutscene2();
                 }
+
+                if (level == 1 && !PlayerPrefs.HasKey("SetBehavior"))
+                {
+                    PlayerPrefs.SetInt("SetBehavior", 1);
+                  
+                }
                 if (!Scene.GetComponent<ReloadScene>().is_zoomed_out)
                 {
                     if (last_level_end)
