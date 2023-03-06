@@ -39,6 +39,8 @@ public class PlayerSwapProperty : MonoBehaviour
     int saved_range;
     int saved_speed;
     public bool is_hit;
+
+    private ReloadScene reloader;
     //float coolDown = 0;
 
     void Start()
@@ -49,12 +51,12 @@ public class PlayerSwapProperty : MonoBehaviour
         swapObject = null;
         swap_AI = false;
         gunSprite.color = new Color(255, 0, 0);
-
+        reloader = FindObjectOfType<ReloadScene>();
     }
 
     void Update()
     {
-        if (PlayerPrefs.HasKey("Retrieved_Gun"))
+        if (!reloader.open_world || PlayerPrefs.HasKey("Retrieved_Gun"))
         {
             if (pauseGame.isPaused) return;
             if (swap_AI)

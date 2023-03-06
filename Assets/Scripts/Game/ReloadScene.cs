@@ -45,6 +45,10 @@ public class ReloadScene : MonoBehaviour
 
     void Start()
     {
+        if (!playermapicon)
+        {
+            return;
+        }
         PlayerMapIcon playericon = FindObjectOfType<PlayerMapIcon>();
         playermapicon = playericon.gameObject;
         Blocker.SetActive(false);
