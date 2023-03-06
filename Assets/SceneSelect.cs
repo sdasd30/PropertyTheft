@@ -48,15 +48,18 @@ public class SceneSelect : MonoBehaviour
         if (active)
         {
             int index = transform.GetSiblingIndex();
+            Debug.Log(index);
             float x = 0;
             float y = 0;
             if (index == 0)
             {
-                x = 18.7f;
-                y = 54.44f;
-            } else if (index == 1)
+                //x = 18.7f;
+                //y = 54.44f;
+                x = -9.51f;
+                y = 33.34f;
+            }
+            else if (index == 1)
             {
-<<<<<<< HEAD
                 //x = 37.56f;
                 //y = 42.49f;
                 //x = -2.37f;
@@ -65,24 +68,26 @@ public class SceneSelect : MonoBehaviour
                 y = 27.46f;
             }
             else if (index == 2)
-=======
-                x = 37.56f;
-                y = 42.49f;
-            } else if (index == 2)
->>>>>>> parent of 053759e (Redone branch)
             {
-                x = 53.6f;
-                y = 20.52f;
-            } else if (index == 3)
+                //x = 53.6f;
+                //y = 20.52f;
+                x = 10.74f;
+                y = 15.45f;
+            }
+            else if (index == 3)
             {
-                x = 26.62f;
-                y = 16.54f;
+                //x = 26.62f;
+                //y = 16.54f;
                 //x = 28.62f;
                 //y = 17.54f;
+                x = 26.68f;
+                y = 6.47f;
             }
             else if (index == 4)
             {
-                x = 42.63f;
+                //x = 42.63f;
+                //y = -6.36f;
+                x = 41.58f;
                 y = -6.36f;
             }
             else if (index == 5)
@@ -99,10 +104,11 @@ public class SceneSelect : MonoBehaviour
             {
                 x = 8.56f;
                 y = -37.33f;
+                PlayerPrefs.SetInt("OtherPlayer", 1);
+                Scene.GetComponent<ReloadScene>().ShowBlue();
             }
             else if (index == 8)
             {
-<<<<<<< HEAD
                 //x = -16.09f;
                 //y = -32.27f;
                 x = -17.4754f;
@@ -208,15 +214,27 @@ public class SceneSelect : MonoBehaviour
             {
                 x = -26.28f;
                 y = 38.48f;
-=======
-                x = -7.25f;
-                y = -32.27f;
->>>>>>> parent of 053759e (Redone branch)
             }
             PlayerPrefs.SetFloat("saved_x", x);
             PlayerPrefs.SetFloat("saved_y", y);
+
+            int saved_level = Scene.GetComponent<ReloadScene>().saved_level;
+            int cur_world = -4;
+            if ((saved_level >= 11 && saved_level <= 17) && saved_level != 10)
+            {
+                cur_world = -4;
+            }
+            else if ((saved_level > 17 && saved_level <= 29) || saved_level == 0)
+            {
+                cur_world = -3;
+            }
+            else if ((saved_level > 0 && saved_level <= 8) || saved_level == 10)
+            {
+                cur_world = -2;
+            }
+
+            PlayerPrefs.SetInt("Cam", cur_world);
             //PlayerPrefs.SetInt("Cam", -2);
-            PlayerPrefs.SetInt("Cam", -2);
             //Scene.GetComponent<ReloadScene>().SetCamera();
 
 

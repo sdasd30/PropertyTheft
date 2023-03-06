@@ -49,17 +49,12 @@ public class PlayerSwapProperty : MonoBehaviour
         swapObject = null;
         swap_AI = false;
         gunSprite.color = new Color(255, 0, 0);
-        
+
     }
 
     void Update()
     {
-<<<<<<< HEAD
         if (PlayerPrefs.HasKey("Retrieved_Gun"))
-=======
-        if (pauseGame.isPaused) return;
-        if (!disableSwaps && Input.GetAxisRaw("Fire1") > .5 || Input.GetAxisRaw("Fire2") > .5)
->>>>>>> parent of 053759e (Redone branch)
         {
             if (pauseGame.isPaused) return;
             if (swap_AI)
@@ -75,21 +70,7 @@ public class PlayerSwapProperty : MonoBehaviour
             {
                 if (!firing)
                 {
-<<<<<<< HEAD
                     if (Input.GetAxisRaw("Fire1") > .5)
-=======
-                    Vector3 mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                    mousePoint.z = 0.0f;
-                    RaycastHit2D hit;
-                    Vector3 direction = Vector3.Normalize(new Vector3(mousePoint.x - transform.position.x,
-                                                          mousePoint.y - transform.position.y, 0.0f));
-
-                    hit = Physics2D.Raycast(transform.position, direction, Mathf.Infinity, layer);
-  
-                    Vector3 hitpoint;
-
-                    if (hit.collider != null)
->>>>>>> parent of 053759e (Redone branch)
                     {
                         Vector3 mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                         mousePoint.z = 0.0f;
@@ -109,21 +90,9 @@ public class PlayerSwapProperty : MonoBehaviour
                                 Scene.GetComponent<ReloadScene>().Cutscene_Swap();
                             }
                         }
-<<<<<<< HEAD
 
 
                         if (hit.collider != null)
-=======
-                    }
- 
-
-                    if (hit.collider != null)
-                    {
-                        Debug.DrawLine(transform.position, hit.point, Color.red, 2.0f, false);
-                        hitpoint = hit.point;
-                    
-                        if (!swap_AI)
->>>>>>> parent of 053759e (Redone branch)
                         {
                             Debug.DrawLine(transform.position, hit.point, Color.red, 2.0f, false);
                             hitpoint = hit.point;
@@ -153,29 +122,12 @@ public class PlayerSwapProperty : MonoBehaviour
                         //}
                         StartCoroutine(SpawnTrail(trail, hitpoint));
 
-<<<<<<< HEAD
-=======
-                } else if (Input.GetAxisRaw("Fire2") > .5)
-                {
-
-                    if (!swap_AI)
-                    {
-                        if (swapObject)
-                        {
-                            MaterialHolder hitHolder = swapObject.GetComponent<MaterialHolder>();
-                            hitHolder.DemarkForSwap();
-                            swapObject = null;
-                        }
-                        swap_AI = true;
-                        gunSprite.color = new Color(0, 0, 255);
->>>>>>> parent of 053759e (Redone branch)
                     }
                     else if (Input.GetAxisRaw("Fire2") > .5)
                     {
 
                         if (!swap_AI)
                         {
-<<<<<<< HEAD
                             if (swapObject)
                             {
                                 MaterialHolder hitHolder = swapObject.GetComponent<MaterialHolder>();
@@ -196,12 +148,6 @@ public class PlayerSwapProperty : MonoBehaviour
                             }
                             swap_AI = false;
                             gunSprite.color = new Color(255, 0, 0, 255);
-=======
-                            Basic_AI AIHolder = swapObject.GetComponent<Basic_AI>();
-                            int AIHolder_type = AIHolder.AI_type;
-                            AIHolder.Set_Type(AIHolder_type, saved_dir, false,  saved_range, saved_speed);
-                            swapObject = null;
->>>>>>> parent of 053759e (Redone branch)
                         }
                     }
                 }
@@ -209,29 +155,18 @@ public class PlayerSwapProperty : MonoBehaviour
                 firing = true;
 
             }
-<<<<<<< HEAD
             else
             {
                 firing = false;
             }
         } else
-=======
-            
-            firing = true;
-
-        }
-        else
->>>>>>> parent of 053759e (Redone branch)
         {
             gunSprite.color = new Color(0, 0, 0, 0);
 
 
         }
-<<<<<<< HEAD
         
 
-=======
->>>>>>> parent of 053759e (Redone branch)
     }
 
     private void AttemptSwap(RaycastHit2D hit)
@@ -241,7 +176,7 @@ public class PlayerSwapProperty : MonoBehaviour
 
         if (hitHolder)
         {
-            
+
             if (!swapObject)
             {
                 //There is currently no object selected for swap. Add this as a swap object.
@@ -308,7 +243,7 @@ public class PlayerSwapProperty : MonoBehaviour
                 saved_range = hitObject.GetComponent<Basic_AI>().fan_range;
                 saved_speed = hitObject.GetComponent<Basic_AI>().fan_speed;
                 saved_hit = hit;
-                
+
                 hitAIHolder.MarkForSwap(swap_AI);
                 if (SwapEvent != null)
                     SwapEvent(this, SwapStatus.StartSwap, hitObject);
@@ -323,7 +258,8 @@ public class PlayerSwapProperty : MonoBehaviour
                 int direction2 = hitAIHolder.fan_direction;
                 int fan_range1 = AIHolder.fan_range;
                 int fan_range2 = hitAIHolder.fan_range;
-                if (!GameObject.ReferenceEquals(hit.transform.gameObject, saved_hit.transform.gameObject)) {
+                if (!GameObject.ReferenceEquals(hit.transform.gameObject, saved_hit.transform.gameObject))
+                {
 
                     hitAIHolder.Set_Type(AIHolder_type, direction1, true, fan_range1, saved_speed);
                     AIHolder.Set_Type(AI_Holder_type_other, direction2, true, fan_range2, hitAIHolder.fan_speed);
