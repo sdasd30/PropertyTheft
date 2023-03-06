@@ -109,16 +109,16 @@ public class ReloadScene : MonoBehaviour
     void Update()
     {
 
-        if (is_zoomed_out)
-        {
-            FindObjectOfType<PlayerMove>().playerMovementEnabled = false;
-            Debug.Log("making the classic player movement stuff");
-            Debug.Log(FindObjectOfType<PlayerMove>());
-        }
-        else
-        {
-            FindObjectOfType<PlayerMove>().playerMovementEnabled = true;
-        }
+        //if (is_zoomed_out)
+        //{
+        //    FindObjectOfType<PlayerMove>().playerMovementEnabled = false;
+        //    Debug.Log("making the classic player movement stuff");
+        //    Debug.Log(FindObjectOfType<PlayerMove>());
+        //}
+        //else
+        //{
+        //    FindObjectOfType<PlayerMove>().playerMovementEnabled = true;
+        //}
 
         if (is_ready)
         {
