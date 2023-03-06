@@ -62,8 +62,8 @@ public class ReloadScene : MonoBehaviour
         is_ready = false;
         cur_time = Time.time;
         is_zoomed_out = false;
-        Cutscene_Blue.SetActive(false);
-        Cutscene_Red.SetActive(false);
+        //Cutscene_Blue.SetActive(false);
+        //Cutscene_Red.SetActive(false);
         //level = -1;
         
         to_reset = false;
@@ -357,8 +357,8 @@ public class ReloadScene : MonoBehaviour
     }
     public void Cutscene_Swap()
     {
-        Cutscene_Red.SetActive(false);
-        Cutscene_Blue.SetActive(false);
+        //Cutscene_Red.SetActive(false);
+        //Cutscene_Blue.SetActive(false);
     }
 
 

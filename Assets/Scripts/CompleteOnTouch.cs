@@ -72,14 +72,14 @@ public class CompleteOnTouch : MonoBehaviour
                     PlayerPrefs.SetInt("Retrieved_Gun", 1);
                     Scene.GetComponent<ReloadScene>().WeaponHandler.SetActive(true);
                 }
-                if (level == 17 && level_start)//&& !PlayerPrefs.HasKey("Investigation")
+                if (level == 17 && level_start && !PlayerPrefs.HasKey("Investigation"))
                 {
                     PlayerPrefs.SetInt("Investigation", 1);
                     PlayerPrefs.SetFloat("saved_x", transform.position.x);
                     PlayerPrefs.SetFloat("saved_y", transform.position.y);
                     FindObjectOfType<Cutscene1Controller>().PlayCutscene1();
                 }
-                if (level == 7 && last_level_end)//&& !PlayerPrefs.HasKey("Betrayal")
+                if (level == 7 && last_level_end && !PlayerPrefs.HasKey("Betrayal"))
                 {
                     PlayerPrefs.SetInt("Betrayal", 1);
                     FindObjectOfType<Cutscene1Controller>().PlayCutscene2();
