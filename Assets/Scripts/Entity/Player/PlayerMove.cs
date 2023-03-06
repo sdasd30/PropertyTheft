@@ -36,8 +36,8 @@ public class PlayerMove : MonoBehaviour
     {
         float dirX = Input.GetAxisRaw("Horizontal");
         float dirY = Input.GetAxisRaw("Vertical");
-        if (playerMovementEnabled)
-        {
+        //if (playerMovementEnabled)
+        //{
             mRigidBody.velocity = new Vector3(horitzontalMoveMultiplier * dirX, mRigidBody.velocity.y, 0);
             bool grounded = IsGrounded();
             if (grounded)
@@ -56,7 +56,7 @@ public class PlayerMove : MonoBehaviour
                     mRigidBody.velocity = new Vector3(mRigidBody.velocity.x, jumpMultiplier, 0);
                 }
             }
-        }
+        
         
     }
 
