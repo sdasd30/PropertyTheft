@@ -47,6 +47,7 @@ public class ReloadScene : MonoBehaviour
     {
         if (!playermapicon)
         {
+            is_ready = true;
             return;
         }
         PlayerMapIcon playericon = FindObjectOfType<PlayerMapIcon>();
