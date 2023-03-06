@@ -9,6 +9,7 @@ public class LoadSceneOnPress : MonoBehaviour
 
     public void LoadScene()
     {
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene(LoadTarget, LoadSceneMode.Single);
     }
 }
