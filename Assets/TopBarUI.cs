@@ -32,7 +32,7 @@ public class TopBarUI : MonoBehaviour
     private float cooldown;
     private float marked_time;
     private float marked_time2;
-
+    
 
 
     public GameObject FanContainer;
@@ -44,7 +44,7 @@ public class TopBarUI : MonoBehaviour
         UI_Toggle2 = false;
         UI_Outline.SetActive(false);
         cooldown = .25f;
-
+        
         marked_time = Time.time;
         marked_time2 = Time.time;
         PlayerNameText.text = "RED";
@@ -66,19 +66,19 @@ public class TopBarUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxisRaw("Fire4") > .5 && Time.time > marked_time + cooldown)
+        if (Input.GetAxisRaw("Fire4") > .5 && Time.time > marked_time + cooldown )
         {
             marked_time = Time.time;
             if (UI_Toggle)
             {
                 DeactivateUI();
-
+              
                 UI_Toggle = false;
             }
             else
             {
                 ReactivateUI();
-
+                
                 UI_Toggle = true;
             }
         }
@@ -110,8 +110,8 @@ public class TopBarUI : MonoBehaviour
         }
 
         if (UI_Toggle)
-        {
-
+            {
+            
             if (player_swap_script.swapObject)
             {
                 //UI_Outline.SetActive(true);
@@ -160,11 +160,11 @@ public class TopBarUI : MonoBehaviour
                             FanDirectionText.text = "UP";
                         }
 
-                        if (object_AI.fan_speed <= 60)
+                        if (object_AI.fan_speed <= 30)
                         {
                             FanForceText.text = "3 lb";
                         }
-                        else if (object_AI.fan_speed > 60)
+                        else if (object_AI.fan_speed >= 120)
                         {
                             FanForceText.text = "10 lb";
                         }
@@ -190,13 +190,13 @@ public class TopBarUI : MonoBehaviour
                 if (player_swap_script.swapObject)
                 {
                     BehaviorContainer.SetActive(true);
-
+                    
 
                 }
                 else
                 {
                     BehaviorContainer.SetActive(false);
-
+                 
                 }
 
             }
@@ -206,7 +206,7 @@ public class TopBarUI : MonoBehaviour
                 if (player_swap_script.swapObject)
                 {
                     MaterialContainer.SetActive(true);
-
+                    
                 }
                 else
                 {
@@ -217,21 +217,21 @@ public class TopBarUI : MonoBehaviour
 
 
 
-        void ReactivateUI()
-        {
+    void ReactivateUI()
+       {
             MaterialContainer.SetActive(true);
             BehaviorContainer.SetActive(true);
             //SwappingContainer.SetActive(true);
             //SwappingModeText.SetActive(true);
         }
 
-        void DeactivateUI()
+    void DeactivateUI()
         {
             MaterialContainer.SetActive(false);
             BehaviorContainer.SetActive(false);
             //SwappingContainer.SetActive(false);
             //SwappingModeText.SetActive(false);
         }
-
+        
     }
 }
