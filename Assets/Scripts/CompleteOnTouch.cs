@@ -24,7 +24,18 @@ public class CompleteOnTouch : MonoBehaviour
             //Scene = transform.parent.parent.gameObject;
             ReloadScene the_script = FindObjectOfType<ReloadScene>();
             Scene = the_script.gameObject;
+            if (level_start)
+            {
+                Sprite change_sprite = FindObjectOfType<FlagSpriteHolder>().Start_Sprite;
+                gameObject.GetComponent<SpriteRenderer>().sprite = change_sprite;
+            } else
+            {
+                Sprite change_sprite = FindObjectOfType<FlagSpriteHolder>().End_Sprite;
+                gameObject.GetComponent<SpriteRenderer>().sprite = change_sprite;
+            }
+
         }
+        
 
     }
 
