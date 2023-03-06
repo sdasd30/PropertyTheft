@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Cinemachine;
+using System.Runtime.CompilerServices;
 
 public class ReloadScene : MonoBehaviour
 {
@@ -80,11 +81,13 @@ public class ReloadScene : MonoBehaviour
         {
             //Debug.Log("begin");
             Blocker.SetActive(true);
-            player_game_object.transform.position = new Vector3(-227.8829f, 155.0642f);
-            PlayerPrefs.SetFloat("saved_x", -227.8829f);
-            PlayerPrefs.SetFloat("saved_y", 155.0642f);
+            float playerSpawnX = -227.96f;
+            float playerSpawnY = 155.25f;
+            player_game_object.transform.position = new Vector3(playerSpawnX, playerSpawnY);
+            PlayerPrefs.SetFloat("saved_x", playerSpawnX);
+            PlayerPrefs.SetFloat("saved_y", playerSpawnY);
             StartCoroutine(Beginning_Cutscene());
-            player_game_object.transform.position = new Vector3(-227.8829f, 148.47f);
+            player_game_object.transform.position = new Vector3(playerSpawnX, playerSpawnY);
             is_ready = true;
 
         }
@@ -97,17 +100,20 @@ public class ReloadScene : MonoBehaviour
     {
         if (is_ready)
         {
-            if (Input.GetAxisRaw("Reload") > .5f)
+            if (Input.GetAxisRaw("Reload") > .5f && Time.time > cur_time + .5f)
             {
+                cur_time = Time.time;
                 SceneReload();
 
             }
+            /*
             if (Input.GetAxisRaw("Reset") > .5f)
             {
 
                 to_reset = true;
 
             }
+            */
             if (is_zoomed_out && Time.time > cur_time + .5f)
             {
 
@@ -211,7 +217,7 @@ public class ReloadScene : MonoBehaviour
         yield return new WaitForSeconds(.01f);
 
         player_game_object.transform.position = new Vector3(PlayerPrefs.GetFloat("saved_x"), PlayerPrefs.GetFloat("saved_y"));
-
+        Debug.Log(player_game_object.transform.position);
 
     }
 
@@ -263,14 +269,24 @@ public class ReloadScene : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             //player_game_object.transform.position = checkpoint_pos; //Sets the player's position to the checkpoints position.
             if (!to_reset)
+<<<<<<< HEAD
             {   
 
+||||||| 1a0ed57
+            {
+=======
+            {
+                Debug.Log("after !to_reset");
+                Debug.Log(checkpoint_pos.x);
+                Debug.Log(checkpoint_pos.y);
+>>>>>>> 097005f06626e29d4789e169bca505fbf2323baa
                 PlayerPrefs.SetFloat("saved_x", checkpoint_pos.x);
                 PlayerPrefs.SetFloat("saved_y", checkpoint_pos.y);
                 PlayerPrefs.SetInt("Cam", level);
             }
             else
             {
+                Debug.Log("DELETING ALL PLAYER PREFS");
                 PlayerPrefs.DeleteAll();
             }
 
