@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialName: Leafy
   spriteTexture: {fileID: 21300000, guid: c50ab9f98d980d240bc82d1c3b7a3724, type: 3}
+  materialAnimation: LeafIdle
   colorModifier: {r: 0, g: 0.6886792, b: 0.057298426, a: 1}
   mass: 1
   health: 2

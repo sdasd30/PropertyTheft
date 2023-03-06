@@ -5,10 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class GameSceneManager : MonoBehaviour
 {
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            LoadNextScene();
+        }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            SceneManager.LoadScene("LevelSelect", LoadSceneMode.Single);
+        }
+    }
     public void LoadNextScene(int world = -1, int stage = -1)
     {
         Time.timeScale = 1.0f;
-        Scene scene = SceneManager.GetActiveScene();
         if (world == -1)
         {
             SceneProperties sp = GetComponent<SceneProperties>();

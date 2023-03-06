@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 1611503105632125320}
   - component: {fileID: 1611503105632125316}
   - component: {fileID: 3634931338695832354}
+  - component: {fileID: 5016087766290606006}
+  - component: {fileID: -6140808236040688405}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -153,7 +155,7 @@ MonoBehaviour:
   coyoteTime: 0.083333336
   jumpableGround:
     serializedVersion: 2
-    m_Bits: 576
+    m_Bits: 2624
 --- !u!114 &3634931338695832354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,6 +171,42 @@ MonoBehaviour:
   BulletTrail: {fileID: -3485799787856847737, guid: 6f505db46f2b33649bf30080a5e54422, type: 3}
   inactiveGunSpr: {fileID: 1836073047, guid: ea82fab18e055744a95beddd9ebd82e3, type: 3}
   activeGunSpr: {fileID: 2046455519, guid: ea82fab18e055744a95beddd9ebd82e3, type: 3}
+  disableSwaps: 0
+  layer:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!95 &5016087766290606006
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611503105632125321}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8dea1d6d0c370c243bcc4f070a92840c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &-6140808236040688405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611503105632125321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7096e0fe8aa8ee40bbcfeead353bb89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1611503105838042948
 GameObject:
   m_ObjectHideFlags: 0

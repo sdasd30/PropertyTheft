@@ -19,7 +19,7 @@ public class MaterialHolder : MonoBehaviour
         set { Debug.LogError("Attempted to write to readonly PropertyList. Use Add/RemoveProperty() instead"); }
     }
 
-    [SerializeField] private List<MaterialProperty> propertyList = new List<MaterialProperty>();
+    [SerializeField] public List<MaterialProperty> propertyList = new List<MaterialProperty>();
     //Properties are ordered by priority. Lower indexed properties are applied first,
     //higher index properties are applied last. This makes them trump lower indexed properties.
     [SerializeField] private MaterialProperty defaultMaterial;
@@ -116,11 +116,18 @@ public class MaterialHolder : MonoBehaviour
     }
 
     GameObject swapIconGO;
-    public void MarkForSwap()
+    public void MarkForSwap(bool swap_AI)
     {
         swapIconGO = Instantiate
             (swapIcon, transform.position, 
             Quaternion.identity, transform);
+        //if (swap_AI)
+        //{
+        //    swapIconGO.GetComponent<SpriteRenderer>().color = new Color(0, 0, 255);
+        //} else
+        //{
+        //    swapIconGO.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0);
+        //}
     }
     public void DemarkForSwap()
     {

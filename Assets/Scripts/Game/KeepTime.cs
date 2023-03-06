@@ -7,6 +7,7 @@ public class KeepTime : MonoBehaviour
 {
 
     public float elapsedTime;
+    float prevBestTime = -1f;
 
     // Update is called once per frame
     void Update()
@@ -17,21 +18,38 @@ public class KeepTime : MonoBehaviour
     public float GetBestTime()
     {
         string scenename = SceneManager.GetActiveScene().name;
-        
+
+        if (prevBestTime != -1f)
+        {
+            Debug.Log($"Prev best: {prevBestTime}");
+            return prevBestTime; 
+        }
         if (PlayerPrefs.HasKey(scenename))
         {
             Debug.Log("Has Key");
-            float prevTime = PlayerPrefs.GetFloat(scenename);
-            return prevTime;
+            prevBestTime = PlayerPrefs.GetFloat(scenename);
+            return prevBestTime;
         }
         Debug.Log("Missing Key");
         PlayerPrefs.SetFloat(scenename, elapsedTime);
-        return elapsedTime;
+        prevBestTime = elapsedTime;
+        return prevBestTime;
     }
 
     public void UpdateBestTime()
     {
         string scenename = SceneManager.GetActiveScene().name;
-        PlayerPrefs.SetFloat(scenename, elapsedTime);
+        if (elapsedTime <= GetBestTime())
+        {
+            
+            PlayerPrefs.SetFloat(scenename, elapsedTime);
+            scenename = scenename + "_time";
+            PlayerPrefs.SetInt(scenename, 1);
+            Debug.Log($"Stage {scenename} on time");
+        }
+        else
+        {
+            Debug.Log($"Stage {scenename} not on time");
+        }
     }
 }
