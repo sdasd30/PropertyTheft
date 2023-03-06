@@ -102,8 +102,6 @@ public class ReloadScene : MonoBehaviour
                 SceneReload();
 
             }
-
-
             if (Input.GetAxisRaw("Reset") > .5f)
             {
 
