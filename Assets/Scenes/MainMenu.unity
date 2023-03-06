@@ -719,9 +719,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Property THeft:
+  m_text: 'Property Theft:
 
-    red man rising'
+    Among Us Origins'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c4a876653ff11a6458f38f91f71abe64, type: 2}
   m_sharedMaterial: {fileID: 5333337409298087241, guid: c4a876653ff11a6458f38f91f71abe64, type: 2}
