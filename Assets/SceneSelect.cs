@@ -43,8 +43,15 @@ public class SceneSelect : MonoBehaviour
 
     void OnMouseOver()
     {
+        int index = transform.GetSiblingIndex();
         //Debug.Log("over");
-        if (active)
+        //if (!PlayerPrefs.HasKey("Retrieved_Gun") && index >= 10 && index <= 16)
+
+
+        //    !PlayerPrefs.HasKey("Retrieved_Gun", 1);
+        //PlayerPrefs.HasKey("SetBehavior")
+        if (active && ((index >= 10 && index <= 17) || (PlayerPrefs.HasKey("Retrieved_Gun") && ((index >= 18 && index <= 28) || index == 0 || index == 1)) || (PlayerPrefs.HasKey("SetBehavior")
+            && (index >= 1 && index <= 9))))
         {
             //Debug.Log("colorchange");
             GetComponent<SpriteRenderer>().color = new Color(0, 176, 255, 128);
@@ -59,9 +66,10 @@ public class SceneSelect : MonoBehaviour
     }
     void OnMouseDown()
     {
-        if (active)
+        int index = transform.GetSiblingIndex();
+        if (active && ((index >= 10 && index <= 17) || (PlayerPrefs.HasKey("Retrieved_Gun") && ((index >= 18 && index <= 28) || index == 0 || index == 1)) || (PlayerPrefs.HasKey("SetBehavior")
+            && (index >= 1 && index <= 9))))
         {
-            int index = transform.GetSiblingIndex();
             Debug.Log("scene select onmousedown index =");
             Debug.Log(index);
             float x = 0;
