@@ -66,7 +66,11 @@ public class CompleteOnTouch : MonoBehaviour
                 FindObjectOfType<VictoryScreenDriver>().ShowScreen();
             }
             else
-            {
+            {   
+                if (level == 100)
+                {
+                    SceneManager.LoadScene("Victory", LoadSceneMode.Single);
+                }
                 if (level == 18 && !level_start)
                 {   
                     PlayerPrefs.SetInt("Retrieved_Gun", 1);
@@ -76,8 +80,8 @@ public class CompleteOnTouch : MonoBehaviour
                 if (level == 17 && level_start && !PlayerPrefs.HasKey("Investigation"))
                 {
                     PlayerPrefs.SetInt("Investigation", 1);
-                    PlayerPrefs.SetFloat("saved_x", transform.position.x);
-                    PlayerPrefs.SetFloat("saved_y", transform.position.y);
+                    //PlayerPrefs.SetFloat("saved_x", transform.position.x);
+                    //PlayerPrefs.SetFloat("saved_y", transform.position.y);
                     FindObjectOfType<Cutscene1Controller>().PlayCutscene1();
                 }
                 if (level == 7 && last_level_end && !PlayerPrefs.HasKey("Betrayal"))
